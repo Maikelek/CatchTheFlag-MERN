@@ -1,0 +1,1018 @@
+
+
+/* Odstránenie marginu a paddingu */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+/* Pozadie */
+body {
+  background-image: url(./fotky/hacking.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Kontainer blok */
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* Hlavička */
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 2;
+  position: fixed;
+  color: white;
+  padding: 3rem; 
+}
+
+#logo {
+  margin-top: -10px;
+  margin-left: -10px;
+  width: 8rem;
+}
+
+/* Veľkosť tlačídka otváracieho menu */
+.openButton > span {
+  font-size: 3rem;
+  cursor: pointer;
+  transition: 1s;
+}
+
+/* Tlačídko otváracieho menu  */
+.openButton > span:hover {
+  color: rgb(104, 207, 233)
+}
+
+
+/* Vyskakovacie menu */
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  float: right;
+  z-index: 1;
+  top: 0;
+  background-image: url(./fotky/hacking.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  right: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+/* Obsah vyskakovácieho menu */
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Linky vyskakovacieho menu */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 3rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Linky vyskakovacieho menu pri hoveri a fokuse */
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+  font-size: 3.3rem;
+}
+
+#active {
+  color: #f1f1f1;
+  font-size: 3.3rem;
+}
+
+/* Zatváracie tlačídko v otváracom menu */
+.overlay .closebtn {
+  position: absolute;
+  cursor: pointer;
+  top: 10px;
+  right: 70px;
+  font-size: 60px;
+}
+
+
+/* Logo z: https://www.flaticon.com/free-icon/hacker_7570776?term=hacker&page=1&position=73&page=1&position=73&related_id=7570776&origin=search */
+.header > img {
+  margin-top: -10px;
+  margin-left: 10px;
+  width: 8rem;
+}
+
+/* Domov nebude vidno v menu */
+#domov {
+  display: none;
+}
+
+/* Ľavá časť bez loginu s registráciou */
+.woLogin {
+  position: absolute;
+  bottom: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  justify-content: flex-end;
+
+  width: 70%;
+  padding-left: 2.5rem;
+  color: white;
+}
+
+/* Button číslo 49 z https://getcssscan.com/css-buttons-examples */
+.button-49,
+.button-49:after {
+  width: 140px;
+  height: 76px;
+  padding-left: 5px;
+  line-height: 78px;
+  font-size: 20px;
+  background: linear-gradient(45deg, transparent 5%, #01c4ff 5%);
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #ffffff;
+  outline: transparent;
+  margin-top: 1%;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'ALTERNATE TEXT';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #e2e2e2 5%, #01c4ff 5%);
+  text-shadow: -3px -3px 0px #000000, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+.button-49:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+  clip-path: var(--slice-1);
+  transform: translate(-20px, -10px);
+  }
+  10% {
+  clip-path: var(--slice-3);
+  transform: translate(10px, 10px);
+  }
+  20% {
+  clip-path: var(--slice-1);
+  transform: translate(-10px, 10px);
+  }
+  30% {
+  clip-path: var(--slice-3);
+  transform: translate(0px, 5px);
+  }
+  40% {
+  clip-path: var(--slice-2);
+  transform: translate(-5px, 0px);
+  }
+  50% {
+  clip-path: var(--slice-3);
+  transform: translate(5px, 0px);
+  }
+  60% {
+  clip-path: var(--slice-4);
+  transform: translate(5px, 10px);
+  }
+  70% {
+  clip-path: var(--slice-2);
+  transform: translate(-10px, 10px);
+  }
+  80% {
+  clip-path: var(--slice-5);
+  transform: translate(20px, -10px);
+  }
+  90% {
+  clip-path: var(--slice-1);
+  transform: translate(-10px, 0px);
+  }
+  100% {
+  clip-path: var(--slice-1);
+  transform: translate(0);
+  }
+}
+
+/* Pravá časť obrazovky - login */
+.login {
+  display: flex;
+  max-width: 400px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  color: white;
+
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Input div pre input */
+.input {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0rem;
+  width: 100%;
+}
+
+/* Odsadenie tagu p v div login */
+.login > p {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+/* Výzor inputového poľa v div input */
+.input > input {
+  background: transparent;
+  color: white;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid white;
+  
+}
+
+/* Ikonky vedľa inputu */
+.input > label {
+  position: absolute;
+  top: 7;
+  font-size: 1rem;
+}
+
+/* Ikonka oka pri hesle */
+.input > #eye {
+  position: absolute;
+  right: 5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Input pole pri fokuse */
+.inputBlueFocus:focus {
+  border-bottom: 3.5px solid rgb(104, 207, 233);
+}
+
+
+
+
+/* Tlačídko na potvrdenie loginu */
+.signin {
+  background: transparent;
+  
+  border: 2px solid white;
+  border-radius: 20px;
+
+  width: 40%;
+  cursor: pointer;
+
+  margin-top: 2rem;
+  margin-left: 25%;
+  padding: 0.4rem;
+
+  color: white;
+
+  transition: all 0.4s ease-in-out;
+}
+
+/* Tlačídko na potvrdenie loginu pri hoveri */
+.signin:hover {
+  text-decoration: underline;
+  border-radius: 0%;
+}
+
+/* Text pre telefóny, ktorý nás posiela sa zaregistrovať ak nemáme ešte účet */
+.mobil {
+  display: none;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Odsadenie a farba textu v texte pre mobil */
+.mobil > a {
+  margin-top: 0.5rem;
+  color: white;
+}
+
+
+
+
+
+/* Zmeny pre Domov*/
+
+
+
+
+
+
+/* Domov div */
+.domov {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  height: 100%;
+  width: 100%;
+
+  color: white;
+  
+
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Text domovu */
+.text {
+  margin-top: 1rem;
+  max-width: 750px;
+}
+
+/* Nadpis */
+.text > h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* p tag v domove */
+.text > p {
+  margin: 5rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* logo je viditelne */
+.logo{
+  visibility: visible;
+}
+
+
+
+
+
+
+/* Zmeny pre Regpage*/
+
+
+
+
+
+
+.loginReg {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  color: white;
+
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Velkosť nadpisu v registračnom menu */
+.loginReg > h1 {
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+
+.inputReg {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: 1.2rem 0rem;
+    width: 100%;
+}
+
+/* Odsadenie v p tagu inputu */
+.loginReg > p {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Výzor menu inputu */
+.inputReg > input {
+  background: transparent;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+
+/* Placeholder inputu a jeho odsadenie */
+.inputReg > input::placeholder {
+  padding-left: 0.5%;
+}
+
+/* Ikonky pri inpute */
+.inputReg > label {
+  position: absolute;
+  top: 5;
+  font-size: 0.9rem;
+}
+
+/* Tlačídko na potvrdenie registrácie */
+.regButton {
+  background: transparent;
+  
+  border: 2px solid white;
+  border-radius: 20px;
+
+  width: 20%;
+
+  margin-top: 1rem;
+  padding: 0.4rem;
+
+  color: white;
+
+  transition: all 0.4s ease-in-out;
+}
+
+/* Tlačídko na potvrdenie registrácie pri hoveri */
+.regButton:hover {
+  border-radius: 0%;
+  color: white;
+}
+
+/* Ikonka oka pri hesle */
+.inputReg > #eye {
+  position: absolute;
+  top: 7;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Ikonka oka2 pri hesle */
+.inputReg > #eye2 {
+  position: absolute;
+  top: 7;
+  right: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+.mobilReg {
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+
+/* Nastavenie linku v -//- */
+.mobilReg > a {
+  color: white;
+  font-size: 1.0rem;
+}
+
+
+
+
+/* Zmeny pre Levely*/
+
+
+
+
+.levely {
+  padding: 10%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+/* Div uloženia pozície levelov */
+.levely > ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+
+  color: white;
+}
+
+/* Výzor textu linku */
+.link {
+  color: white;
+  text-decoration: none;    
+  font-size: 1.8rem;
+}
+
+/* Div samotného levelu */
+.levelHranica {
+  border: 4px solid black;
+  border-radius: 5px 20px 5px;
+
+  background: rgba(0, 174, 255, 0.5);
+  padding: 0.8rem;
+  margin: 1rem;
+  transition: 0.5s;
+}
+
+/* Div levelu pri hoveri */
+.levelHranica:hover {
+  background: rgba(4, 52, 75, 0.8);
+  border-top-color: rgb(51, 48, 48);
+  border-right-color: rgb(31, 29, 29);
+}
+
+
+
+
+
+
+
+
+/*Upravy pre level*/
+
+
+
+.level{
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  color: white;
+}
+
+/* Veľkosť textu nadpisu v leveli */
+.level > h1 {
+  font-size: 3rem;
+  color: white
+}
+/* Veľkosť textu počtu bodov v leveli */
+.level > h5 {
+  font-size: 1.7rem;
+  color: white
+}
+
+/* Nastavenia pomôcky v leveli */
+.pomocka {  
+  border-bottom: 1px white solid;
+  border-top: 1px white solid;
+  padding: 0.5rem;
+  text-align: center;
+  max-width: 500px;
+  margin-top: 1.8rem;
+  font-size: 1.2rem;
+  color: white
+}
+
+/* Zmena veľkosti fotky v pomôcke */
+.pomocka > img {
+width: 10rem; 
+height: auto
+}
+
+.pomocka a, .pomocka a:link, .pomocka a:visited {
+  color: white;
+}
+
+.pomocka a:hover {
+  color: red;
+}
+
+/* Špeciálna zmena pre fotku v 5 úlohe */
+#fotka {
+margin-left: 17px;
+width: 150px;
+height: 150px;
+}
+
+
+
+
+.level input {
+  font-size: 1.5rem;
+  margin-top: 4rem;
+  background: transparent;
+  color: white;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+.level input::placeholder {
+  color: white;
+}
+
+
+.button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nastavenie tlačídka v Dive tlačídka*/
+.button > button {
+  width: 150px;
+  height: 50px;
+  background: rgba(10, 10, 10, 0.7);;
+  color: white;
+  transition: 0.5s;
+}
+
+
+
+
+
+
+
+/*Zmeny pre adminske menu*/
+
+
+.nav ul {
+  display: flex;
+  justify-content: space-between;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  background-color: #191C24;
+}
+
+.nav li a, .dropbtn {
+  display: inline-block;
+  color: #c2c5ce;
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.nav li a:hover, .dropdown:hover .dropbtn {
+  background-color: #0f1118;
+  border-top: solid 1px #0DCAF0;
+  color: white;
+}
+
+.nav li.dropdown {
+  display: inline-block;
+}
+
+.nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #191C24;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+.nav .dropdown-content a {
+  color: #c2c5ce;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav .dropdown-content a:hover {
+  background-color: #0f1118;
+  border-bottom: solid 1px #0DCAF0;
+  color: white;
+}
+
+.nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.content {
+  padding: 2rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  overflow: scroll;
+
+  background-color: #070708;
+}
+
+.spotUpdate {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.update {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #191C24;
+  width: 100%;
+  padding: 0.8rem;
+}
+
+.update h1{
+  font-size: 1.5rem;
+}
+
+#updateName {
+  text-align: center;
+}
+
+.zmaz {
+  padding: 0.7rem;
+  margin-right: 1rem;
+
+  background-color: #AB2E3C;
+  color: white;
+
+  cursor: pointer;
+  border: none;
+}
+
+.uprav{
+  padding: 0.7rem;
+
+  background-color: #0D6EFD;
+  color: white;
+
+  cursor: pointer;
+  border: none;
+}
+
+
+.uprav a {
+  color: white;
+  text-decoration: none;
+}
+
+.zmaz:hover {
+  background-color: #92222f;  
+}
+
+.uprav:hover {
+  background-color: #0756cc;  
+}
+
+.textCenter {
+  padding: 1rem;
+}
+
+
+
+.updateForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  background-color: #191C24;
+
+  border: solid black 2px;
+
+  padding: 0.5rem;
+}
+
+.updateForm > button {
+    
+    border: solid #0DCAF0 1px;
+    border-bottom: 3px solid #0DCAF0;
+    border-right: 3px solid #0DCAF0;
+    border-radius: 30px;
+
+    background-color: #191C24;
+
+    padding: 1rem;
+
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+.updateForm > button:hover {
+  background-color: #101218;
+  border-radius: 0px;
+}
+
+
+
+
+.updateForminput:focus::placeholder {
+  color: white;
+}
+
+.updateForm input:hover {
+  background-color: #20242e;
+  color: white;
+  transition: all 0.4s ease-in-out;
+}
+
+.updateForm input:hover::placeholder {
+  color: white;
+  transition: all 0.4s ease-in-out;
+}
+
+
+
+
+
+/*                 Alerty     a          Inputy         */
+
+.inputWithLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  width: auto;
+}
+
+.inputField {
+
+  background-color: #101218;
+  color: white;
+  width: auto;
+  padding: 1rem 1.2rem;
+  margin-bottom: 10px;
+
+  border: solid #0DCAF0 1px;
+  border-bottom: 3px solid #0DCAF0;
+  border-right: 3px solid #0DCAF0;
+}
+
+.labelForInput {
+  align-self: flex-start;
+}
+
+.labelForInputDanger {
+  color: #db352ff3;
+}
+
+.inputFieldDanger {
+  border: solid #750f0f 1px;
+  border-bottom: 3px solid #eb2121;
+  border-right: 3px solid #eb2121;
+}
+
+/* media query */
+@media screen and (max-width: 800px) {
+
+  /* Logo nie je viditelné */
+  .header > a{
+      visibility: hidden;
+      margin-top: -5%;
+  }
+
+  /* Pri telefóne nebude vidno ľavú stranu pri logine */
+  .woLogin {
+      display: none;
+  }
+  
+  /* Login bude roztiahnutý na celú obrazovku */
+  .login {
+      width: 100%;
+      max-width: 100%;
+  }
+
+  /* Domov bude viditelný */
+  #domov {
+      display: block;
+    }
+    
+
+  /* Text pre uživateľov na mobilnom telefóne bude viditelný */
+  .mobil {
+      display: block;
+      margin-right: 12%;
+  }
+
+  /* Odsadenie textu */
+  .text {
+      margin-top: -120px;
+      margin-right: 50px;
+  }  
+
+  /* Veľkost textu pre telefóny */
+  .text > h1 {
+      margin-left: 5%;
+      font-size: 30px;
+      margin-top: 120px;
+  }  
+
+  /* Výzor P tagu na stránke domov */
+  .text > p {
+      margin: 2rem;
+      margin-top: 20px;
+      font-size: 1.3rem;
+      width: 100%;
+      border-left: solid 1px white;
+      border-right: solid 1px white;
+      padding: 1rem;
+      margin-left: 4%;
+  }  
+
+  /* Zmena velkosti registračného tlačídka pri mobile */
+  .regButton {
+  
+    width: 60%;
+
+  }
+
+  /* Zmena veľkostí registračného menu */
+  .loginReg {
+      padding: 1rem;
+      
+  }
+
+  .updateForm input {
+    width: 40%;
+  }
+
+  .level > h1 {
+    font-size: 2.5rem;
+  }
+
+  .pomocka {  
+    max-width: 400px;
+}
+  .text {
+    max-height: 750px;
+  }
+
+  .levely {
+    border: white solid 1px;
+    padding: 3rem;
+    overflow-y: scroll;
+    max-height: 400px;
+    top: 30%
+  }
+
+  .labelForInput {
+    align-self: center;
+  }
+
+  .inputWithLabel {
+    width: 200%;
+  }
+  .updateForm {
+    padding: 3rem;
+  }
+
+}
