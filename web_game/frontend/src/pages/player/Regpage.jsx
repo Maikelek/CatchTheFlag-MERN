@@ -87,13 +87,13 @@ const Regpage = () => {
         </div>
 
         <div className='inputReg'>
-          <input className='inputBlueFocus' name="password" type="password" required={true} onChange={handleChange} placeholder="Zadaj svoje heslo: "/>
+          <input id='hesloInput1' className='inputBlueFocus' name="password" type="password" required={true} onChange={handleChange} placeholder="Zadaj svoje heslo: "/>
           <label><FontAwesomeIcon icon={faLock}/></label>
           <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye1}/></label>
         </div>
 
         <div className='inputReg'>
-          <input className='inputBlueFocus' name="passwordRep" type="password" required={true} onChange={handleChange} placeholder="Zopakuj svoje heslo: "/>
+          <input id='hesloInput2' className='inputBlueFocus' name="passwordRep" type="password" required={true} onChange={handleChange} placeholder="Zopakuj svoje heslo: "/>
           <label><FontAwesomeIcon icon={faLockOpen}/></label>
           <label id='eye2' onClick={hesloToggle2}><FontAwesomeIcon icon={eye2}/></label>
         </div>

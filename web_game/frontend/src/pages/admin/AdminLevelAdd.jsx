@@ -125,7 +125,7 @@ const AdminLevelAdd = () => {
           </div>
 
 
-          <button>Pridaj Level</button>
+          <button className='buttonForm'>Pridaj Level</button>
         </form>
       </div>
     </div>

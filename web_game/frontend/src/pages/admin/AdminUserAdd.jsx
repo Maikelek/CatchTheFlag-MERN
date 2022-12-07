@@ -49,7 +49,7 @@ const AdminUserAdd = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <form className='updateForm' onSubmit={handleClick}>
+        <form className='updateFormUser' onSubmit={handleClick}>
 
             <div className='textCenter'>
               <h1>Pridaj Používateľa</h1>
@@ -99,7 +99,7 @@ const AdminUserAdd = () => {
                 name='points'/>
             </div>
 
-            <button>Pridaj Používateľa</button>
+            <button className='buttonForm'>Pridaj Používateľa</button>
         </form>
       </div>
     </div>

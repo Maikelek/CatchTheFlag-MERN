@@ -830,7 +830,20 @@ height: 150px;
   padding: 0.5rem;
 }
 
-.updateForm > button {
+.updateFormUser {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  background-color: #191C24;
+
+  border: solid black 2px;
+
+  padding: 8rem;
+}
+
+.buttonForm {
     
     border: solid #0DCAF0 1px;
     border-bottom: 3px solid #0DCAF0;
@@ -846,7 +859,7 @@ height: 150px;
     transition: all 0.2s ease-in-out;
 }
 
-.updateForm > button:hover {
+.buttonForm:hover {
   background-color: #101218;
   border-radius: 0px;
 }
@@ -1012,6 +1025,9 @@ height: 150px;
     width: 200%;
   }
   .updateForm {
+    padding: 3rem;
+  }
+  .updateFormUser {
     padding: 3rem;
   }
 
