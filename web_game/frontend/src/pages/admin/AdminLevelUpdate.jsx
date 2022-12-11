@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 import AdminNav from '../components/AdminNav';
 
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const AdminLevelUpdate = () => {
   
   const [levely, setLevely] = useState ( [] )
@@ -43,8 +46,8 @@ const AdminLevelUpdate = () => {
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                  <button className='zmaz' onClick={() => handleDelete(level.id)}>Zmaž</button>
-                  <Link to={`${level.id}`}><button className='uprav'>Uprav</button></Link>
+                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                 </div> 
             </div>  
           ))}

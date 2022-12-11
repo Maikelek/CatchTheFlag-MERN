@@ -20,6 +20,9 @@ app.use('/level', levelRouter)
 const userRouter = require('./routes/userRouter');
 app.use('/user', userRouter)
 
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
+
 /*Port aplikácie*/ 
 app.listen(8800, () =>{      
     console.log("Backend ide na porte 8800")

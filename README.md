@@ -5,12 +5,11 @@ Projekt je internetovou hrou, ktorá je zameraná na hľadanie hesiel (vlajok). 
 #
 
 ## ToDO list
-* Zmeniť menu na Full screen Overlay Navigation ✔
-* Doplniť level 7 ✔
-* Funkčné css media query 100%  ✔
-* Podeliť app.js na viac súborov ✔
-* Login/Register funguje - pridať autentifikáciu. X
+* user sessions X
 * Urobiť podstránku profil X
+* Odpovede v leveloch X
+* Adminský používateľ X
+* Hlavný panel admisnkého menu X
 
 #
 

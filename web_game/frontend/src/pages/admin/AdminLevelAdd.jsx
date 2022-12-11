@@ -30,7 +30,6 @@ const AdminLevelAdd = () => {
 
   const handleClick = async e => {   
     e.preventDefault();
-    console.log(error)
     
     if (level.title.length <= 0) {
       setError(true)

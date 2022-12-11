@@ -13,7 +13,7 @@
 body {
   background-image: url(./fotky/hacking.png);
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center center; 
   background-attachment: fixed;
   background-size: cover;
   overflow: hidden;
@@ -309,9 +309,9 @@ body {
   width: 40%;
   cursor: pointer;
 
-  margin-top: 2rem;
-  margin-left: 25%;
-  padding: 0.4rem;
+  margin-top: 15px;
+  align-self: center;
+  padding: 0.5rem;
 
   color: white;
 
@@ -327,7 +327,7 @@ body {
 /* Text pre telefóny, ktorý nás posiela sa zaregistrovať ak nemáme ešte účet */
 .mobil {
   display: none;
-  text-align: center;
+  align-self: center;
   margin-top: 30px;
 }
 
@@ -400,39 +400,44 @@ body {
 
 
 
+.bluredDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+}
 
 
 .loginReg {
   display: flex;
-  width: 100%;
-  max-width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10rem;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  color: white;
 
-  background: rgba(10, 10, 10, 0.5);
-  backdrop-filter: blur(10px);
+  width: 30%;
+  color: white;
 }
 
 /* Velkosť nadpisu v registračnom menu */
 .loginReg > h1 {
   margin: 2rem;
   font-size: 2rem;
+  align-self: center;
 }
 
 
 .inputReg {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    margin: 1.2rem 0rem;
-    width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-content: center;
+  margin: 1.2rem 0rem;
+  width: 100%;
 }
 
 /* Odsadenie v p tagu inputu */
@@ -446,23 +451,21 @@ body {
   background: transparent;
   color: white;
   font-size: 1.2rem;
-  padding: 0.4rem 1.2rem;
+
+  padding-left: 1.5rem;
+  padding-bottom: 0.3rem;
+
   margin-bottom: 10px;
   border: none;
   border-bottom: 2px solid white;
 }
 
 
-/* Placeholder inputu a jeho odsadenie */
-.inputReg > input::placeholder {
-  padding-left: 0.5%;
-}
-
 /* Ikonky pri inpute */
 .inputReg > label {
   position: absolute;
-  top: 5;
-  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 /* Tlačídko na potvrdenie registrácie */
@@ -472,10 +475,11 @@ body {
   border: 2px solid white;
   border-radius: 20px;
 
-  width: 20%;
+  width: 30%;
 
+  align-self: center;
   margin-top: 1rem;
-  padding: 0.4rem;
+  padding: 0.7rem;
 
   color: white;
 
@@ -749,6 +753,7 @@ height: 150px;
   color: white;
   overflow: scroll;
 
+  
   background-color: #070708;
 }
 
@@ -766,6 +771,7 @@ height: 150px;
   background-color: #191C24;
   width: 100%;
   padding: 0.8rem;
+
 }
 
 .update h1{
@@ -851,6 +857,7 @@ height: 150px;
     border-radius: 30px;
 
     background-color: #191C24;
+    box-shadow: #1c8eec 0px 5px 15px;
 
     padding: 1rem;
 
@@ -906,9 +913,12 @@ height: 150px;
   margin-bottom: 10px;
 
   border: solid #0DCAF0 1px;
-  border-bottom: 3px solid #0DCAF0;
-  border-right: 3px solid #0DCAF0;
+  border-bottom: 2px solid #0DCAF0;
+  border-right: 2px solid #0DCAF0;
+
+  box-shadow: #080a0a 0px 30px 60px -12px inset, #0DCAF0 0px 18px 36px -18px inset, #1c8eec 0px 5px 15px;
 }
+ 
 
 .labelForInput {
   align-self: flex-start;
@@ -922,6 +932,23 @@ height: 150px;
   border: solid #750f0f 1px;
   border-bottom: 3px solid #eb2121;
   border-right: 3px solid #eb2121;
+  box-shadow: #ec1c1c 0px 5px 15px;
+}
+
+.loginDangerLabel {
+  width: max-content;
+  padding: 10px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 5px;
+  font-size: 16px;
+
+  align-self: center;
+
+  background-color: rgb(212, 164, 168);
+  border-color: rgba(220, 53, 69, 1);
+  color: rgba(114, 28, 36,1);
 }
 
 /* media query */
@@ -953,7 +980,6 @@ height: 150px;
   /* Text pre uživateľov na mobilnom telefóne bude viditelný */
   .mobil {
       display: block;
-      margin-right: 12%;
   }
 
   /* Odsadenie textu */
@@ -990,7 +1016,7 @@ height: 150px;
 
   /* Zmena veľkostí registračného menu */
   .loginReg {
-      padding: 1rem;
+      width: max-content;
       
   }
 

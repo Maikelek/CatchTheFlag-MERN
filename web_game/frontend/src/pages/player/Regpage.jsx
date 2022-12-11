@@ -1,15 +1,17 @@
 import React from 'react';
-import axios from 'axios'; 
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
 
 const Regpage = () => {  
+
+  const nav = useNavigate();
 
   const [eye1, setEye1] = useState(faEye);
   const [eye2, setEye2] = useState(faEye);
@@ -50,62 +52,103 @@ const Regpage = () => {
     password: "",
     passowrdRep: ""
   });
+
+  const [msg, setMsg] = useState({});
   
   
   const handleChange = (e) => {
-    setUser(prev => ({...prev, [e.target.name]: e.target.value}));  
+    setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
+    console.log(user)
   };
-  
+
   const handleClick = async e => {   
     e.preventDefault();
-    
-    if (user.email === "") {
-      console.log("empty")
-    }
-  
-    try{
-      await axios.post("http://localhost:8800/user/add", user); 
-    }catch(error) {
-      console.log(error);  
-    };
-  } 
+   
+    fetch('http://localhost:8800/auth/register', {
+      method:'POST',
+      body: JSON.stringify(user), 
+      headers: {
+          'Content-Type':'application/json'
+      }
+      }).then(res => res.json()) 
+      .then(response => {
+        if (response.message === "200") {
+          nav("/levely"); 
+        } else {
+          setMsg(response)
+        }
+      })
+      .catch(err => {
+          console.log(err);
+          alert(err);
+      });
+  }
 
   return (
     <div className='container'>
-            
-      <form onSubmit={handleClick} className='loginReg'>
-        <h1>Registrácia</h1>
 
-        <div className='inputReg'>
-          <input className='inputBlueFocus' name="name" type="text" autoComplete="off" required={true} onChange={handleChange} placeholder='Zadaj svoj meno: '/>
-          <label><FontAwesomeIcon icon={faUser}/></label>
+      <div className="bluredDiv">
+
+        <form onSubmit={handleClick} className='loginReg'>
+          <h1>Registrácia</h1>
+
+          <div className='inputReg'>
+            <input 
+              className='inputBlueFocus' 
+              name="name" 
+              type="text" 
+              autoComplete="off" 
+              onChange={handleChange} 
+              placeholder='Zadaj svoj meno: '/>
+            <label><FontAwesomeIcon icon={faUser}/></label>
+          </div>
+                
+          <div className='inputReg'>
+            <input 
+              className='inputBlueFocus' 
+              name="email" 
+              type="email" 
+              autoComplete="off" 
+              onChange={handleChange} 
+              placeholder="Zadaj svoje email: "/>
+            <label><FontAwesomeIcon icon={faEnvelope}/></label>
+          </div>
+
+          <div className='inputReg'>
+            <input 
+              id='hesloInput1' 
+              className='inputBlueFocus' 
+              name="password" 
+              type="password" 
+              onChange={handleChange} 
+              placeholder="Zadaj svoje heslo: "/>
+            <label><FontAwesomeIcon icon={faLock}/></label>
+            <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye1}/></label>
+          </div>
+
+          <div className='inputReg'>
+            <input 
+              id='hesloInput2' 
+              className='inputBlueFocus' 
+              name="passwordRep" 
+              type="password" 
+              onChange={handleChange} 
+              placeholder="Zopakuj svoje heslo: "/>
+            <label><FontAwesomeIcon icon={faLockOpen}/></label> 
+            <label id='eye2' onClick={hesloToggle2}><FontAwesomeIcon icon={eye2}/></label>
+          </div>
+
+          {msg.message ? <label className="loginDangerLabel"><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label> : null }
+          <button className='regButton' type="submit">Registruj sa</button>
+
+          <div className='mobilReg'>
+            <p>Ak máš účet</p>
+            <Link to='/'>Prihlás sa tu</Link>
         </div>
-              
-        <div className='inputReg'>
-          <input className='inputBlueFocus' name="email" type="email" required={true} autoComplete="off" onChange={handleChange} placeholder="Zadaj svoje email: "/>
-          <label><FontAwesomeIcon icon={faEnvelope}/></label>
-        </div>
+        </form>
 
-        <div className='inputReg'>
-          <input id='hesloInput1' className='inputBlueFocus' name="password" type="password" required={true} onChange={handleChange} placeholder="Zadaj svoje heslo: "/>
-          <label><FontAwesomeIcon icon={faLock}/></label>
-          <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye1}/></label>
-        </div>
-
-        <div className='inputReg'>
-          <input id='hesloInput2' className='inputBlueFocus' name="passwordRep" type="password" required={true} onChange={handleChange} placeholder="Zopakuj svoje heslo: "/>
-          <label><FontAwesomeIcon icon={faLockOpen}/></label>
-          <label id='eye2' onClick={hesloToggle2}><FontAwesomeIcon icon={eye2}/></label>
-        </div>
-
-        <button className='regButton' type="submit">Registruj sa</button>
-
-        <div className='mobilReg'>
-          <p>Ak máš účet</p>
-          <Link to='/'>Prihlás sa tu</Link>
       </div>
-      </form>
-        
+
     </div>
   )
 }
