@@ -936,6 +936,7 @@ height: 150px;
 }
 
 .loginDangerLabel {
+ 
   width: max-content;
   padding: 10px;
   border-radius: 4px;
@@ -949,6 +950,23 @@ height: 150px;
   background-color: rgb(212, 164, 168);
   border-color: rgba(220, 53, 69, 1);
   color: rgba(114, 28, 36,1);
+}
+
+.loginSucessLabel {
+
+  width: max-content;
+  padding: 10px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 5px;
+  font-size: 16px;
+
+  align-self: center;
+
+  background-color: rgba(227, 253, 235, 1);
+  border-color: rgba(38, 179, 3, 1);
+  color: rgba(60, 118, 61, 1);
 }
 
 /* media query */

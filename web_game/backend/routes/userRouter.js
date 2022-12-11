@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 const db = require("../db");  
 
 
@@ -13,15 +14,19 @@ router.get("/display", (req, res) => {
   })
   
 
-router.post("/add", (req, res) => { 
+router.post("/add", async (req, res) => { 
     const q = "INSERT INTO users (`name`, `email`, `password`, `points`) VALUES (?)";
-  
+
+    let password = req.body.password;
+    password = await bcrypt.hash(password, 8);
+
     const values = [
       req.body.name,
       req.body.email,
-      req.body.password,
+      password,
       req.body.points
     ];
+
   
     db.query(q, [values], (error, data) => {
       if (error) return res.send(error);

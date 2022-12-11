@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 04:59 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Dec 11, 2022 at 04:11 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hackquestprojekt`
+-- Database: `catch_the_flag_game`
 --
 
 -- --------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE `levels` (
   `points` int(6) NOT NULL,
   `pass` varchar(30) DEFAULT NULL,
   `link` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `levels`
@@ -64,16 +64,15 @@ CREATE TABLE `users` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `points` int(6) DEFAULT NULL,
-  `created` date DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `points` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`, `created`) VALUES
-(1, 'maikelek', 'maikelekmain@gmail.com', 'heslojeflasa123', 50, '2022-11-02');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`) VALUES
+(1, 'admin', 'admin@admin.sk', '$2a$08$797Et9kkaK53TbZrI2zzquGjaTADxsXeB/FRyDEbsBtbvG0UNpe4y', 0);
 
 --
 -- Indexes for dumped tables

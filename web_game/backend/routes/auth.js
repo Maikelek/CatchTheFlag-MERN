@@ -31,11 +31,11 @@ router.post('/register', (req, res) => {
 
         let hashedPassword = await bcrypt.hash(passwordRep, 8);
 
-        db.query('INSERT INTO users (`id`,`name`, `email`, `password`) VALUES (0,?,?,?)', [name, email, hashedPassword], (error, results) =>{
+        db.query('INSERT INTO users (`id`,`name`, `email`, `password`, `points`) VALUES (0,?,?,?,0)', [name, email, hashedPassword], (error, results) =>{
             if(error) {
                 console.log(error);
             } else {
-                return res.status(200).json({ message: "200" });
+                return res.status(200).json({ messageGreen: "Si zaregistrovaný" });
             }
         });
     });
@@ -57,7 +57,19 @@ router.post('/login', async (req, res) => {
                     return res.status(200).json({ message: "200" });
                 }
                 else {
-                    return res.status(400).json({ message: "Zlé heslo!" });
+                    let random = Math.floor(Math.random() * 11)
+                    if ( random <= 2 ) {
+                        return res.status(400).json({ message: "Zlé heslo, skús znova!"  });
+                    } else if ( random <= 4 ) {
+                        return res.status(400).json({ message: "Zadávaš zlé heslo!"  });
+                    } else if ( random <= 6 ) {
+                        return res.status(400).json({ message: "Nesprávne heslo!"  });
+                    } else if ( random <= 8 ) {
+                        return res.status(400).json({ message: "Pri zabudnotom hesle kontaktuj admina!"  });
+                    } else {
+                        return res.status(400).json({ message: "Neplatné heslo"  });
+                    }
+                    
                 }
             }
         })

@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
 
 const Regpage = () => {  
-
-  const nav = useNavigate();
 
   const [eye1, setEye1] = useState(faEye);
   const [eye2, setEye2] = useState(faEye);
@@ -21,12 +18,12 @@ const Regpage = () => {
   
     if (hesloInput.type === "password") {
       hesloInput.type = "type"
-      setEye1(faEyeSlash)
+      setEye1(faEyeSlash);
     }
   
     else {
-      hesloInput.type = "password"
-      setEye1(faEye)
+      hesloInput.type = "password";
+      setEye1(faEye);
     }
   
   }
@@ -35,13 +32,13 @@ const Regpage = () => {
     let hesloInput2 = document.getElementById("hesloInput2");
   
     if (hesloInput2.type === "password") {
-      hesloInput2.type = "type"
-      setEye2(faEyeSlash)
+      hesloInput2.type = "type";
+      setEye2(faEyeSlash);
     }
   
     else {
-      hesloInput2.type = "password"
-      setEye2(faEye)
+      hesloInput2.type = "password";
+      setEye2(faEye);
     }
   }
   
@@ -58,7 +55,6 @@ const Regpage = () => {
   
   const handleChange = (e) => {
     setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
-    console.log(user)
   };
 
   const handleClick = async e => {   
@@ -72,10 +68,10 @@ const Regpage = () => {
       }
       }).then(res => res.json()) 
       .then(response => {
-        if (response.message === "200") {
-          nav("/levely"); 
+        if (response.message === "Si zaregistrovaný") {
+          setMsg(response);
         } else {
-          setMsg(response)
+          setMsg(response);
         }
       })
       .catch(err => {
@@ -139,6 +135,7 @@ const Regpage = () => {
           </div>
 
           {msg.message ? <label className="loginDangerLabel"><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label> : null }
+          {msg.messageGreen ? <label className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</label> : null }
           <button className='regButton' type="submit">Registruj sa</button>
 
           <div className='mobilReg'>

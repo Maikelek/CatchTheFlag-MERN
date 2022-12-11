@@ -100,6 +100,7 @@ const Index = () => {
                     className='inputBlueFocus' 
                     id="hesloInput" 
                     name="password" 
+                    autoComplete='off'
                     onChange={handleChange} 
                     type="password" 
                     placeholder="Zadaj svoje heslo: "/>

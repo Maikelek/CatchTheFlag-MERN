@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 import AdminNav from '../components/AdminNav';
 
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 const AdminUserUpdate = () => {
   
   const [users, setUsers] = useState ( [] )
@@ -43,8 +47,8 @@ const AdminUserUpdate = () => {
             <div className='update' key={user.id}>
                 <h1>{user.name}</h1>
                 <div>
-                  <button className='zmaz' onClick={() => handleDelete(user.id)}>Zmaž</button>
-                  <Link to={`${user.id}`}><button className='uprav'>Uprav</button></Link>
+                  <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                 </div> 
             </div>  
           ))}
