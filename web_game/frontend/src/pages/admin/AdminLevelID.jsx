@@ -29,7 +29,7 @@ const AdminLevelID = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8800/level/update/${id}`, level);
+      await axios.put(`http://localhost:8800/level/${id}`, level);
       nav("/admin/level/update");
     } catch (err) {
       console.log(err);
@@ -40,19 +40,19 @@ const AdminLevelID = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <div className='updateForm'>
+        <form onSubmit={handleClick} className='updateForm'>
           <div className='textCenter'>
             <h1>Aktualizuj Level</h1>
           </div>
-          <input type="text" placeholder='Názov: '  autoCmplete="off" onChange={handleChange} name='title'/>
-          <input type="text" placeholder='Pomôcka'  autoComplete="off" onChange={handleChange} name='hint'/>
-          <input type="text" placeholder='Fotka: '  autoComplete="off" onChange={handleChange} name='picture'/>
-          <input type="text" placeholder='Link: '  autoComplete="off" onChange={handleChange} name='link'/>
-          <input type="number" placeholder='Počet bodov: ' autoComplete="off" onChange={handleChange} name='points'/>
-          <input type="text" placeholder='Heslo: '  autoComplete="off" onChange={handleChange} name='pass'/>
+            <input type="text" placeholder='Názov: '  autoCmplete="off" onChange={handleChange} name='title'/>
+            <input type="text" placeholder='Pomôcka'  autoComplete="off" onChange={handleChange} name='hint'/>
+            <input type="text" placeholder='Fotka: '  autoComplete="off" onChange={handleChange} name='picture'/>
+            <input type="text" placeholder='Link: '  autoComplete="off" onChange={handleChange} name='link'/>
+            <input type="number" placeholder='Počet bodov: ' autoComplete="off" onChange={handleChange} name='points'/>
+            <input type="text" placeholder='Heslo: '  autoComplete="off" onChange={handleChange} name='pass'/>
 
-        <button onClick={handleClick}>Aktualizuj</button>
-        </div>
+            <button>Aktualizuj</button>
+        </form>
       </div>
     </div>
   )

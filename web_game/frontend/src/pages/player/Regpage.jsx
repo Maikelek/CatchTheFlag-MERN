@@ -60,7 +60,7 @@ const Regpage = () => {
   const handleClick = async e => {   
     e.preventDefault();
    
-    fetch('http://localhost:8800/auth/register', {
+    fetch('http://localhost:8800/register', {
       method:'POST',
       body: JSON.stringify(user), 
       headers: {

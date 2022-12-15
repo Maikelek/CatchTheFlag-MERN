@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../../fotky/hacker.png'; 
+import logo from '../../images/hacker.png'; 
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,15 +29,15 @@ const Header = () => {
 
         <div id="myNav" className='overlay'>
             <span onClick={closeNav} className='closebtn'>&times;</span>
-        <div className='overlay-content'>
-            <Link to="/">Prihlásenie</Link>
-            <Link to="/register">Registrácia</Link>
-            <Link to="/levely">Levely</Link>
-            <Link to="/profil">Profil</Link>
-            <Link to="/logout">Odhlás sa</Link>
-        </div>
+            <div className='overlay-content'>
+                <Link to="/">Prihlásenie</Link>
+                <Link to="/register">Registrácia</Link>
+                <Link to="/levely">Levely</Link>
+                <Link to="/profil">Profil</Link>
+                <Link to="/logout">Odhlás sa</Link>
+            </div>
 
-    </div>
+        </div>
     </div>
   )
 }

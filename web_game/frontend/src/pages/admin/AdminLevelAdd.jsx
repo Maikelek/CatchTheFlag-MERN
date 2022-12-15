@@ -42,7 +42,7 @@ const AdminLevelAdd = () => {
     }
 
     if (level.title && level.hint && level.pass ){
-      await axios.post("http://localhost:8800/level/add", level); 
+      await axios.post("http://localhost:8800/level", level); 
       nav("/admin/level/update"); 
     }
   }

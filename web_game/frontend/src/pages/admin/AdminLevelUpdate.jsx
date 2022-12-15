@@ -16,7 +16,7 @@ const AdminLevelUpdate = () => {
   useEffect( () => {                
       const fetchAllLevely = async () => {
           try{
-              const res = await axios.get("http://localhost:8800/level/display")
+              const res = await axios.get("http://localhost:8800/level")
               setLevely(res.data)
           }catch(error) {
               console.log(error)
@@ -27,7 +27,7 @@ const AdminLevelUpdate = () => {
 
   const handleDelete = async (id) => {         
     try {
-      await axios.delete(`http://localhost:8800/level/remove/${id}`);
+      await axios.delete(`http://localhost:8800/level/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);

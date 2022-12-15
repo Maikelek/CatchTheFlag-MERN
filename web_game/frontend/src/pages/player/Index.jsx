@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import logo from '../../fotky/hacker.png'; 
+import logo from '../../images/hacker.png'; 
 
 import { faEye, faUser, faLock, faEyeSlash, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,7 @@ const Index = () => {
       const handleClick = async e => {   
         e.preventDefault();
        
-        fetch('http://localhost:8800/auth/login', {
+        fetch('http://localhost:8800/auth', {
           method:'POST',
           body: JSON.stringify(user), 
           headers: {
@@ -53,8 +53,10 @@ const Index = () => {
           .then(response => {
             if (response.message === "200") {
               nav("/levely"); 
+              console.log(response)
             } else {
               setMsg(response)
+              console.log(response)
             }
           })
           .catch(err => {

@@ -11,7 +11,7 @@
 
 /* Pozadie */
 body {
-  background-image: url(./fotky/hacking.png);
+  background-image: url(./images/hacking.png);
   background-repeat: no-repeat;
   background-position: center center; 
   background-attachment: fixed;
@@ -64,7 +64,7 @@ body {
   float: right;
   z-index: 1;
   top: 0;
-  background-image: url(./fotky/hacking.png);
+  background-image: url(./images/hacking.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;

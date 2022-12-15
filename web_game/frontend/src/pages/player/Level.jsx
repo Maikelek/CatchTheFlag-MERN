@@ -5,9 +5,9 @@ import { useLocation } from 'react-router-dom'
 
 import Header from '../components/Header'
 
-import l3 from '../../fotky/l3.JPEG'
-import l4 from '../../fotky/l4.JPEG'
-import petrabottova2001 from '../../fotky/petrabottova2001.png'
+import l3 from '../../images/l3.JPEG'
+import l4 from '../../images/l4.JPEG'
+import petrabottova2001 from '../../images/petrabottova2001.png'
 
 const Level = () => {
 
@@ -19,7 +19,7 @@ const Level = () => {
     useEffect( () => {                
         const fetchAllData = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/level/display/${id}`)
+                const res = await axios.get(`http://localhost:8800/level/${id}`)
                 setLevelData(res.data)
             }catch(error) {
                 console.log(error)

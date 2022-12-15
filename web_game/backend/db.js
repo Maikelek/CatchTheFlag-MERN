@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("Pripojene k Databaze")
+    console.log("Joined to the database");
 });
 
 module.exports = connection;

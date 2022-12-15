@@ -26,7 +26,7 @@ const AdminUserID = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8800/user/update/${id}`, user);
+      await axios.put(`http://localhost:8800/user/${id}`, user);
       nav("/admin/user/update");
     } catch (err) {
       console.log(err);
@@ -37,18 +37,18 @@ const AdminUserID = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <div className='updateForm'>
+        <form onSubmit={handleClick} className='updateForm'>
           <div className='textCenter'>
             <h1>Aktualizuj používateľa
             </h1>
           </div>
-          <input type="text" placeholder='Meno:'  autoComplete="off" onChange={handleChange} name='name'/>
-          <input type="text" placeholder='Email:'  autoComplete="off" onChange={handleChange} name='email'/>
-          <input type="text" placeholder='Heslo: '  autoComplete="off" onChange={handleChange} name='password'/>
-          <input type="number" placeholder='Počet bodov: ' autoComplete="off" onChange={handleChange} name='points'/>
+            <input type="text" placeholder='Meno:'  autoComplete="off" onChange={handleChange} name='name'/>
+            <input type="text" placeholder='Email:'  autoComplete="off" onChange={handleChange} name='email'/>
+            <input type="text" placeholder='Heslo: '  autoComplete="off" onChange={handleChange} name='password'/>
+            <input type="number" placeholder='Počet bodov: ' autoComplete="off" onChange={handleChange} name='points'/>
 
-        <button onClick={handleClick}>Aktualizuj</button>
-        </div>
+           <button>Aktualizuj</button>
+        </form>
       </div>
     </div>
   )

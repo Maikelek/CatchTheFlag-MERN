@@ -12,7 +12,7 @@ const Levely = () => {
     useEffect( () => {                
         const fetchAllLevely = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/level/display")
+                const res = await axios.get("http://localhost:8800/level")
                 setLevely(res.data)
             }catch(error) {
                 console.log(error)
