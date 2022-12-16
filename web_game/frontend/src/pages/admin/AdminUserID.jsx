@@ -1,9 +1,13 @@
-import axios from 'axios'
-import React from 'react'
-import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios'; 
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
+
+import { faUser, faLock, faEnvelope, faCoins } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+ 
 
 const AdminUserID = () => {  
   const [user, setUser] = useState({  
@@ -37,17 +41,54 @@ const AdminUserID = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <form onSubmit={handleClick} className='updateForm'>
-          <div className='textCenter'>
-            <h1>Aktualizuj používateľa
-            </h1>
-          </div>
-            <input type="text" placeholder='Meno:'  autoComplete="off" onChange={handleChange} name='name'/>
-            <input type="text" placeholder='Email:'  autoComplete="off" onChange={handleChange} name='email'/>
-            <input type="text" placeholder='Heslo: '  autoComplete="off" onChange={handleChange} name='password'/>
-            <input type="number" placeholder='Počet bodov: ' autoComplete="off" onChange={handleChange} name='points'/>
+        <form className='updateForm' onSubmit={handleClick}>
 
-           <button>Aktualizuj</button>
+            <div className='textCenter'>
+              <h1>Aktualizuj Používateľa</h1>
+            </div>
+
+            <div className="inputWithLabel">
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faUser}/></i> Meno</label>
+              <input 
+                className="inputField"
+                type="text"  
+                autoComplete="off" 
+                onChange={handleChange} 
+                name='name'/>
+            </div>
+            
+
+            <div className="inputWithLabel">
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faEnvelope}/></i> Email</label>
+              <input 
+                className="inputField"
+                type="email"  
+                autoComplete="off" 
+                onChange={handleChange} 
+                name='email'/>
+            </div>
+            
+            <div className="inputWithLabel">
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
+              <input 
+                className="inputField"
+                type="text" 
+                onChange={handleChange} 
+                name='password'/>
+            </div>
+            
+
+            <div className="inputWithLabel">
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
+              <input 
+                className='inputField' 
+                type="number"  
+                autoComplete="off" 
+                onChange={handleChange} 
+                name='points'/>
+            </div>
+
+            <button className='buttonForm'>Aktualizuj Používateľa</button>
         </form>
       </div>
     </div>

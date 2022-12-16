@@ -1,10 +1,14 @@
 import {BrowserRouter,Routes,Route,} from "react-router-dom";
 
-import Index from "./pages/player/Index"
-import Domov from "./pages/player/Domov";
-import Levely from "./pages/player/Levely";
-import Register from "./pages/player/Regpage";
-import Level from "./pages/player/Level";
+import Index from "./pages/notLogged/Index"
+import Domov from "./pages/notLogged/Domov";
+import Register from "./pages/notLogged/Regpage";
+
+
+
+import Levely from "./pages/logged/Levely";
+import Level from "./pages/logged/Level";
+
 
 
 import Admin from "./pages/admin/Admin";

@@ -1,5 +1,8 @@
 const bcrypt = require("bcryptjs");
-const db = require("../db"); 
+const jwt = require("jsonwebtoken");
+const db = require("../db");
+
+require("dotenv").config();
 
 
 const validateUser = async (req, res) => {
@@ -14,7 +17,22 @@ const validateUser = async (req, res) => {
                 return res.status(400).json({ message: "Neexistujúci používateľ" });
             } else {
                 if (await bcrypt.compare(password, results[0].password)) {
-                    return res.status(200).json({ message: "200" });
+
+                    const accessToken = jwt.sign(
+                        {"email": email}, 
+                        process.env.ACCESS_TOKEN_SECRET,
+                        {expiresIn: '15m' }
+                    )
+
+                    const refreshToken = jwt.sign(
+                        {"email": email}, 
+                        process.env.REFRESH_TOKEN_SECRET,
+                        {expiresIn: '1d' }
+                    )
+
+                    res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24* 60 * 60 * 1000});
+                    res.status(200).json({ message: "200", accessToken});
+
                 }
                 else {
                     let random = Math.floor(Math.random() * 11)

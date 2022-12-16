@@ -1,7 +1,9 @@
 const express = require('express'); 
-const cors = require("cors");   
+const cors = require("cors"); 
+const cookieParser = require('cookie-parser');
 
 const app = express()
+app.use(cookieParser());  
 app.use(express.urlencoded({ extended: true }));    
 app.use(express.json());
 app.use(cors());
@@ -27,6 +29,6 @@ const authRouter = require('./routes/authRouter');
 app.use('/auth', authRouter);
 
 /*Port aplikácie*/ 
-app.listen(8800, () =>{      
-    console.log("Backend is on port 8800");
+app.listen(process.env.PORT, () =>{      
+    console.log("Backend is on port " + process.env.PORT);
 })
