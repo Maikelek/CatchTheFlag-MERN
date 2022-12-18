@@ -20,7 +20,7 @@ This project is CTF (catch the flag) game made as dynamic webpage using **M**(my
 
 
 
-# How to start the application
+# How to start the application ( main_app )
 * Open 2 terminals
 * In one terminal **cd** into **frontend** in other **cd** into **backend**
 * Write **npm i** in both to install dependencies
