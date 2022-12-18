@@ -15,7 +15,8 @@ const AdminUserAdd = () => {
     name: "",
     email: "",
     password: "",
-    points: 0
+    points: 0,
+    role: "hrac"
   });
 
   const [error, setError] = useState(false)
@@ -40,7 +41,7 @@ const AdminUserAdd = () => {
     }
 
     if (user.name && user.email && user.password ){
-      await axios.post("http://localhost:8800/user/add", user); 
+      await axios.post("http://localhost:8800/user", user); 
       nav("/admin/user/update"); 
     }
   }
@@ -82,7 +83,7 @@ const AdminUserAdd = () => {
               <label className={"labelForInput " + (error && user.password.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
               <input 
                 className={"inputField " + (error && user.password.length <=0  ? 'inputFieldDanger' : 'null')}
-                type="text" 
+                type="password" 
                 placeholder={error && user.password.length <=0 ? "Používateľ musí mať heslo": null } 
                 onChange={handleChange} 
                 name='password'/>
@@ -98,6 +99,23 @@ const AdminUserAdd = () => {
                 onChange={handleChange} 
                 name='points'/>
             </div>
+
+            <div className="inputWithLabelRow">
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Hráč</label>
+              <input 
+                type="radio"  
+                onChange={handleChange} 
+                name='role'
+                value="hrac"/>
+
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Admin</label>
+              <input 
+                type="radio"  
+                onChange={handleChange} 
+                name='role'
+                value="admin"/>
+            </div>
+
 
             <button className='buttonForm'>Pridaj Používateľa</button>
         </form>

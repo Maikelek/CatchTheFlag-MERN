@@ -28,6 +28,9 @@ app.use('/register', registerRouter);
 const authRouter = require('./routes/authRouter');
 app.use('/auth', authRouter);
 
+const jwtAuthRouter = require('./routes/jwtAuthRouter');
+app.use('/jwtAuth', jwtAuthRouter);
+
 /*Port aplikácie*/ 
 app.listen(process.env.PORT, () =>{      
     console.log("Backend is on port " + process.env.PORT);

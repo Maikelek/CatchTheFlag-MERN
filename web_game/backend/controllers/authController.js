@@ -21,17 +21,13 @@ const validateUser = async (req, res) => {
                     const accessToken = jwt.sign(
                         {"email": email}, 
                         process.env.ACCESS_TOKEN_SECRET,
-                        {expiresIn: '15m' }
+                        {expiresIn: "7d" }
                     )
 
-                    const refreshToken = jwt.sign(
-                        {"email": email}, 
-                        process.env.REFRESH_TOKEN_SECRET,
-                        {expiresIn: '1d' }
-                    )
-
-                    res.cookie("jwt", refreshToken, {httpOnly: true, maxAge: 24* 60 * 60 * 1000});
-                    res.status(200).json({ message: "200", accessToken});
+                    // req.session.user = results;
+                    const id = results[0].id;
+                    const role = results[0].role;
+                    return res.status(200).json({ message: "ok", accessToken, id, email, role });
 
                 }
                 else {

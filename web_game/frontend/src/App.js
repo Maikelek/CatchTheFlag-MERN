@@ -22,7 +22,11 @@ import AdminUserID from "./pages/admin/AdminUserID";
 import AdminLevelAdd from "./pages/admin/AdminLevelAdd";
 import AdminUserAdd from "./pages/admin/AdminUserAdd";
 
+import AuthentificateUser from "./pages/components/AuthentificateUser";
+
 import "./App.css";
+
+
 
 function App() {
   return ( 
@@ -32,19 +36,24 @@ function App() {
           <Route path="/" element={<Index/>}/>
           <Route path="/domov" element={<Domov/>}/>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/levely" element={<Levely/>}/>
-          <Route path="/level/:id" element={<Level/>}/>
 
-          <Route path="/admin" element={<Admin/>}/>
+          
+          <Route element={<AuthentificateUser/>}>
+            <Route path="/levely" element={<Levely/>}/>
+            <Route path="/level/:id" element={<Level/>}/>
 
-          <Route path="/admin/level/update" element={<AdminLevelUpdate/>}/>
-          <Route path="/admin/level/update/:id" element={<AdminLevelID/>}/>
 
-          <Route path="/admin/user/update" element={<AdminUserUpdate/>}/>
-          <Route path="/admin/user/update/:id" element={<AdminUserID/>}/>
+            <Route path="/admin" element={<Admin/>}/>
 
-          <Route path="/admin/level/add" element={<AdminLevelAdd/>}/>
-          <Route path="/admin/user/add" element={<AdminUserAdd/>}/>
+            <Route path="/admin/level/update" element={<AdminLevelUpdate/>}/>
+            <Route path="/admin/level/update/:id" element={<AdminLevelID/>}/>
+
+            <Route path="/admin/user/update" element={<AdminUserUpdate/>}/>
+            <Route path="/admin/user/update/:id" element={<AdminUserID/>}/>
+
+            <Route path="/admin/level/add" element={<AdminLevelAdd/>}/>
+            <Route path="/admin/user/add" element={<AdminUserAdd/>}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

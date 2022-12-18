@@ -894,6 +894,15 @@ height: 150px;
   width: auto;
 }
 
+.inputWithLabelRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  width: auto;
+}
+
 .inputField {
 
   background-color: #101218;
@@ -908,7 +917,6 @@ height: 150px;
 
   box-shadow: #080a0a 0px 30px 60px -12px inset, #0DCAF0 0px 18px 36px -18px inset, #1c8eec 0px 5px 15px;
 }
- 
 
 .labelForInput {
   align-self: flex-start;

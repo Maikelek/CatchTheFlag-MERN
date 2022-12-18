@@ -51,12 +51,11 @@ const Index = () => {
           }
           }).then(res => res.json()) 
           .then(response => {
-            if (response.message === "200") {
+            if (response.message === "ok") {
+              localStorage.setItem("token", response.accessToken)
               nav("/levely"); 
-              console.log(response)
             } else {
               setMsg(response)
-              console.log(response)
             }
           })
           .catch(err => {

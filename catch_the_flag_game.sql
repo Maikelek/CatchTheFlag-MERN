@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 04:11 PM
+-- Generation Time: Dec 18, 2022 at 03:08 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -64,15 +64,16 @@ CREATE TABLE `users` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `points` int(6) DEFAULT NULL
+  `points` int(6) DEFAULT NULL,
+  `role` varchar(10) NOT NULL DEFAULT 'hrac'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`) VALUES
-(1, 'admin', 'admin@admin.sk', '$2a$08$797Et9kkaK53TbZrI2zzquGjaTADxsXeB/FRyDEbsBtbvG0UNpe4y', 0);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`, `role`) VALUES
+(1, 'admin', 'admin@admin.sk', '$2a$08$797Et9kkaK53TbZrI2zzquGjaTADxsXeB/FRyDEbsBtbvG0UNpe4y', 0, 'admin');
 
 --
 -- Indexes for dumped tables

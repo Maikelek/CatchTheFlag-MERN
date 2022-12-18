@@ -13,7 +13,7 @@ const getUsers = (req, res) => {
   
 
 const createUser = async (req, res) => { 
-    const q = "INSERT INTO users (`name`, `email`, `password`, `points`) VALUES (?)";
+    const q = "INSERT INTO users (`name`, `email`, `password`, `points`, `role`) VALUES (?)";
 
     let password = req.body.password;
     password = await bcrypt.hash(password, 8);
@@ -22,7 +22,8 @@ const createUser = async (req, res) => {
       req.body.name,
       req.body.email,
       password,
-      req.body.points
+      req.body.points,
+      req.body.role
     ];
 
   
