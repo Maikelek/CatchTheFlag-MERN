@@ -22,8 +22,6 @@ import AdminUserID from "./pages/admin/AdminUserID";
 import AdminLevelAdd from "./pages/admin/AdminLevelAdd";
 import AdminUserAdd from "./pages/admin/AdminUserAdd";
 
-import AuthentificateUser from "./pages/components/AuthentificateUser";
-
 import "./App.css";
 
 
@@ -38,7 +36,6 @@ function App() {
           <Route path="/register" element={<Register/>}/>
 
           
-          <Route element={<AuthentificateUser/>}>
             <Route path="/levely" element={<Levely/>}/>
             <Route path="/level/:id" element={<Level/>}/>
 
@@ -53,7 +50,6 @@ function App() {
 
             <Route path="/admin/level/add" element={<AdminLevelAdd/>}/>
             <Route path="/admin/user/add" element={<AdminUserAdd/>}/>
-          </Route>
         </Routes>
       </BrowserRouter>
     </div>

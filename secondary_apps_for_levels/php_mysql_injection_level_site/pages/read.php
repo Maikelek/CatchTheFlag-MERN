@@ -4,11 +4,6 @@ if(isset($_POST['find']))
 {
     $id = $_POST['id'];
 
-    if(!$id) {
-        $_SESSION['messageDanger'] = "Je potrebné vyplniť všetky polia";
-        exit(0);
-    }
-
     $query = "SELECT * FROM `users` WHERE `id`=$id";
     $search_result = filterTable($query);
     

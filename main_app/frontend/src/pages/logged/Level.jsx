@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import Header from '../components/Header'
 
@@ -11,10 +11,30 @@ import petrabottova2001 from '../../images/petrabottova2001.png'
 
 const Level = () => {
 
-  const [levelData, setLevelData] = useState ( [] )
-
   const location = useLocation();  
   const id = location.pathname.split("/")[2]; 
+  const nav = useNavigate(); 
+
+  const [levelData, setLevelData] = useState ( [] );
+  const [logged, setLogged] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [msg, setMsg] = useState({});
+
+  useEffect(() => {
+    fetch('http://localhost:8800/auth', {
+        method:'GET',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        credentials: 'include'
+        }).then(res => res.json()) 
+        .then(response => {
+          if( response.auth === true ) {
+            setLogged(response.user[0].id)
+          } 
+        })
+       
+    },[])
 
     useEffect( () => {                
         const fetchAllData = async () => {
@@ -28,6 +48,34 @@ const Level = () => {
         fetchAllData()
     },[id])
 
+    const handleChange = (e) => {
+        setAnswer(prev => ({...prev, [e.target.name]: e.target.value})); 
+      };
+
+      const handleClick = async e => {   
+        e.preventDefault();
+       
+        fetch('http://localhost:8800/answer', {
+          method:'POST',
+          body: JSON.stringify(logged, id), 
+          headers: {
+              'Content-Type':'application/json'
+          }
+          }).then(res => res.json()) 
+          .then(response => {
+            console.log(response)
+            if (response.message === "ok") {
+              nav("/levely"); 
+            } else {
+              setMsg(response)
+            }
+          })
+          .catch(err => {
+              console.log(err);
+              alert(err);
+          });
+      }
+
   return (
 
     <div className='container'>
@@ -36,7 +84,7 @@ const Level = () => {
 
         {levelData.map(level => (
             <div className='level' key={level.id}>
-                <h1>{level.title}</h1>
+                <h1>{level.title} Tvoje id {logged}</h1>
                 <h5>Za {level.points} bodov</h5>
                 {level.id === 5 ? <img src={petrabottova2001} id='fotka' alt='petrabottova2001' />: null }
                 {level.picture ? <img src={level.picture} id='fotka' alt='levelFoto'/> : null }
@@ -46,10 +94,16 @@ const Level = () => {
                     {level.id === 3 ? <img src={l3} alt='l3'/>: null }
                     {level.id === 4 ? <img src={l4} alt='l4' />: null }
                 </div>
-                <input type="text" placeholder='Vlož heslo: ' name='password'/>
-                <div className='button'>
-                    <button className='signin'>Potvrď</button>
-                </div>
+                <form onSubmit={handleClick}>
+                    <input type="text" 
+                        placeholder='Vlož heslo: ' 
+                        name='answer'
+                        autoComplete='off'
+                        onChange={handleChange}/>
+                    <div className='button'>
+                        <button className='signin'>Potvrď</button>
+                    </div>
+                </form>
             </div>  
         ))}
     </div>

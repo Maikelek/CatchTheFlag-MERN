@@ -4,7 +4,8 @@ const authController = require('../controllers/authController');
 
 
 router.route("/")  
-    .post(authController.validateUser);
+    .post(authController.validateUser)
+    .get(authController.sessionExists);
 
 
 module.exports = router;

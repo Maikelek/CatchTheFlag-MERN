@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,13 +13,12 @@ const Index = () => {
     const nav = useNavigate(); 
 
     const [eye, setEye] = useState(faEye);
-
-    const [msg, setMsg] = useState({})
-
+    const [msg, setMsg] = useState({});
     const [user, setUser] = useState({ 
         email: "",
         password: "",
       });
+    const [logged, setLogged] = useState("");
 
     function hesloToggle() {
         let hesloInput = document.getElementById("hesloInput");
@@ -48,11 +47,11 @@ const Index = () => {
           body: JSON.stringify(user), 
           headers: {
               'Content-Type':'application/json'
-          }
+          },
+          credentials: 'include'
           }).then(res => res.json()) 
           .then(response => {
             if (response.message === "ok") {
-              localStorage.setItem("token", response.accessToken)
               nav("/levely"); 
             } else {
               setMsg(response)
@@ -64,9 +63,24 @@ const Index = () => {
           });
       }
 
+    useEffect(() => {
+      fetch('http://localhost:8800/auth', {
+          method:'GET',
+          headers: {
+              'Content-Type':'application/json'
+          },
+          credentials: 'include'
+          }).then(res => res.json()) 
+          .then(response => {
+            if( response.auth === true ) {
+              setLogged(response.user[0].name)
+            } 
+          })
+         
+      },[])
+
   return (
     <div className='container'>
-        
         <div className='header'>
             <Link to="/domov">
                 <img src={logo} alt="hacker" id='logo' />
@@ -82,6 +96,7 @@ const Index = () => {
         </div>
 
         <form className='login' onSubmit={handleClick}>
+            {logged ? <h1>Vitaj {logged}</h1> : null }
             <h3>Prihlás sa</h3>
             <p>A nájdi rôzne chyby vo webových technológiach. Vzhľadom na typ hry odporúčam používať počítač/notebook</p>
 
