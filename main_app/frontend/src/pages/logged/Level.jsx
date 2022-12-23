@@ -1,13 +1,17 @@
-import axios from 'axios'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import Header from '../components/Header'
+import Header from '../components/Header';
 
-import l3 from '../../images/l3.JPEG'
-import l4 from '../../images/l4.JPEG'
-import petrabottova2001 from '../../images/petrabottova2001.png'
+import l3 from '../../images/l3.JPEG';
+import l4 from '../../images/l4.JPEG';
+import petrabottova2001 from '../../images/petrabottova2001.png';
+
+
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Level = () => {
 
@@ -57,7 +61,7 @@ const Level = () => {
        
         fetch('http://localhost:8800/answer', {
           method:'POST',
-          body: JSON.stringify(logged, id), 
+          body: JSON.stringify({id, logged, answer}), 
           headers: {
               'Content-Type':'application/json'
           }
@@ -84,7 +88,7 @@ const Level = () => {
 
         {levelData.map(level => (
             <div className='level' key={level.id}>
-                <h1>{level.title} Tvoje id {logged}</h1>
+                <h1>{level.title}</h1>
                 <h5>Za {level.points} bodov</h5>
                 {level.id === 5 ? <img src={petrabottova2001} id='fotka' alt='petrabottova2001' />: null }
                 {level.picture ? <img src={level.picture} id='fotka' alt='levelFoto'/> : null }
@@ -104,6 +108,7 @@ const Level = () => {
                         <button className='signin'>Potvrď</button>
                     </div>
                 </form>
+                {msg.message ? <label className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label>: null }
             </div>  
         ))}
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2022 at 03:08 PM
+-- Generation Time: Dec 23, 2022 at 06:27 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -68,12 +68,16 @@ CREATE TABLE `users` (
   `role` varchar(10) NOT NULL DEFAULT 'hrac'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `users`
+-- Table structure for table `user_levels`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`, `role`) VALUES
-(1, 'admin', 'admin@admin.sk', '$2a$08$797Et9kkaK53TbZrI2zzquGjaTADxsXeB/FRyDEbsBtbvG0UNpe4y', 0, 'admin');
+CREATE TABLE `user_levels` (
+  `userID` int(11) DEFAULT NULL,
+  `levelID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -105,7 +109,7 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
