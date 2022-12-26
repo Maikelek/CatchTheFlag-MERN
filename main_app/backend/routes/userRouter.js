@@ -11,6 +11,9 @@ router.route('/')
 router.route('/:id')
     .put(userController.updateUser)
     .delete(userController.deleteUser);
+
+router.route('/profil')
+    .post(userController.getPoints);
   
 
 

@@ -20,7 +20,7 @@ const Level = () => {
   const nav = useNavigate(); 
 
   const [levelData, setLevelData] = useState ( [] );
-  const [logged, setLogged] = useState("");
+  const [logged, setLogged] = useState(0);
   const [answer, setAnswer] = useState("");
   const [msg, setMsg] = useState({});
 
@@ -33,12 +33,15 @@ const Level = () => {
         credentials: 'include'
         }).then(res => res.json()) 
         .then(response => {
+          console.log(response)
           if( response.auth === true ) {
-            setLogged(response.user[0].id)
-          } 
+            setLogged(response.user[0].id);
+          } else {
+            nav("/"); 
+          }
         })
        
-    },[])
+    },[nav])
 
     useEffect( () => {                
         const fetchAllData = async () => {
@@ -79,6 +82,7 @@ const Level = () => {
               alert(err);
           });
       }
+
 
   return (
 

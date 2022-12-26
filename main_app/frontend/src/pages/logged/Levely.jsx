@@ -2,23 +2,44 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import Header from '../components/Header'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Levely = () => {
+
+
+
+    const nav = useNavigate(); 
+
+    useEffect(() => {
+        fetch('http://localhost:8800/auth', {
+            method:'GET',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            credentials: 'include'
+            }).then(res => res.json()) 
+            .then(response => {
+              if( response.auth === false ) {
+                nav("/"); 
+              }  
+            })
+           
+        },[nav])
 
     const [levely, setLevely] = useState ( [] )
 
     useEffect( () => {                
         const fetchAllLevely = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/level")
-                setLevely(res.data)
+                const response = await axios.get("http://localhost:8800/level")
+                setLevely(response.data)
             }catch(error) {
                 console.log(error)
             }
         }
         fetchAllLevely()
     },[])
+    
 
     return (
         <div className='container'>

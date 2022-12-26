@@ -8,6 +8,7 @@ import Register from "./pages/notLogged/Regpage";
 
 import Levely from "./pages/logged/Levely";
 import Level from "./pages/logged/Level";
+import Profil from "./pages/logged/Profil";
 
 
 
@@ -38,6 +39,7 @@ function App() {
           
             <Route path="/levely" element={<Levely/>}/>
             <Route path="/level/:id" element={<Level/>}/>
+            <Route path="/profil" element={<Profil/>}/>
 
 
             <Route path="/admin" element={<Admin/>}/>

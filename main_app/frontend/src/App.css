@@ -688,6 +688,86 @@ height: 150px;
 /*Zmeny pre adminske menu*/
 
 
+
+
+.profilHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+}
+
+
+.profil {
+  display: flex;
+  flex-direction: column;
+
+  width: 60%;
+  height: 55%;
+
+  border-radius: 7%;
+
+  color: white;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(15px);
+}
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 2rem;
+}
+
+.profilCenter {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.inputWithLabelProfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  width: auto;
+}
+
+.profilButton {
+  background: transparent;
+  
+  border: 2px solid white;
+  border-radius: 20px;
+
+  width: 20%;
+  cursor: pointer;
+
+  margin: 2rem;
+  align-self: center;
+  padding: 0.8rem;
+
+  color: white;
+
+  transition: all 0.4s ease-in-out;
+}
+
+.profilButton:hover {
+  text-decoration: underline;
+  border-radius: 0%;
+}
+
+
+
+
+
+/*Zmeny pre adminske menu*/
+
+
 .nav ul {
   display: flex;
   justify-content: space-between;
@@ -1071,6 +1151,21 @@ height: 150px;
   }
   .updateFormUser {
     padding: 3rem;
+  }
+  .nameRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .profil {
+    height: 75%;
+    width: 80%;
+  }
+
+  .profilButton {
+    margin: 20px;
+    padding: 1.2rem;
+    width: auto;
+    height: auto;
   }
 
 }

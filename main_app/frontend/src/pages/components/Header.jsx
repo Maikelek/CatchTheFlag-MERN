@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../images/hacker.png'; 
@@ -14,7 +15,27 @@ const Header = () => {
       
     function closeNav() {
         document.getElementById("myNav").style.width = "0%";
-      }    
+      } 
+
+      const [id, setID] = useState(0);
+      const [role, setRole] = useState("");
+      
+      useEffect(() => {
+        fetch('http://localhost:8800/auth', {
+            method:'GET',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            credentials: 'include'
+            }).then(res => res.json()) 
+            .then(response => {
+              if( response.auth === true ) {
+                setID(response.user[0].id);
+                setRole(response.user[0].role);
+              } 
+            })
+           
+        },[])
   
 
   return (
@@ -30,11 +51,13 @@ const Header = () => {
         <div id="myNav" className='overlay'>
             <span onClick={closeNav} className='closebtn'>&times;</span>
             <div className='overlay-content'>
-                <Link to="/">Prihlásenie</Link>
-                <Link to="/register">Registrácia</Link>
-                <Link to="/levely">Levely</Link>
-                <Link to="/profil">Profil</Link>
-                <Link to="/logout">Odhlás sa</Link>
+                {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
+                <Link to="/domov">Domov</Link>
+                {id > 0 ?  null : <Link to="/">Prihlásenie</Link>}
+                {id > 0 ?  null : <Link to="/register">Registrácia</Link>}
+                {id === 0 ?  null : <Link to="/levely">Levely</Link>}
+                {id === 0 ?  null : <Link to="/profil">Profil</Link>}
+                {id === 0 ?  null : <Link to="/logout">Odhlás sa</Link>}
             </div>
 
         </div>
