@@ -47,10 +47,25 @@ const sessionExists = (req, res) => {
     } else {
         res.send({ auth: false});
     }
+};
+
+const deleteSession = (req, res) => {
+    if ( req.session.user ) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send({logout: false, message: "Problém pri odhlásení"})
+            } else {
+                res.send({logout: true}) 
+            }
+        })
+    } else {
+          res.send({logout: false, message: "Neexistujúca session"})
+        }
 }
    
 
 module.exports = {
     validateUser,
-    sessionExists
+    sessionExists,
+    deleteSession
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import logo from '../../images/hacker.png'; 
 
@@ -8,6 +8,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
+
+    const nav = useNavigate();
 
     function openNav() {
         document.getElementById("myNav").style.width = "100%";
@@ -35,7 +37,28 @@ const Header = () => {
               } 
             })
            
-        },[])
+        },[]);
+
+      const handleClick = async e => {   
+        e.preventDefault();
+        
+        fetch('http://localhost:8800/auth', {
+          method:'DELETE',
+          headers: {
+              'Content-Type':'application/json'
+          },
+          credentials: 'include'
+          }).then(res => res.json()) 
+          .then(response => {
+            if (response.logout === true) {
+              nav("/"); 
+            } 
+          })
+          .catch(err => {
+              console.log(err);
+              alert(err);
+          });
+      }
   
 
   return (
@@ -57,7 +80,7 @@ const Header = () => {
                 {id > 0 ?  null : <Link to="/register">Registrácia</Link>}
                 {id === 0 ?  null : <Link to="/levely">Levely</Link>}
                 {id === 0 ?  null : <Link to="/profil">Profil</Link>}
-                {id === 0 ?  null : <Link to="/logout">Odhlás sa</Link>}
+                {id === 0 ?  null : <Link to="/logout" onClick={handleClick}>Odhlás sa</Link>}
             </div>
 
         </div>
