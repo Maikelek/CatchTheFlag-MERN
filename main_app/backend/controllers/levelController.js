@@ -68,7 +68,7 @@ const getLevelByID = (req, res) => {
         if(error) return res.json("error");
         return res.json(data);
     })
-  }
+};
 
 module.exports = {
     getLevels,

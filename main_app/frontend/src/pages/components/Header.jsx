@@ -80,7 +80,7 @@ const Header = () => {
                 {id > 0 ?  null : <Link to="/register">Registrácia</Link>}
                 {id === 0 ?  null : <Link to="/levely">Levely</Link>}
                 {id === 0 ?  null : <Link to="/profil">Profil</Link>}
-                {id === 0 ?  null : <Link to="/logout" onClick={handleClick}>Odhlás sa</Link>}
+                {id === 0 ?  null : <Link onClick={handleClick}>Odhlás sa</Link>}
             </div>
 
         </div>

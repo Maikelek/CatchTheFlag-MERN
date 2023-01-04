@@ -12,5 +12,4 @@ router.route('/:id')
     .delete(levelController.deleteLevel)
     .put(levelController.updateLevel);
 
-
 module.exports = router;

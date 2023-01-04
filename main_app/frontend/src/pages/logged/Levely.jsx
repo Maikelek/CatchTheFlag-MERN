@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const Levely = () => {
 
 
+    const [id, setID] = useState ( 0 )
 
     const nav = useNavigate(); 
 
@@ -21,24 +22,30 @@ const Levely = () => {
             .then(response => {
               if( response.auth === false ) {
                 nav("/"); 
-              }  
+              } else {
+                setID(response.user[0].id)
+              } 
             })
            
         },[nav])
 
     const [levely, setLevely] = useState ( [] )
+    const [done, setDone] = useState ( [] )
 
     useEffect( () => {                
         const fetchAllLevely = async () => {
             try{
-                const response = await axios.get("http://localhost:8800/level")
-                setLevely(response.data)
+                const response = await axios.post(" http://localhost:8800/answer/done", {id})
+                setDone(response.data.done)
+                setLevely(response.data.levels)
             }catch(error) {
                 console.log(error)
             }
         }
         fetchAllLevely()
-    },[])
+    },[id])
+    
+    console.log(done.findIndex((doneLevel) => doneLevel.levelID===2)>= 0)
     
 
     return (
@@ -49,10 +56,17 @@ const Levely = () => {
             <div className='levely'>
             <ul>
             {levely.map(level => (
-                  <div className='levelHranica' key={level.id}>
-                    <li><Link to={`/level/${level.id}`} className='link' title={level.title}>{level.title}</Link></li>
-                  </div>  
-                ))}
+
+               
+                <div className={done.findIndex((doneLevel) => doneLevel.levelID===level.id) >= 0 ? "doneHranica" : "levelHranica"} key={level.id}>
+                    <li><Link to={`/level/${level.id}`} 
+                            className="link"
+                            title={level.title}>
+                            {level.title}
+                        </Link></li>
+                </div> 
+
+            ))}
             </ul>
 
             </div>
@@ -61,3 +75,4 @@ const Levely = () => {
     )
 }
 export default Levely
+

@@ -33,7 +33,6 @@ const Level = () => {
         credentials: 'include'
         }).then(res => res.json()) 
         .then(response => {
-          console.log(response)
           if( response.auth === true ) {
             setLogged(response.user[0].id);
           } else {
@@ -70,7 +69,6 @@ const Level = () => {
           }
           }).then(res => res.json()) 
           .then(response => {
-            console.log(response)
             if (response.message === "ok") {
               nav("/levely"); 
             } else {

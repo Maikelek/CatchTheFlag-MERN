@@ -47,10 +47,26 @@ const answerChecker = async (req, res) => {
       return res.json({ message: "Neplatné heslo !"});
     }
   });
+};
 
+const getLevelsAndDone = (req, res) => {   
+  userID = req.body.id;
+  const q = "SELECT id, title FROM levels";
+
+  db.query(q, (error, levels) => {   
+      if(error) return res.json("error");
+
+      const query = "SELECT levelID FROM user_levels WHERE userID = ?";
+
+      db.query(query,[userID], (error, done) => {   
+        if(error) return res.json("error");
+        return res.json({done, levels});
+    })
+  })
 
 };
 
   module.exports = {
-    answerChecker
+    answerChecker,
+    getLevelsAndDone
 };

@@ -4,7 +4,10 @@ const answerController = require('../controllers/answerController');
 
 
 router.route("/")  
-    .post(answerController.answerChecker)
+    .post(answerController.answerChecker) 
+
+router.route("/done")  
+    .post(answerController.getLevelsAndDone)
 
 
 module.exports = router;
