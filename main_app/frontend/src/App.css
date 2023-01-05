@@ -717,8 +717,8 @@ height: 150px;
   display: flex;
   flex-direction: column;
 
-  width: 40%;
-  height: 55%;
+  width: 65vh;
+  height: 55vh;
 
   border-radius: 7%;
 
@@ -782,12 +782,16 @@ height: 150px;
   border-bottom: 1px solid white;
 }
 
-.inputFieldProfil:hover {
-  border-bottom: 1px solid rgb(27, 252, 240);
+.points:hover {
+  color: #15a8b3;
 }
 
-.inputFieldProfil:active {
-  border-bottom: 1px solid rgb(27, 252, 240);
+.inputFieldProfil:hover {
+  border-bottom: 1px solid #00E6F6;
+}
+
+.inputFieldProfil:focus {
+  border-bottom: 1px solid #00E6F6;
 }
 
 
@@ -1075,7 +1079,6 @@ height: 150px;
   color: rgba(60, 118, 61, 1);
 }
 
-/* media query */
 @media screen and (max-width: 800px) {
 
   /* Logo nie je viditelné */
@@ -1196,13 +1199,6 @@ height: 150px;
     height: auto;
   }
   .inputFieldProfil {
-    color: white;
-    width: auto;
     padding: 0.4rem 1.2rem;
-    margin-bottom: 10px;
-  
-    background-color: transparent;
-    border: hidden;
-    border-bottom: 1px solid white;
   }
 }

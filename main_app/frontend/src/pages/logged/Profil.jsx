@@ -111,7 +111,7 @@ const Profil = () => {
                     </div>
                 </form>
                 
-                <h2 className='profilCenter'>Počet bodov: {points}</h2>
+                <h2 className='profilCenter'>Počet bodov: <i className='points'>{points}</i></h2>
 
 <button className='profilButton'>Aktualizuj</button>
             </div>
