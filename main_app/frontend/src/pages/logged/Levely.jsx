@@ -45,8 +45,6 @@ const Levely = () => {
         fetchAllLevely()
     },[id])
     
-    console.log(done.findIndex((doneLevel) => doneLevel.levelID===2)>= 0)
-    
 
     return (
         <div className='container'>

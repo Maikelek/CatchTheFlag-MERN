@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Profil = () => {
 
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [user, setUser] = useState("");
     const [points, setPoints] = useState(0);
     const nav = useNavigate(); 
 
@@ -35,7 +35,7 @@ const Profil = () => {
             }).then(res => res.json()) 
             .then(response => {
               if( response.auth === true ) {
-                setName(response.user[0].name);
+                setUser(response.user[0]);
                 setEmail(response.user[0].email);
               } else {
                 nav("/"); 
@@ -44,6 +44,10 @@ const Profil = () => {
            
         },[nav])
 
+    const handleChange = (e) => {
+        setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
+    };
+
   return (
 
     <div className='container'>
@@ -51,60 +55,66 @@ const Profil = () => {
         <Header />
 
         <div className="profilHolder">
-            <form className="profil">
-                <h1 className='profilCenter'>PROFIL</h1>
-
-                <div className="nameRow">
-
-                    <div className="inputWithLabelProfil">
-                        <label className="labelForInput" >Meno</label>
-                        <input 
-                            className="inputField "
-                            type="text"
-                            value={name}  
-                            autoComplete="off" 
-                            name='name'/>
-                    </div>
-
-                    <div className="inputWithLabelProfil">
-                        <label className="labelForInput" >Email</label>
-                        <input 
-                            className="inputField "
-                            type="text"
-                            value={email}  
-                            autoComplete="off" 
-                            name='name'/>
-                    </div>
-
-                    </div>
-
+            <div className="profil">
+                <h1 className='profilCenter'>PROFIL</h1>    
+                
+                <form>    
                     <div className="nameRow">
 
-                    <div className="inputWithLabelProfil">
-                        <label className="labelForInput" >Heslo</label>
-                        <input 
-                            className="inputField "
-                            type="text"  
-                            autoComplete="off" 
-                            name='name'/>
+                        <div className="inputWithLabelProfil">
+                            <label className="labelForInput" >Meno</label>
+                            <input 
+                                className="inputFieldProfil"
+                                type="text"
+                                value={user.name}
+                                onChange={handleChange}  
+                                autoComplete="off" 
+                                name='name'/>
+                        </div>
+
+                        <div className="inputWithLabelProfil">
+                            <label className="labelForInput" >Email</label>
+                            <input 
+                                className="inputFieldProfil"
+                                type="text"
+                                value={user.email}
+                                onChange={handleChange}  
+                                autoComplete="off" 
+                                name='email'/>
+                        </div>
+
+                        </div>
+
+                        <div className="nameRow">
+
+                        <div className="inputWithLabelProfil">
+                            <label className="labelForInput" >Heslo</label>
+                            <input 
+                                className="inputFieldProfil"
+                                type="password"
+                                value=""
+                                onChange={handleChange}    
+                                autoComplete="off" 
+                                name='pass'/>
+                        </div>
+
+                        <div className="inputWithLabelProfil">
+                            <label className="labelForInput" >Heslo</label>
+                            <input 
+                                className="inputFieldProfil"
+                                type="password"
+                                value=""
+                                onChange={handleChange}    
+                                autoComplete="off" 
+                                name='passRep'/>
+                        </div>
                     </div>
+                </form>
+                
+                <h2 className='profilCenter'>Počet bodov: {points}</h2>
 
-                    <div className="inputWithLabelProfil">
-                        <label className="labelForInput" >Heslo</label>
-                        <input 
-                            className="inputField "
-                            type="text"  
-                            autoComplete="off" 
-                            name='name'/>
-                </div>
-        
-                </div>
-
-                <h1 className='profilCenter'>Počet bodov: {points}</h1>
-
-                <button className='profilButton'>Aktualizuj</button>
-
-            </form>
+<button className='profilButton'>Aktualizuj</button>
+            </div>
         </div>
 
     

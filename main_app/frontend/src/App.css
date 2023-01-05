@@ -576,7 +576,7 @@ body {
   background: rgba(10, 231, 21, 0.7);
   padding: 0.8rem;
   margin: 1rem;
-  transition: 2s;
+  transition: 0.5s;
 }
 
 /* Div levelu pri hoveri */
@@ -717,7 +717,7 @@ height: 150px;
   display: flex;
   flex-direction: column;
 
-  width: 60%;
+  width: 40%;
   height: 55%;
 
   border-radius: 7%;
@@ -757,7 +757,7 @@ height: 150px;
   width: 20%;
   cursor: pointer;
 
-  margin: 2rem;
+  margin: 1rem;
   align-self: center;
   padding: 0.8rem;
 
@@ -771,6 +771,24 @@ height: 150px;
   border-radius: 0%;
 }
 
+.inputFieldProfil {
+  color: white;
+  width: auto;
+  padding: 1rem 1.2rem;
+  margin-bottom: 10px;
+
+  background-color: transparent;
+  border: hidden;
+  border-bottom: 1px solid white;
+}
+
+.inputFieldProfil:hover {
+  border-bottom: 1px solid rgb(27, 252, 240);
+}
+
+.inputFieldProfil:active {
+  border-bottom: 1px solid rgb(27, 252, 240);
+}
 
 
 
@@ -1177,5 +1195,14 @@ height: 150px;
     width: auto;
     height: auto;
   }
-
+  .inputFieldProfil {
+    color: white;
+    width: auto;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 10px;
+  
+    background-color: transparent;
+    border: hidden;
+    border-bottom: 1px solid white;
+  }
 }
