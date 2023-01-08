@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 import AdminNav from '../components/AdminNav';
 
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowTrendDown, faArrowTrendUp, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AdminLevelUpdate = () => {
@@ -34,6 +34,13 @@ const AdminLevelUpdate = () => {
     }
   };
 
+  const sort = () => {
+    let sorted = [];
+    for (var level in levely) {
+      sorted.push([level, maxSpeed[vehicle]]);
+    }
+  }
+
   return (
     <div>
 
@@ -41,17 +48,26 @@ const AdminLevelUpdate = () => {
 
       <div className='content'>
         <div className="spotUpdate">
-        <h1>Moderacia levelov</h1>
-          {levely.map(level => (
-            <div className='update' key={level.id}>
-                <h1>{level.title}</h1>
-                <div>
-                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
-                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                </div> 
-            </div>  
-          ))}
+          <h1>Moderacia levelov</h1>
+          <div className="update">
+            <form action="">
+              <input type="text" name="" id="" />
+            </form>
+            <div>
+              <button className='zmaz'><FontAwesomeIcon icon={faArrowTrendDown} /></button>
+              <button className='uprav'><FontAwesomeIcon icon={faArrowTrendUp} /></button>
+            </div>
           </div>
+            {levely.map(level => (
+              <div className='update' key={level.id}>
+                  <h1>{level.title}</h1>
+                  <div>
+                    <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                    <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  </div> 
+              </div>  
+            ))}
+            </div>
         </div>
 
       </div>

@@ -52,6 +52,9 @@ app.use('/auth', authRouter);
 const answerRouter = require('./routes/answerRouter');
 app.use('/answer', answerRouter);
 
+const profilRouter = require('./routes/profilRouter');
+app.use('/profil', profilRouter);
+
 
 /*Port aplikácie*/ 
 app.listen(process.env.PORT, () =>{      
