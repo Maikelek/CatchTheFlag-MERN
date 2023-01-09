@@ -2,11 +2,11 @@ const db = require("../db");
 
 
 const getLevels = (req, res) => {   
-    const q = "SELECT id, title FROM levels";
+    const q = "SELECT id, title, points FROM levels";
   
     db.query(q,(error, data) => {   
         if(error) return res.json("error");
-        return res.json(data);
+        return res.send(data);
     })
 };
 

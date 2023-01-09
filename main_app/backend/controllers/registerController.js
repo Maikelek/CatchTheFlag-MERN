@@ -23,7 +23,9 @@ const userRegister = (req, res) => {
             return res.status(401).json({ message: "Musíš zadať email !" });
         } else if ( !password || !passwordRep) {
             return res.status(401).json({ message: "Musíš zadať heslo !" });
-        } else if ( password !== passwordRep) {
+        } else if ( password.length < 7) {
+            return res.status(401).json({ message: "Heslo musi mať minimálne 7 znakov" });
+        }else if ( password !== passwordRep) {
             return res.status(401).json({ message: "Hesla sa nezhodujú !" });
         }
 

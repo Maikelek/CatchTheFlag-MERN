@@ -51,21 +51,27 @@ const Levely = () => {
 
             <Header />
 
-            <div className='levely'>
-            <ul>
-            {levely.map(level => (
+            <div className="holder">
 
-               
-                <div className={done.findIndex((doneLevel) => doneLevel.levelID===level.id) >= 0 ? "doneHranica" : "levelHranica"} key={level.id}>
-                    <li><Link to={`/level/${level.id}`} 
-                            className="link"
-                            title={level.title}>
-                            {level.title}
-                        </Link></li>
-                </div> 
+                <div className='levely'>
+                    <ul>
 
-            ))}
-            </ul>
+                        {levely.map(level => (
+
+                        
+                            <div className={done.findIndex((doneLevel) => doneLevel.levelID===level.id) >= 0 ? "doneHranica" : "levelHranica"} key={level.id}>
+                                <li><Link to={`/level/${level.id}`} 
+                                        className="link"
+                                        title={level.title}>
+                                        {level.title}
+                                    </Link></li>
+                            </div> 
+
+                        ))}
+                        
+                    </ul>
+
+                </div>
 
             </div>
 

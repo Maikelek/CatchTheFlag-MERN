@@ -76,6 +76,7 @@ const Header = () => {
             <div className='overlay-content'>
                 {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
                 <Link to="/domov">Domov</Link>
+                <Link to="/stats">Štatistika</Link>
                 {id > 0 ?  null : <Link to="/">Prihlásenie</Link>}
                 {id > 0 ?  null : <Link to="/register">Registrácia</Link>}
                 {id === 0 ?  null : <Link to="/levely">Levely</Link>}

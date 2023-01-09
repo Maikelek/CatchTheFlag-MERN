@@ -1,8 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const AdminNav = () => {
+
+  
+  const nav = useNavigate();
+
+  const handleClick = async e => {   
+    e.preventDefault();
+    
+    fetch('http://localhost:8800/auth', {
+      method:'DELETE',
+      headers: {
+          'Content-Type':'application/json'
+      },
+      credentials: 'include'
+      }).then(res => res.json()) 
+      .then(response => {
+        if (response.logout === true) {
+          nav("/"); 
+        } 
+      })
+      .catch(err => {
+          console.log(err);
+          alert(err);
+      });
+  }
 
   return (
     <div className="nav">
@@ -19,6 +43,7 @@ const AdminNav = () => {
             <span className='dropbtn'>Cesty</span>
             <div className='dropdown-content'>
               <Link to="/register">Registrácia</Link>
+              <Link to="/stats">Štatistika</Link>
               <Link to="/">Prihlásenie</Link>
               <Link to="/domov">Domov</Link>
               <Link to="/levely">Levely</Link>
@@ -30,7 +55,7 @@ const AdminNav = () => {
             <div className='dropdown-content'>
               <Link to="/admin/level/add">Level</Link>
               <Link to="/admin/user/add">Používateľ</Link>
-              <Link>Odhlás sa</Link>
+              <Link onClick={handleClick}>Odhlás sa</Link>
             </div>
           </li>
         </ul>

@@ -11,20 +11,6 @@ const Profil = () => {
     const [points, setPoints] = useState(0);
     const nav = useNavigate(); 
 
-
-
-    useEffect( () => {                
-        const fetchPoints = async () => {
-            try{
-                const response = await axios.post("http://localhost:8800/user/profil", {email})
-                setPoints(response.data[0].points)
-            }catch(error) {
-                console.log(error)
-            }
-        }
-        fetchPoints()
-    },[email])
-
     useEffect(() => {
         fetch('http://localhost:8800/auth', {
             method:'GET',
@@ -44,6 +30,19 @@ const Profil = () => {
            
         },[nav])
 
+
+    useEffect( () => {                
+        const fetchPoints = async () => {
+            try{
+                const response = await axios.post("http://localhost:8800/profil", {email})
+                setPoints(response.data[0].points)
+            }catch(error) {
+                console.log(error)
+            }
+        }
+        fetchPoints()
+    },[email])
+
     const handleChange = (e) => {
         setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
     };
@@ -54,7 +53,7 @@ const Profil = () => {
 
         <Header />
 
-        <div className="profilHolder">
+        <div className="holder">
             <div className="profil">
                 <h1 className='profilCenter'>PROFIL</h1>    
                 
@@ -112,8 +111,7 @@ const Profil = () => {
                 </form>
                 
                 <h2 className='profilCenter'>Počet bodov: <i className='points'>{points}</i></h2>
-
-<button className='profilButton'>Aktualizuj</button>
+                <button className='profilButton'>Aktualizuj</button>
             </div>
         </div>
 

@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route,} from "react-router-dom";
 import Index from "./pages/notLogged/Index"
 import Domov from "./pages/notLogged/Domov";
 import Register from "./pages/notLogged/Regpage";
+import Stats from "./pages/notLogged/Stats";
 
 
 
@@ -35,23 +36,24 @@ function App() {
           <Route path="/" element={<Index/>}/>
           <Route path="/domov" element={<Domov/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/stats" element={<Stats/>}/>
 
-          
-            <Route path="/levely" element={<Levely/>}/>
-            <Route path="/level/:id" element={<Level/>}/>
-            <Route path="/profil" element={<Profil/>}/>
+        
+          <Route path="/levely" element={<Levely/>}/>
+          <Route path="/level/:id" element={<Level/>}/>
+          <Route path="/profil" element={<Profil/>}/>
 
+      
+          <Route path="/admin" element={<Admin/>}/>
 
-            <Route path="/admin" element={<Admin/>}/>
+          <Route path="/admin/level/update" element={<AdminLevelUpdate/>}/>
+          <Route path="/admin/level/update/:id" element={<AdminLevelID/>}/>
 
-            <Route path="/admin/level/update" element={<AdminLevelUpdate/>}/>
-            <Route path="/admin/level/update/:id" element={<AdminLevelID/>}/>
+          <Route path="/admin/user/update" element={<AdminUserUpdate/>}/>
+          <Route path="/admin/user/update/:id" element={<AdminUserID/>}/>
 
-            <Route path="/admin/user/update" element={<AdminUserUpdate/>}/>
-            <Route path="/admin/user/update/:id" element={<AdminUserID/>}/>
-
-            <Route path="/admin/level/add" element={<AdminLevelAdd/>}/>
-            <Route path="/admin/user/add" element={<AdminUserAdd/>}/>
+          <Route path="/admin/level/add" element={<AdminLevelAdd/>}/>
+          <Route path="/admin/user/add" element={<AdminUserAdd/>}/>
         </Routes>
       </BrowserRouter>
     </div>

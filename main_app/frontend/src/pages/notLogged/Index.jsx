@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 
 import logo from '../../images/hacker.png'; 
+import ContactAdmin from '../components/ContactAdmin';
 
 import { faEye, faUser, faLock, faEyeSlash, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -129,6 +130,8 @@ const Index = () => {
                 <p>Nemáš účet?</p>
                 <Link to="/register">Zaregistruj sa</Link>
             </div>
+
+            <ContactAdmin/>
 
         </form>
     </div>

@@ -139,9 +139,9 @@ const Regpage = () => {
           <button className='regButton' type="submit">Registruj sa</button>
 
           <div className='mobilReg'>
-            <p>Ak máš účet</p>
-            <Link to='/'>Prihlás sa tu</Link>
-        </div>
+              <p>Ak máš účet</p>
+              <Link to='/'>Prihlás sa tu</Link>
+          </div>
         </form>
 
       </div>

@@ -25,7 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 86400000
+      expires: 86400000 // 1 deň
     }
 })
 );
@@ -51,6 +51,9 @@ app.use('/auth', authRouter);
 
 const answerRouter = require('./routes/answerRouter');
 app.use('/answer', answerRouter);
+
+const profilRouter = require('./routes/profilRouter');
+app.use('/profil', profilRouter);
 
 
 /*Port aplikácie*/ 
