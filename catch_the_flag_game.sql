@@ -52,7 +52,7 @@ INSERT INTO `levels` (`id`, `title`, `hint`, `picture`, `points`, `pass`, `link`
 (8, 'Komunikácia', 'Odchytili sme komunikáciu, nájdeš heslo? ', NULL, 20, '/l8-w1r3$h.4rk\\', 'https://drive.google.com/file/d/1dP1j30Gew_LFKymRvFd1DZ2Z86i3XJ-C/view?usp=sharing'),
 (9, 'Linux', 'Vo verejnej lokálnej sieti sa niekto pokúsil nabúrať do SSH Linux serveru, vieš zistiť kedy sa mu podarilo preniknúť? Heslo vo forme HH-MM-SS', NULL, 5, '22:59:50', 'https://drive.google.com/file/d/1aXZC3RLHV935pEZXefIu-QFuM1t_VMj5/view?usp=sharing'),
 (10, 'Známe znaky', 'Skús dekódovať túto správu', NULL, 5, 'enchantmcpass', 'https://drive.google.com/file/d/1q9M-No7RAVioeqB0ClJBMisaQbB4GXN0/view?usp=sharing'),
-(11, 'Php weby sú fajn', 'Michal Priemerny si urobil stránku. Nájdi na nej niekoho zaujimavého.', NULL, 25, '/l11-=)$qlinject10n=)\\', '178.40.39.207');
+(11, 'Php weby sú fajn', 'Michal Priemerny si urobil stránku. Nájdi na nej niekoho zaujimavého.', NULL, 25, '/l11-=)$qlinject10n=)\\', 'http://178.40.39.207/');
 
 -- --------------------------------------------------------
 
