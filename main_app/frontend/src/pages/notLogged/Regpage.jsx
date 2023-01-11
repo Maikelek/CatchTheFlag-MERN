@@ -106,7 +106,7 @@ const Regpage = () => {
               type="email" 
               autoComplete="off" 
               onChange={handleChange} 
-              placeholder="Zadaj svoje email: "/>
+              placeholder="Zadaj svoj email: "/>
             <label><FontAwesomeIcon icon={faEnvelope}/></label>
           </div>
 

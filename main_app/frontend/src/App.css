@@ -750,7 +750,7 @@ height: 150px;
   flex-direction: column;
 
   width: 65vh;
-  height: 55vh;
+  height: 65vh;
 
   border-radius: 7%;
 
@@ -1223,8 +1223,9 @@ height: 150px;
     gap: 15px;
   }
   .profil {
-    height: 75%;
-    width: 80%;
+    padding: 3rem;
+    height: 100vh;
+    width: 100vh;
   }
 
   .profilButton {
