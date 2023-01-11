@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2022 at 06:27 PM
+-- Generation Time: Jan 11, 2023 at 11:54 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,7 +51,8 @@ INSERT INTO `levels` (`id`, `title`, `hint`, `picture`, `points`, `pass`, `link`
 (7, 'Discord', 'Na Discord serveri si používateľ \"MichalPriemerny\" uložil priečinok nájdi ho', NULL, 25, '/l7-:d1sc0rd807:\\', 'https://discord.gg/Tvcq7a7RAW'),
 (8, 'Komunikácia', 'Odchytili sme komunikáciu, nájdeš heslo? ', NULL, 20, '/l8-w1r3$h.4rk\\', 'https://drive.google.com/file/d/1dP1j30Gew_LFKymRvFd1DZ2Z86i3XJ-C/view?usp=sharing'),
 (9, 'Linux', 'Vo verejnej lokálnej sieti sa niekto pokúsil nabúrať do SSH Linux serveru, vieš zistiť kedy sa mu podarilo preniknúť? Heslo vo forme HH-MM-SS', NULL, 5, '22:59:50', 'https://drive.google.com/file/d/1aXZC3RLHV935pEZXefIu-QFuM1t_VMj5/view?usp=sharing'),
-(10, 'Známe znaky', 'Skús dekódovať túto správu', NULL, 5, 'enchantmcpass', 'https://drive.google.com/file/d/1q9M-No7RAVioeqB0ClJBMisaQbB4GXN0/view?usp=sharing');
+(10, 'Známe znaky', 'Skús dekódovať túto správu', NULL, 5, 'enchantmcpass', 'https://drive.google.com/file/d/1q9M-No7RAVioeqB0ClJBMisaQbB4GXN0/view?usp=sharing'),
+(11, 'Php weby sú fajn', 'Michal Priemerny si urobil stránku. Nájdi na nej niekoho zaujimavého.', NULL, 25, '/l11-=)$qlinject10n=)\\', '178.40.39.207');
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

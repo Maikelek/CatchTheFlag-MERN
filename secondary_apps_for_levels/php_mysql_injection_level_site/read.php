@@ -1,21 +1,33 @@
 <?php
 session_start();
+
+require './config/config.php';
+
+if(isset($_SESSION["token"])){
+    $id = $_SESSION["token"];
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id=$id");
+    $data = mysqli_fetch_assoc($result);
+} else {
+    $id = null;
+    header("Location: index.php");
+}
+
 if(isset($_POST['find']))
 {
     $id = $_POST['id'];
 
-    $query = "SELECT * FROM `users` WHERE `id`=$id";
+    $query = "SELECT * FROM `users` WHERE id=$id";
     $search_result = filterTable($query);
     
 }
  else {
-    $query = "SELECT * FROM `users` WHERE `id`=0";
+    $query = "SELECT * FROM `users` WHERE id=0";
     $search_result = filterTable($query);
 }
 
 function filterTable($query)
 {
-    require '../config/config.php';
+    require './config/config.php';
     $filter_Result = mysqli_query($conn, $query);
     return $filter_Result;
 }
@@ -35,19 +47,32 @@ function filterTable($query)
 <body>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <div class="container">
-                <a href="https://github.com/maikelek" class="navbar-brand">Michal Priemerny</a>
-                
-                <ul class="navbar-nav">
+        <div class="container">
+            <a href="https://github.com/maikelek" class="navbar-brand">Michal Priemerny</a>
+            
+
+            <ul class="navbar-nav">
+            <?php if($id >= 1): ?>
                     <li class="nav-item">
-                        <a href="create.php" class="nav-link">Pridaj sa</a>
+                        <a href="profil.php" class="nav-link">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="read.php" class="nav-link active">Nájdi</a>
+                        <a href="read.php" class="nav-link active">Najdi</a>
                     </li>
-                </ul>
-            </div>
-        </nav>
+                    <li class="nav-item">
+                        <a href="./backend/logout.php" class="nav-link">Odhlás sa</a>
+                    </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a href="register.php" class="nav-link">Registruj sa</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.php" class="nav-link">Prihlás sa</a>
+                </li>
+            <?php endif; ?>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-4">
 
@@ -72,9 +97,7 @@ function filterTable($query)
                     <tr>
                         <th>ID</th>
                         <th>MENO</th>
-                        <th>PRIEZVISKO</th>
-                        <th>EMAIL</th>
-                        <th>VEK</th>
+                        <th>MOTTO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,9 +105,7 @@ function filterTable($query)
                 <tr>
                     <td><?php echo $row['id'];?></td>
                     <td><?php echo $row['fname'];?></td>
-                    <td><?php echo $row['lname'];?></td>
-                    <td><?php echo $row['email'];?></td>
-                    <td><?php echo $row['age'];?></td>
+                    <td><?php echo $row['motto'];?></td>
                 </tr>
                 <?php endwhile;?>
                     </tr>

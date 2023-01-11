@@ -1,6 +1,13 @@
 <?php
 session_start();
-?>
+require './config/config.php';
+
+if(isset($_SESSION["token"])){
+    $id = $_SESSION["token"];
+} else {
+    $id = null;
+}?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,19 +22,32 @@ session_start();
 <body>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <div class="container">
-                <a href="https://github.com/maikelek" class="navbar-brand">Michal Priemerny</a>
-                
-                <ul class="navbar-nav">
+        <div class="container">
+            <a href="https://github.com/maikelek" class="navbar-brand">Michal Priemerny</a>
+            
+
+            <ul class="navbar-nav">
+            <?php if($id >= 1): ?>
                     <li class="nav-item">
-                        <a href="create.php" class="nav-link active">Pridaj sa</a>
+                        <a href="profil.php" class="nav-link">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="read.php" class="nav-link">Nájdi</a>
+                        <a href="read.php" class="nav-link">Najdi</a>
                     </li>
-                </ul>
-            </div>
-        </nav>
+                    <li class="nav-item">
+                        <a href="./backend/logout.php" class="nav-link">Odhlás sa</a>
+                    </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a href="register.php" class="nav-link active">Registruj sa</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.php" class="nav-link">Prihlás sa</a>
+                </li>
+            <?php endif; ?>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-4">
 
@@ -45,29 +65,29 @@ session_start();
         <?php include('./components/alertDanger.php')?>
 
         <div class="card">
-            <form action="../backend/add.php" method="POST">
+            <form action="./backend/registerUser.php" method="POST">
                 <div class="p-3">
                     <label for="fname" class="form-label">Meno</label>
                     <input type="text" class="form-control" name="fname">
                     <div class="form-text">Zadaj svoje meno!</div>
                 </div>
                 <div class="p-3">
-                    <label for="lname" class="form-label">Priezvisko</label>
-                    <input type="text" class="form-control" name="lname">
-                    <div class="form-text">Zadaj svoje priezvisko!</div>
+                    <label for="about" class="form-label">Motto</label>
+                    <input type="text" class="form-control" name="motto">
+                    <div class="form-text">Zadaj svoje motto!</div>
                 </div>
                 <div class="p-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" name="email">
-                    <div class="form-text">Zadaj svoj email!</div>
+                    <label for="pass" class="form-label">Heslo</label>
+                    <input type="password" class="form-control" name="pass">
+                    <div class="form-text">Zadaj svoje heslo!</div>
                 </div>
                 <div class="p-3">
-                    <label for="fname" class="form-label">Vek</label>
-                    <input type="number" class="form-control" name="age">
-                    <div class="form-text">Zadaj svoj vek!</div>
+                    <label for="passRep" class="form-label">Zopakuj heslo!</label>
+                    <input type="password" class="form-control" name="passRep">
+                    <div class="form-text">Zopakuj svoje heslo!</div>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" name="add" class="btn btn-success mb-5">Pridaj sa !</button>
+                    <button type="submit" name="register" class="btn btn-success mb-5">Pridaj sa !</button>
                 </div>
             </form>
         </div>
