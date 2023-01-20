@@ -7,15 +7,14 @@ const Domov = () => {
     <div className='container'>
 
       <Header />
-
-
+      
       <div className='domov'>
 
         <div className='text'>
             <h1>Ročníkový projekt</h1>
             <p>
                 Ročníkový projekt v podobe webovej stránky so zameraním na prácu s webovými technológiami, sociálnymi sieťami, šifrovaním, forénznou a malwareovou analýzou. Jeho úlohou je zvýšiť povedomie o 
-                týchto technológiach a ich nebezpečenstvách
+                týchto technológiach a ich nebezpečenstvách. Súťaž je vhodná prevažne pre študentov stredných škôl a vyššie.
                 <br></br><br></br>
                 
                 Jedná sa o /catch the flag\ hru. Pre prechod do ďalšieho levlu je potrebné na stránke za pomoci využitia technológii spomenutých vyššie nájsť heslo 

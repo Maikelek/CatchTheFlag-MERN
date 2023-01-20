@@ -44,7 +44,18 @@ const answerChecker = async (req, res) => {
       }
        
     } else {
-      return res.json({ message: "Neplatné heslo !"});
+      let random = Math.floor(Math.random() * 11)
+      if ( random <= 2 ) {
+          return res.json({ message: "Zlá vlajka, môžeš skúsiť znova!"  });
+      } else if ( random <= 4 ) {
+          return res.json({ message: "Neplatná vlajka, skúšaj ďalej!"  });
+      } else if ( random <= 6 ) {
+          return res.json({ message: "Nesprávná vlajka, chyby nerátame =)"  });
+      } else if ( random <= 8 ) {
+          return res.json({ message: "Zlá vlajka, učíme sa chybami, že?"  });
+      } else {
+          return res.json({ message: "Zlá vlajku, skúšaj alebo sa vráť do menu"  });
+      }
     }
   });
 };

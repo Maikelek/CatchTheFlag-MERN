@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 /* Odstránenie marginu a paddingu */
 * {
@@ -6,10 +6,10 @@
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* Pozadie */
+/* Pozadie a font */
 body {
   background-image: url(./images/hacking.png);
   background-repeat: no-repeat;
@@ -145,7 +145,7 @@ body {
 /* Button číslo 49 z https://getcssscan.com/css-buttons-examples */
 .button-49,
 .button-49:after {
-  width: 140px;
+  width: 150px;
   height: 76px;
   padding-left: 5px;
   line-height: 78px;
@@ -375,22 +375,25 @@ body {
   color: white;
   overflow:auto;
   top: 25%;
-
+  text-align: center;
 }
 
 .stats {
   display: flex;
   justify-content: space-between;
-
-  font-size: 12px;
+  align-items: center;
+  font-size: 16px;
   margin: 3rem;
   border-bottom: 1px solid white;
+  padding-bottom: 1rem;
 }
+
 
 /* Text domovu */
 .text {
-  margin-top: 1rem;
-  max-width: 750px;
+  max-width: 1000px;
+  word-wrap: break-word;
+  overflow: auto;
 }
 
 /* Nadpis */
@@ -401,7 +404,7 @@ body {
 
 /* p tag v domove */
 .text > p {
-  margin: 5rem;
+  padding: 3.2rem;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -587,37 +590,45 @@ body {
 .link {
   color: white;
   text-decoration: none;    
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 }
 
 /* Div samotného levelu */
 .levelHranica {
-  border: 4px solid black;
-  border-radius: 5px 20px 5px;
+  border: 3px solid black;
+  border-radius: 25px;
 
-  background: rgba(0, 174, 255, 0.5);
-  padding: 0.8rem;
+  background: linear-gradient(to right, #34b0cc, #145e77);
+  padding: 0.8rem 2rem;
   margin: 1rem;
   transition: 0.5s;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .doneHranica {
-  border: 4px solid black;
-  border-radius: 5px 20px 5px;
+  border: 3px solid black;
+  border-radius: 25px;
 
-  background: rgba(10, 231, 21, 0.7);
-  padding: 0.8rem;
+  background: linear-gradient(to right, #1dc726, #2d7a0e);
+  padding: 0.8rem 2rem;
   margin: 1rem;
   transition: 0.5s;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* Div levelu pri hoveri */
 .levelHranica:hover {
-  background: rgba(4, 52, 75, 0.8);
-  border-top-color: rgb(51, 48, 48);
-  border-right-color: rgb(31, 29, 29);
+  cursor: pointer; 
+  transform: scale(1.1);
 }
 
+.doneHranica:hover {
+  cursor: pointer; 
+  transform: scale(1.1);
+}
 
 
 
@@ -631,19 +642,24 @@ body {
 
 .level{
   overflow: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center; 
   align-items: center;
   flex-direction: column;
+  text-align: center;
   gap: 5px;
+  padding: 5rem;
+  border-radius: 15%;
   color: white;
+
+  background: rgba(10, 10, 10, 0.8);
+  border: 3px solid rgb(15, 15, 15);
+  border-radius: 15%;
+  box-shadow: 2px 2px 5px rgb(82, 80, 79);
 }
 
 /* Veľkosť textu nadpisu v leveli */
 .level > h1 {
+  margin: 15px;
   font-size: 3rem;
   color: white
 }
@@ -709,7 +725,6 @@ height: 150px;
   margin-top: 2rem;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 /* Nastavenie tlačídka v Dive tlačídka*/
@@ -1130,43 +1145,13 @@ height: 150px;
   .login {
       width: 100%;
       max-width: 100%;
-  }
-
-  /* Domov bude viditelný */
-  #domov {
-      display: block;
-    }
-    
+  } 
 
   /* Text pre uživateľov na mobilnom telefóne bude viditelný */
   .mobil {
       display: block;
   }
 
-  /* Odsadenie textu */
-  .text {
-      margin-top: -120px;
-      margin-right: 50px;
-  }  
-
-  /* Veľkost textu pre telefóny */
-  .text > h1 {
-      margin-left: 5%;
-      font-size: 30px;
-      margin-top: 120px;
-  }  
-
-  /* Výzor P tagu na stránke domov */
-  .text > p {
-      margin: 2rem;
-      margin-top: 20px;
-      font-size: 1.3rem;
-      width: 100%;
-      border-left: solid 1px white;
-      border-right: solid 1px white;
-      padding: 1rem;
-      margin-left: 4%;
-  }  
 
   /* Zmena velkosti registračného tlačídka pri mobile */
   .regButton {
@@ -1194,16 +1179,45 @@ height: 150px;
 
   .pomocka {  
     max-width: 400px;
-}
+  }
+
   .text {
+    margin: 5rem;
     max-height: 750px;
   }
 
-  .levely {
-    top: 10%;
-    width: fit-content;
-    overflow: scroll;
+  .text > h1 {
+    font-size: 2.2rem;
   }
+
+  .level{
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+    justify-content: center;
+  }
+
+  .levely {
+    width: 100%;
+    max-height: 50%;
+    top: 25%;
+    bottom:25%;
+    border: 4px solid rgb(119, 16, 16);
+    border-radius: 15%;
+    box-shadow: 2px 2px 15px rgb(255, 38, 0);
+    padding: 10px;
+  }
+
+  .levely > ul {
+    position:absolute;
+    width: 100%;
+    max-height: 50%;
+    overflow:auto; 
+    top: 25%;
+    bottom:25%;
+    padding: 1rem;
+}
+
 
   .labelForInput {
     align-self: center;
@@ -1235,5 +1249,10 @@ height: 150px;
   }
   .inputFieldProfil {
     padding: 0.4rem 1.2rem;
+  }
+  .stats {
+    font-size: 10px;
+    margin: 0;
+    padding: 2rem;
   }
 }

@@ -9,24 +9,28 @@ const userRegister = (req, res) => {
     const password = req.body.password;
     const passwordRep = req.body.passwordRep;
 
+    const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if ( !name ) {return res.status(401).json({ message: "Musíš zadať meno !" });}
+
+    if ( name.length > 25 ) {return res.status(401).json({ message: "Meno nesmie byť dlhšie ako 25 znakov !" });}
+
+    if( !email ) {return res.status(401).json({ message: "Musíš zadať email!" });}
+
+    if(!emailRegex.test(email)) {return res.status(401).json({ message: "Email má nesprávny formát !" });}
+    
+    if ( !password || !passwordRep) {return res.status(401).json({ message: "Musíš zadať heslo !" });} 
+    
+    if ( password.length < 7) {return res.status(401).json({ message: "Heslo musi mať minimálne 7 znakov" });} 
+    
+    if ( password !== passwordRep) {return res.status(401).json({ message: "Hesla sa nezhodujú !" });}
+
     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) =>{
         if(error) {
            return console.log(error);
         } 
         if ( results.length > 0 ) {
             return res.status(401).json({ message: "Tento email je už použitý !" });
-        } else if ( !name ) {
-            return res.status(401).json({ message: "Musíš zadať meno !" });
-        } else if ( name.length > 25 ) {
-            return res.status(401).json({ message: "Meno nesmie byť dlhšie ako 25 znakov !" });
-        } else if ( !email ) {
-            return res.status(401).json({ message: "Musíš zadať email !" });
-        } else if ( !password || !passwordRep) {
-            return res.status(401).json({ message: "Musíš zadať heslo !" });
-        } else if ( password.length < 7) {
-            return res.status(401).json({ message: "Heslo musi mať minimálne 7 znakov" });
-        }else if ( password !== passwordRep) {
-            return res.status(401).json({ message: "Hesla sa nezhodujú !" });
         }
 
 

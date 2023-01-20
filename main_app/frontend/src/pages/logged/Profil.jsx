@@ -12,36 +12,32 @@ const Profil = () => {
     const nav = useNavigate(); 
 
     useEffect(() => {
-        fetch('http://localhost:8800/auth', {
-            method:'GET',
+        axios.get('http://localhost:8800/auth', {
             headers: {
                 'Content-Type':'application/json'
             },
-            credentials: 'include'
-            }).then(res => res.json()) 
+            withCredentials: true
+            })
             .then(response => {
-              if( response.auth === true ) {
-                setUser(response.user[0]);
-                setEmail(response.user[0].email);
+              if( response.data.auth ) {
+                setUser(response.data.user[0]);
+                setEmail(response.data.user[0].email);
               } else {
                 nav("/"); 
               }
-            })
-           
-        },[nav])
-
-
-    useEffect( () => {                
-        const fetchPoints = async () => {
-            try{
-                const response = await axios.post("http://localhost:8800/profil", {email})
-                setPoints(response.data[0].points)
-            }catch(error) {
-                console.log(error)
+            }).catch(error => console.log(error))
+            if(email) {
+                const fetchPoints = async () => {
+                    try{
+                        const response = await axios.post("http://localhost:8800/profil", {email})
+                        setPoints(response.data[0].points)
+                    }catch(error) {
+                        console.log(error)
+                    }
+                }
+                fetchPoints()
             }
-        }
-        fetchPoints()
-    },[email])
+    }, [nav, email])
 
     const handleChange = (e) => {
         setUser(prev => ({...prev, [e.target.name]: e.target.value})); 

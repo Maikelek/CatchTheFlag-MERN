@@ -64,9 +64,6 @@ function filterTable($query)
                     </li>
             <?php else: ?>
                 <li class="nav-item">
-                    <a href="register.php" class="nav-link">Registruj sa</a>
-                </li>
-                <li class="nav-item">
                     <a href="index.php" class="nav-link">Prihlás sa</a>
                 </li>
             <?php endif; ?>
@@ -87,8 +84,8 @@ function filterTable($query)
 
 
         <form action="read.php" method="post" class="input-group mb-3">
-            <input required type="text" class="form-control" name="id" placeholder="Zadaj ID používateľa">
-            <button class="btn btn-outline-secondary" type="text" name="find">Nájdi</button>
+            <input required type="number" class="form-control" name="id" placeholder="Zadaj ID používateľa">
+            <button class="btn btn-outline-secondary" type="submit" name="find">Nájdi</button>
         </div>
 
         <div class="container">

@@ -33,6 +33,8 @@ function App() {
     <div className="App">
       <BrowserRouter>  
         <Routes>
+          <Route path="*" element={<Domov/>}/>
+
           <Route path="/" element={<Index/>}/>
           <Route path="/domov" element={<Domov/>}/>
           <Route path="/register" element={<Register/>}/>

@@ -22,7 +22,7 @@ const Stats = () => {
         fetchAllUsers()
     },[])
 
-    users = users.sort((a, b) => (a.points < b.points && a.points > 0 && b.points > 0 ) ? 1: -1)
+    users = users.sort((a, b) => (a.points < b.points) ? 1: -1)
     users = users.filter((a => a.points > 0 && a.role !== "admin"));
   return (
     <div>

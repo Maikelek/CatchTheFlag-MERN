@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+import Header from '../components/Header';
+
 import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -82,6 +84,7 @@ const Regpage = () => {
 
   return (
     <div className='container'>
+      <Header />
 
       <div className="bluredDiv">
 
@@ -103,7 +106,7 @@ const Regpage = () => {
             <input 
               className='inputBlueFocus' 
               name="email" 
-              type="email" 
+              type="text" 
               autoComplete="off" 
               onChange={handleChange} 
               placeholder="Zadaj svoje email: "/>
