@@ -4,9 +4,13 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Profil = () => {
 
     const [email, setEmail] = useState("");
+    const [msg, setMsg] = useState({});
     const [points, setPoints] = useState(0);
     const [user, setUser] = useState({   
         id: "",
@@ -32,8 +36,8 @@ const Profil = () => {
                     setUser(authResponse.data.user);
                     setEmail(authResponse.data.user.email);
                     const profileResponse = await axios.post("http://localhost:8800/profil", {email});
-                    if(profileResponse.data && profileResponse.data.points) {
-                        setPoints(profileResponse.data.points);
+                    if(profileResponse.data[0] && profileResponse.data[0].points) {
+                        setPoints(profileResponse.data[0].points);
                     }
                 } else {
                     nav("/"); 
@@ -45,7 +49,21 @@ const Profil = () => {
         fetchData();
     }, [nav, email])
 
-    console.log(user)
+    const handleClick = async e => {   
+        e.preventDefault();
+    
+        try {
+            const response = await axios.post('http://localhost:8800/profil/update', {user});
+            if (response.data.message === "ok") {
+                nav("/profil"); 
+            } else {
+                setMsg(response.data)
+            }
+        } catch(error) {
+            console.log(error);
+            alert(error);
+        }
+    }
 
   return (
 
@@ -57,7 +75,7 @@ const Profil = () => {
             <div className="profil">
                 <h1 className='profilCenter'>PROFIL</h1>   
                 
-                <form>    
+                <form onSubmit={handleClick}>    
                     <div className="nameRow">
 
                         <div className="inputWithLabelProfil">
@@ -96,7 +114,6 @@ const Profil = () => {
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
-                                value={user.pass}
                                 autoComplete="off" 
                                 name='pass'
                                 onChange={(e) => {
@@ -109,7 +126,6 @@ const Profil = () => {
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
-                                value={user.passRep}  
                                 autoComplete="off" 
                                 name='passRep'
                                 onChange={(e) => {
@@ -117,10 +133,15 @@ const Profil = () => {
                                 }}/>
                         </div>
                     </div>
+                    <h2 className='profilCenter'>Počet bodov: <i className='points'>{points}</i></h2>
+                    
+                    <div className="centerButton">
+                        <button className='profilButton'>Aktualizuj</button>
+                        {msg.message ? <h4 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h4>: null }
+                        {msg.messageGreen ? <h4 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h4> : null }
+                    </div>
                 </form>
                 
-                <h2 className='profilCenter'>Počet bodov: <i className='points'>{points}</i></h2>
-                <button className='profilButton'>Aktualizuj</button>
             </div>
         </div>
 

@@ -797,17 +797,24 @@ height: 150px;
   width: auto;
 }
 
+.centerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .profilButton {
   background: transparent;
-  
+  font-size: 16px;
+
   border: 2px solid white;
   border-radius: 20px;
 
   width: 30%;
   cursor: pointer;
 
-  margin: 3rem;
-  align-self: center;
+  margin: 2rem;
   padding: 1rem;
 
   color: white;
@@ -1252,6 +1259,10 @@ height: 150px;
     height: 100%;
     border-radius: 0%;
     justify-content: center;
+  }
+  
+  .centerButton{
+    margin-top: 1rem;
   }
 
   .profilButton {
