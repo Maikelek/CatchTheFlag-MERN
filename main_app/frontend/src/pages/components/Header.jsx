@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation} from 'react-router-dom';
 
 import logo from '../../images/hacker.png'; 
 
@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
 
+    const location = useLocation();
     const nav = useNavigate();
 
     function openNav() {
@@ -21,6 +22,11 @@ const Header = () => {
 
       const [id, setID] = useState(0);
       const [role, setRole] = useState("");
+      const [activeLink, setActiveLink] = useState('');
+
+      useEffect(() => {
+        setActiveLink(location.pathname);
+      }, [location]);
       
       useEffect(() => {
         fetch('http://localhost:8800/auth', {
@@ -32,8 +38,8 @@ const Header = () => {
             }).then(res => res.json()) 
             .then(response => {
               if( response.auth === true ) {
-                setID(response.user[0].id);
-                setRole(response.user[0].role);
+                setID(response.user.id);
+                setRole(response.user.role);
               } 
             })
            
@@ -75,12 +81,12 @@ const Header = () => {
             <span onClick={closeNav} className='closebtn'>&times;</span>
             <div className='overlay-content'>
                 {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
-                <Link to="/domov">Domov</Link>
-                <Link to="/stats">Štatistika</Link>
-                {id > 0 ?  null : <Link to="/">Prihlásenie</Link>}
-                {id > 0 ?  null : <Link to="/register">Registrácia</Link>}
-                {id === 0 ?  null : <Link to="/levely">Levely</Link>}
-                {id === 0 ?  null : <Link to="/profil">Profil</Link>}
+                <Link to="/domov" id={activeLink === '/domov' ? 'active' : ''}>Domov</Link>
+                <Link to="/stats" id={activeLink === '/stats' ? 'active' : ''}>Štatistika</Link>
+                {id > 0 ?  null : <Link to="/" id={activeLink === '/' ? 'active' : ''}>Prihlásenie</Link>}
+                {id > 0 ?  null : <Link to="/register" id={activeLink === '/register' ? 'active' : ''}>Registrácia</Link>}
+                {id === 0 ?  null : <Link to="/levely" id={activeLink === '/levely' ? 'active' : ''}>Levely</Link>}
+                {id === 0 ?  null : <Link to="/profil" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
                 {id === 0 ?  null : <Link onClick={handleClick}>Odhlás sa</Link>}
             </div>
 

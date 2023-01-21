@@ -10,7 +10,7 @@ const Domov = () => {
       
       <div className='domov'>
 
-        <div className='text'>
+          <div className='text'>
             <h1>Ročníkový projekt</h1>
             <p>
                 Ročníkový projekt v podobe webovej stránky so zameraním na prácu s webovými technológiami, sociálnymi sieťami, šifrovaním, forénznou a malwareovou analýzou. Jeho úlohou je zvýšiť povedomie o 
@@ -23,7 +23,7 @@ const Domov = () => {
                 Projekt je inšpirovaný CTF súťažiami ako TryhackMe, HackTheBox, CyberGame, HackQuest.
 
             </p>
-        </div>
+         </div>
       </div>
 
     </div>

@@ -16,8 +16,9 @@ const validateUser = async (req, res) => {
                 return res.json({ message: "Neexistujúci používateľ" });
             } else {
                 if (await bcrypt.compare(password, results[0].password)) {
-
-                    req.session.user = results;
+                    
+                    user = {id: results[0].id, name:results[0].name, email: results[0].email, role: results[0].role}
+                    req.session.user = user;
                     return res.json({ message: "ok"});
 
                 }

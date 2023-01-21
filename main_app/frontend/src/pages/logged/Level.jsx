@@ -34,7 +34,7 @@ const Level = () => {
         }).then(res => res.json()) 
         .then(response => {
           if( response.auth === true ) {
-            setLogged(response.user[0].id);
+            setLogged(response.user.id);
           } else {
             nav("/"); 
           }

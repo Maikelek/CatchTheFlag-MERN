@@ -37,6 +37,11 @@ body {
   padding: 3rem; 
 }
 
+#active {
+  color: #ffffff;
+  font-size: 3.3rem;
+}
+
 #logo {
   margin-top: -10px;
   margin-left: -10px;
@@ -96,12 +101,7 @@ body {
 /* Linky vyskakovacieho menu pri hoveri a fokuse */
 .overlay a:hover, .overlay a:focus {
   color: #f1f1f1;
-  font-size: 3.3rem;
-}
-
-#active {
-  color: #f1f1f1;
-  font-size: 3.3rem;
+  transform: scale(1.1);
 }
 
 /* Zatváracie tlačídko v otváracom menu */
@@ -263,6 +263,7 @@ body {
 .login > p {
   padding-top: 2rem;
   padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Výzor inputového poľa v div input */
@@ -272,8 +273,8 @@ body {
   padding: 0.4rem 1.2rem;
   margin-bottom: 10px;
   border: none;
-  border-bottom: 2px solid white;
-  
+  border-bottom: 2px solid white; 
+  font-size: 0.9rem;
 }
 
 /* Ikonky vedľa inputu */
@@ -771,6 +772,7 @@ height: 150px;
 
   color: white;
   background: rgba(10, 10, 10, 0.6);
+  box-shadow: 2px 2px 5px rgb(218, 212, 211);
   backdrop-filter: blur(15px);
 }
 
@@ -801,12 +803,12 @@ height: 150px;
   border: 2px solid white;
   border-radius: 20px;
 
-  width: 20%;
+  width: 30%;
   cursor: pointer;
 
-  margin: 1rem;
+  margin: 3rem;
   align-self: center;
-  padding: 0.8rem;
+  padding: 1rem;
 
   color: white;
 
@@ -1145,6 +1147,7 @@ height: 150px;
   .login {
       width: 100%;
       max-width: 100%;
+      font-size: 16px;
   } 
 
   /* Text pre uživateľov na mobilnom telefóne bude viditelný */
@@ -1162,7 +1165,14 @@ height: 150px;
 
   /* Zmena veľkostí registračného menu */
   .loginReg {
-      width: max-content;  
+      width: 80%;  
+  }
+  .inputReg > input {
+    font-size: 1rem;
+  }
+
+  .input > input {
+    font-size: 1rem;
   }
 
   .adminProblem {
@@ -1202,9 +1212,10 @@ height: 150px;
     max-height: 50%;
     top: 25%;
     bottom:25%;
-    border: 4px solid rgb(119, 16, 16);
+    background: rgba(10, 10, 10, 0.6);
+    box-shadow: 2px 2px 5px rgb(71, 69, 69);
+    backdrop-filter: blur(15px);
     border-radius: 15%;
-    box-shadow: 2px 2px 15px rgb(255, 38, 0);
     padding: 10px;
   }
 
@@ -1237,9 +1248,10 @@ height: 150px;
     gap: 15px;
   }
   .profil {
-    padding: 3rem;
-    height: 100vh;
-    width: 100vh;
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+    justify-content: center;
   }
 
   .profilButton {
@@ -1255,5 +1267,8 @@ height: 150px;
     font-size: 10px;
     margin: 0;
     padding: 2rem;
+  }
+  .stats > h1 {
+    margin-top: 2rem;
   }
 }

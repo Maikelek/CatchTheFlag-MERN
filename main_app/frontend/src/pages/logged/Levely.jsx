@@ -23,7 +23,7 @@ const Levely = () => {
               if( response.auth === false ) {
                 nav("/"); 
               } else {
-                setID(response.user[0].id)
+                setID(response.user.id)
               } 
             })
            

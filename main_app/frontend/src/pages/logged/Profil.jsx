@@ -7,41 +7,45 @@ import { useNavigate } from 'react-router-dom';
 const Profil = () => {
 
     const [email, setEmail] = useState("");
-    const [user, setUser] = useState("");
     const [points, setPoints] = useState(0);
+    const [user, setUser] = useState({   
+        id: "",
+        name: "",
+        email: "",
+        role: "",
+        pass: "",
+        passRep: ""
+      })
+
     const nav = useNavigate(); 
 
     useEffect(() => {
-        axios.get('http://localhost:8800/auth', {
-            headers: {
-                'Content-Type':'application/json'
-            },
-            withCredentials: true
-            })
-            .then(response => {
-              if( response.data.auth ) {
-                setUser(response.data.user[0]);
-                setEmail(response.data.user[0].email);
-              } else {
-                nav("/"); 
-              }
-            }).catch(error => console.log(error))
-            if(email) {
-                const fetchPoints = async () => {
-                    try{
-                        const response = await axios.post("http://localhost:8800/profil", {email})
-                        setPoints(response.data[0].points)
-                    }catch(error) {
-                        console.log(error)
+        const fetchData = async () => {
+            try {
+                const authResponse = await axios.get('http://localhost:8800/auth', {
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    withCredentials: true
+                });
+                if( authResponse.data.auth ) {
+                    setUser(authResponse.data.user);
+                    setEmail(authResponse.data.user.email);
+                    const profileResponse = await axios.post("http://localhost:8800/profil", {email});
+                    if(profileResponse.data && profileResponse.data.points) {
+                        setPoints(profileResponse.data.points);
                     }
+                } else {
+                    nav("/"); 
                 }
-                fetchPoints()
+            } catch(error) {
+                console.log(error);
             }
+        }
+        fetchData();
     }, [nav, email])
 
-    const handleChange = (e) => {
-        setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
-    };
+    console.log(user)
 
   return (
 
@@ -51,7 +55,7 @@ const Profil = () => {
 
         <div className="holder">
             <div className="profil">
-                <h1 className='profilCenter'>PROFIL</h1>    
+                <h1 className='profilCenter'>PROFIL</h1>   
                 
                 <form>    
                     <div className="nameRow">
@@ -62,9 +66,12 @@ const Profil = () => {
                                 className="inputFieldProfil"
                                 type="text"
                                 value={user.name}
-                                onChange={handleChange}  
                                 autoComplete="off" 
-                                name='name'/>
+                                name='name'
+                                onChange={(e) => {
+                                    setUser({...user, name: e.target.value})
+                                }}/>
+                                
                         </div>
 
                         <div className="inputWithLabelProfil">
@@ -73,9 +80,11 @@ const Profil = () => {
                                 className="inputFieldProfil"
                                 type="text"
                                 value={user.email}
-                                onChange={handleChange}  
                                 autoComplete="off" 
-                                name='email'/>
+                                name='email'
+                                onChange={(e) => {
+                                    setUser({...user, email: e.target.value})
+                                }}/>
                         </div>
 
                         </div>
@@ -87,10 +96,12 @@ const Profil = () => {
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
-                                value=""
-                                onChange={handleChange}    
+                                value={user.pass}
                                 autoComplete="off" 
-                                name='pass'/>
+                                name='pass'
+                                onChange={(e) => {
+                                    setUser({...user, pass: e.target.value})
+                                }}/>
                         </div>
 
                         <div className="inputWithLabelProfil">
@@ -98,10 +109,12 @@ const Profil = () => {
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
-                                value=""
-                                onChange={handleChange}    
+                                value={user.passRep}  
                                 autoComplete="off" 
-                                name='passRep'/>
+                                name='passRep'
+                                onChange={(e) => {
+                                    setUser({...user, passRep: e.target.value})
+                                }}/>
                         </div>
                     </div>
                 </form>
