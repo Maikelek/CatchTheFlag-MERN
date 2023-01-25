@@ -1,6 +1,5 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import axios from "axios"
@@ -18,7 +17,7 @@ const LevelController = () => {
   useEffect( () => {                
       const fetchAllLevely = async () => {
           try{
-              const res = await axios.get("http://localhost:8800/level")
+              const res = await axios.get("http://localhost:8800/admin/level")
               setLevely(res.data)
           }catch(error) {
               console.log(error)
@@ -30,7 +29,7 @@ const LevelController = () => {
 
   const handleDelete = async (id) => {         
     try {
-      await axios.delete(`http://localhost:8800/level/${id}`);
+      await axios.delete(`http://localhost:8800/admin/level/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);

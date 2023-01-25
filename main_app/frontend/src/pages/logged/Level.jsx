@@ -94,11 +94,16 @@ const Level = () => {
                   <h5>Za {level.points} bodov</h5>
                   {level.id === 5 ? <img src={petrabottova2001} id='fotka' alt='petrabottova2001' />: null }
                   {level.picture ? <img src={level.picture} id='fotka' alt='levelFoto'/> : null }
+
+                  {level.id === 3 || level.id === 4 ? 
+                    <div className='pomocka'>
+                      {level.id === 3 ? <img src={l3} alt='l3'/>: null }
+                      {level.id === 4 ? <img src={l4} alt='l4' />: null }
+                    </div> : null}
+
                   <div className='pomocka'>
                       <p>{level.hint ? <label>Pomôcka je: {level.hint} {level.link ? <a href={level.link} target="_blank" rel="noopener noreferrer" id='odkaz'>LINK</a> : null}</label> : null}</p>
                       {level.id === 1 ? <div dangerouslySetInnerHTML={{__html: "<!-- heslo je /l1-z4c1470k\\ -->"}}/>: null }
-                      {level.id === 3 ? <img src={l3} alt='l3'/>: null }
-                      {level.id === 4 ? <img src={l4} alt='l4' />: null }
                   </div>
                   <form onSubmit={handleClick}>
                       <input type="text" 

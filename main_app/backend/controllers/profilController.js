@@ -22,7 +22,7 @@ const editUser =  async (req, res)  => {
   const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
   if ( !name ) {return res.json({ message: "Musíš mať nejaké meno!" });}
-  if ( !email ) {return res.json({ message: "Musíš mať nejaké email!" });}
+  if ( !email ) {return res.json({ message: "Musíš mať nejaký email!" });}
 
 
   if((email && name) && (!pass && !passRep)) {
@@ -36,13 +36,13 @@ const editUser =  async (req, res)  => {
 
         let random = Math.floor(Math.random() * 11)
         if ( random <= 2 ) {
-            return res.json({ messageGreen: "Zmeny sa prejavia po opätovnom prihlásení"  });
+            return res.json({ messageGreen: "Zmeny sa prejavia po prihlásení"  });
         } else if ( random <= 4 ) {
             return res.json({ messageGreen: "Po odhlásení sa tvoj profil aktualizuje"  });
         } else if ( random <= 6 ) {
-            return res.json({ messageGreen: "Aktualizoval si sa, zmeny uvidíš po odhlásení"  });
+            return res.json({ messageGreen: "Zmeny uvidíš po odhlásení"  });
         } else if ( random <= 8 ) {
-            return res.json({ messageGreen: "Údaje boli zmenené, odhlás sa aby si videl zmeny"  });
+            return res.json({ messageGreen: "Odhlás sa aby si videl aktuálne zmeny"  });
         } else {
             return res.json({ messageGreen: "Profil sa aktualizuje po odhlásení"  });
         }
@@ -64,13 +64,13 @@ const editUser =  async (req, res)  => {
 
         let random = Math.floor(Math.random() * 11)
         if ( random <= 2 ) {
-            return res.json({ messageGreen: "Zmeny sa prejavia po opätovnom prihlásení"  });
+            return res.json({ messageGreen: "Zmeny sa prejavia po prihlásení"  });
         } else if ( random <= 4 ) {
             return res.json({ messageGreen: "Po odhlásení sa tvoj profil aktualizuje"  });
         } else if ( random <= 6 ) {
-            return res.json({ messageGreen: "Aktualizoval si sa, zmeny uvidíš po odhlásení"  });
+            return res.json({ messageGreen: "Zmeny uvidíš po odhlásení"  });
         } else if ( random <= 8 ) {
-            return res.json({ messageGreen: "Údaje boli zmenené, odhlás sa aby si videl zmeny"  });
+            return res.json({ messageGreen: "Odhlás sa aby si videl aktuálne zmeny"  });
         } else {
             return res.json({ messageGreen: "Profil sa aktualizuje po odhlásení"  });
         }

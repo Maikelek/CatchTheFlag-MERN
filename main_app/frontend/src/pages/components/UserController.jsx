@@ -16,7 +16,7 @@ const UserController = () => {
     useEffect( () => {                
         const fetchAllUsers = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/user/")
+                const res = await axios.get("http://localhost:8800/admin/user")
                 setUsers(res.data)
             }catch(error) {
                 console.log(error)
@@ -27,7 +27,7 @@ const UserController = () => {
   
     const handleDelete = async (id) => {         
       try {
-        await axios.delete(`http://localhost:8800/user/${id}`);
+        await axios.delete(`http://localhost:8800/admin/user/${id}`);
         window.location.reload()
       } catch (err) {
         console.log(err);

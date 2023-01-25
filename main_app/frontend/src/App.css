@@ -1128,7 +1128,7 @@ height: 150px;
   border-style: solid;
   border-width: 1px;
   margin-top: 5px;
-  font-size: 16px;
+  font-size: 15px;
 
   align-self: center;
 
@@ -1185,6 +1185,19 @@ height: 150px;
   .adminProblem {
     visibility: hidden;  
   }
+
+  .update > h1{
+    font-size: 1rem;
+  }
+
+  .zmaz {
+    padding: 0.4rem;
+  }
+
+  .uprav {
+    padding: 0.4rem;
+  }
+
 
   .updateForm input {
     width: 40%;

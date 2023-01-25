@@ -53,10 +53,8 @@ const Profil = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:8800/profil/update', {user});
-            if (response.data.message === "ok") {
-                nav("/profil"); 
-            } else {
+            const response = await axios.put('http://localhost:8800/profil', {user});
+            if (response.data) {
                 setMsg(response.data)
             }
         } catch(error) {
@@ -110,7 +108,7 @@ const Profil = () => {
                         <div className="nameRow">
 
                         <div className="inputWithLabelProfil">
-                            <label className="labelForInput" >Heslo</label>
+                            <label className="labelForInput">Heslo</label>
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
@@ -122,7 +120,7 @@ const Profil = () => {
                         </div>
 
                         <div className="inputWithLabelProfil">
-                            <label className="labelForInput" >Heslo</label>
+                            <label className="labelForInput"> Zopakuj Heslo</label>
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
@@ -137,8 +135,8 @@ const Profil = () => {
                     
                     <div className="centerButton">
                         <button className='profilButton'>Aktualizuj</button>
-                        {msg.message ? <h4 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h4>: null }
-                        {msg.messageGreen ? <h4 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h4> : null }
+                        {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
+                        {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
                     </div>
                 </form>
                 

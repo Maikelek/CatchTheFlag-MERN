@@ -55,6 +55,10 @@ app.use('/answer', answerRouter);
 const profilRouter = require('./routes/profilRouter');
 app.use('/profil', profilRouter);
 
+const adminRouter = require('./routes/adminRouter');
+app.use('/admin', adminRouter);
+
+
 
 /*Port aplikácie*/ 
 app.listen(process.env.PORT, () =>{      

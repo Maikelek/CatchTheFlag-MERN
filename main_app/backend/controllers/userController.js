@@ -1,49 +1,14 @@
-const bcrypt = require("bcryptjs");
 const db = require("../db");  
 
 
 const getUsers = (req, res) => {   
-    const q = "SELECT * FROM users"
+    const q = "SELECT id,name,email,points,role FROM users"
   
     db.query(q,(error, data) => {   
         if(error) return res.json("error");
         return res.json(data);
     })
   }
-  
-
-const createUser = async (req, res) => { 
-    const q = "INSERT INTO users (`name`, `email`, `password`, `points`, `role`) VALUES (?)";
-
-    let password = req.body.password;
-    password = await bcrypt.hash(password, 8);
-
-    const values = [
-      req.body.name,
-      req.body.email,
-      password,
-      req.body.points,
-      req.body.role
-    ];
-
-  
-    db.query(q, [values], (error, data) => {
-      if (error) return res.send(error);
-      return res.json(data);
-    });
-  };
-  
-
-const deleteUser = (req, res) => { 
-    const userId = req.params.id;
-    const q = "DELETE FROM users WHERE id = ?";
-  
-    db.query(q,[userId], (error, data) => {
-        if(error) return res.json("Error");
-        return res.json("Level bol zmazaný");
-    });
-};
-  
   
 const updateUser = (req, res) => { 
     const userId = req.params.id;
@@ -66,7 +31,5 @@ const updateUser = (req, res) => {
 
 module.exports = {
     getUsers,
-    createUser,
-    updateUser,
-    deleteUser
+    updateUser
 };

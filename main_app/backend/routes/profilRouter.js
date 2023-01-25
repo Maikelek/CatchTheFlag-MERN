@@ -5,9 +5,7 @@ const profilController = require('../controllers/profilController');
 
 
 router.route('/')
-    .post(profilController.getPoints);
-
-router.route('/update')
-    .post(profilController.editUser);
+    .post(profilController.getPoints)
+    .put(profilController.editUser);
 
 module.exports = router;  

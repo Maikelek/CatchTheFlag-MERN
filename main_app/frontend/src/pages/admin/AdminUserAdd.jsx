@@ -20,6 +20,7 @@ const AdminUserAdd = () => {
   });
 
   const [error, setError] = useState(false)
+  const [msg, setMsg] = useState({});
 
   const nav = useNavigate(); 
 
@@ -41,8 +42,7 @@ const AdminUserAdd = () => {
     }
 
     if (user.name && user.email && user.password ){
-      await axios.post("http://localhost:8800/user", user); 
-      nav("/admin/user/update"); 
+      await axios.post("http://localhost:8800/admin/user", user); 
     }
   }
 
@@ -57,34 +57,28 @@ const AdminUserAdd = () => {
             </div>
 
             <div className="inputWithLabel">
-              <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> Meno</label>
+              <label className="labelForInput "><i><FontAwesomeIcon icon={faUser}/></i> Meno</label>
               <input 
-                className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
                 type="text"  
                 autoComplete="off" 
-                placeholder={error && user.name.length <=0 ? "Používateľ musí mať meno": null }
                 onChange={handleChange} 
                 name='name'/>
             </div>
             
 
             <div className="inputWithLabel">
-              <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> Email</label>
+              <label className="labelForInput "><i><FontAwesomeIcon icon={faEnvelope}/></i> Email</label>
               <input 
-                className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
                 type="email"  
                 autoComplete="off" 
-                placeholder={error && user.email.length <=0 ? "Používateľ musí mať email": null }
                 onChange={handleChange} 
                 name='email'/>
             </div>
             
             <div className="inputWithLabel">
-              <label className={"labelForInput " + (error && user.password.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
+              <label className="labelForInput"><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
               <input 
-                className={"inputField " + (error && user.password.length <=0  ? 'inputFieldDanger' : 'null')}
                 type="password" 
-                placeholder={error && user.password.length <=0 ? "Používateľ musí mať heslo": null } 
                 onChange={handleChange} 
                 name='password'/>
             </div>
@@ -93,7 +87,6 @@ const AdminUserAdd = () => {
             <div className="inputWithLabel">
               <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
               <input 
-                className='inputField' 
                 type="number"  
                 autoComplete="off" 
                 onChange={handleChange} 
@@ -106,6 +99,7 @@ const AdminUserAdd = () => {
                 type="radio"  
                 onChange={handleChange} 
                 name='role'
+                checked
                 value="hrac"/>
 
               <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Admin</label>

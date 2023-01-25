@@ -50,7 +50,6 @@ const AdminUserID = () => {
             <div className="inputWithLabel">
               <label className="labelForInput"><i><FontAwesomeIcon icon={faUser}/></i> Meno</label>
               <input 
-                className="inputField"
                 type="text"  
                 autoComplete="off" 
                 onChange={handleChange} 
@@ -61,7 +60,6 @@ const AdminUserID = () => {
             <div className="inputWithLabel">
               <label className="labelForInput"><i><FontAwesomeIcon icon={faEnvelope}/></i> Email</label>
               <input 
-                className="inputField"
                 type="email"  
                 autoComplete="off" 
                 onChange={handleChange} 
@@ -71,7 +69,6 @@ const AdminUserID = () => {
             <div className="inputWithLabel">
               <label className="labelForInput"><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
               <input 
-                className="inputField"
                 type="text" 
                 onChange={handleChange} 
                 name='password'/>
@@ -81,7 +78,6 @@ const AdminUserID = () => {
             <div className="inputWithLabel">
               <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
               <input 
-                className='inputField' 
                 type="number"  
                 autoComplete="off" 
                 onChange={handleChange} 

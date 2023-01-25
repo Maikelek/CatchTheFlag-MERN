@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 
-import { faAddressCard, faLock, faCoins, faComments, faCamera, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faLock, faCoins, faComments, faCamera, faGlobe, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 
 const AdminLevelAdd = () => {
 
   const [error, setError] = useState(false)
-
+  const [msg, setMsg] = useState({});
   const [level, setLevel] = useState({ 
     title: "",
     hint: "",
@@ -24,26 +24,16 @@ const AdminLevelAdd = () => {
 
   const nav = useNavigate(); 
 
-  const handleChange = (e) => {
-    setLevel(prev => ({...prev, [e.target.name]: e.target.value}));  
-  };
-
   const handleClick = async e => {   
     e.preventDefault();
-    
-    if (level.title.length <= 0) {
-      setError(true)
-    }
-    if (level.hint.length <= 0) {
-      setError(true)
-    }
-    if (level.pass.length <= 0) {
-      setError(true)
-    }
 
-    if (level.title && level.hint && level.pass ){
-      await axios.post("http://localhost:8800/level", level); 
-      nav("/admin/level/update"); 
+    try {
+      const response = await axios.post(`http://localhost:8800/admin/level`, level);
+      if (response.data) {
+        setMsg(response.data)
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -51,80 +41,91 @@ const AdminLevelAdd = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <form onSubmit={handleClick} className='updateForm'>
+      <form onSubmit={handleClick} className='updateForm'>
 
-          <div className='textCenter'>
-            <h1>Pridaj Level</h1>
+        <div className='textCenter'>
+          <h1>Pridaj Level</h1>
+        </div>
+
+        <div className="inputWithLabel">  
+          <label className="labelForInput"><i><FontAwesomeIcon icon={faAddressCard}/></i> Nazov Levelu</label>
+          <input 
+            type="text"  
+            autoComplete="off" 
+            name='title'
+            value={level.title}
+            onChange={(e) => {
+              setLevel({...level, title: e.target.value})
+            }}/>
+        </div>
+        
+        <div className="inputWithLabel">  
+            <label className="labelForInput"><i><FontAwesomeIcon icon={faComments}/></i> Pomôcka</label>
+            <textarea               
+                type="text"  
+                autoComplete="off" 
+                name='hint'
+                value={level.hint}
+                onChange={(e) => {
+                  setLevel({...level, hint: e.target.value})
+                }}
+              />
           </div>
 
-          <div className="inputWithLabel">  
-            <label className={"labelForInput " + (error && level.title.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> Nazov Levelu</label>
-            <input 
-              className={"inputField " + (error && level.title.length <=0  ? 'inputFieldDanger' : 'null')}
-              type="text"  
-              autoComplete="off" 
-              placeholder={error && level.title.length <=0 ? "Level musí mať názov": null }
-              onChange={handleChange} 
-              name='title'/>
-          </div>
+        <div className="inputWithLabel">  
+          <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
+          <input 
+            type="number"  
+            autoComplete="off" 
+            name='points'
+            value={level.points}
+            onChange={(e) => {
+              setLevel({...level, points: e.target.value})
+            }}/>
+        </div>
 
-          <div className="inputWithLabel">  
-            <label className={"labelForInput " + (error && level.hint.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> Pomôcka</label>
-            <input 
-              className={"inputField " + (error && level.hint.length <=0  ? 'inputFieldDanger' : 'null')}
-              type="text"  
-              autoComplete="off" 
-              placeholder={error && level.hint.length <=0 ? "Level musí mať pomôcku": null }
-              onChange={handleChange} 
-              name='hint'/>
-          </div>
+        <div className="inputWithLabel">  
+          <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Fotka</label>
+          <input 
+            type="text"  
+            autoComplete="off" 
+            placeholder="Nevyžaduje sa"
+            name='picture'
+            value={level.picture ? level.picture : ""}
+            onChange={(e) => {
+              setLevel({...level, picture: e.target.value})
+            }}/>
+        </div>
 
-          <div className="inputWithLabel">  
-            <label className={"labelForInput " + (error && level.points.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
-            <input 
-              className={"inputField " + (error && level.points.length <=0  ? 'inputFieldDanger' : 'null')}
-              type="number"  
-              autoComplete="off" 
-              placeholder={error && level.points.length <=0 ? "Zadaj počet bodov": null }
-              onChange={handleChange} 
-              name='points'/>
-          </div>
+        <div className="inputWithLabel">  
+          <label className="labelForInput"><i><FontAwesomeIcon icon={faLock} /></i> Heslo</label>
+          <input 
+            type="text"  
+            autoComplete="off" 
+            name='pass'
+            value={level.pass}
+            onChange={(e) => {
+              setLevel({...level, pass: e.target.value})
+            }}/>
+        </div>
 
-          <div className="inputWithLabel">  
-            <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Fotka</label>
-            <input 
-              className="inputField"
-              type="text"  
-              autoComplete="off" 
-              placeholder="Nevyžaduje sa"
-              onChange={handleChange} 
-              name='picture'/>
-          </div>
-
-          <div className="inputWithLabel">  
-            <label className={"labelForInput " + (error && level.pass.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock} /></i> Heslo</label>
-            <input 
-              className={"inputField " + (error && level.pass.length <=0  ? 'inputFieldDanger' : 'null')}
-              type="text"  
-              autoComplete="off" 
-              placeholder={error && level.pass.length <=0 ? "Heslo je nutné": null }
-              onChange={handleChange} 
-              name='pass'/>
-          </div>
-
-          <div className="inputWithLabel">  
-            <label className="labelForInput "><i><FontAwesomeIcon icon={faGlobe} /></i> Link</label>
-            <input 
-              className="inputField "
-              type="text"  
-              autoComplete="off" 
-              placeholder="Nevyžaduje sa"
-              onChange={handleChange} 
-              name='link'/>
-          </div>
+        <div className="inputWithLabel">  
+          <label className="labelForInput "><i><FontAwesomeIcon icon={faGlobe} /></i> Link</label>
+          <input 
+            type="text"  
+            autoComplete="off" 
+            placeholder="Nevyžaduje sa"
+            name='link'
+            value={level.link ? level.link : ""}
+            onChange={(e) => {
+              setLevel({...level, link: e.target.value})
+            }}/>
+        </div>
 
 
-          <button className='buttonForm'>Pridaj Level</button>
+        <button className='buttonForm'>Aktualizuj Level</button>
+        {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
+        {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>
       </div>
     </div>
