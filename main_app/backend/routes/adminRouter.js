@@ -19,7 +19,7 @@ router.route("/user")
 
 router.route('/user/:id')
     .delete(adminController.deleteUserAdmin)
-    .put(adminController.updateLevelAdmin);
+    .get(adminController.getUserByIDAdmin);
 
 
 

@@ -84,8 +84,7 @@ const Regpage = () => {
 
   return (
     <div className='container'>
-      <Header />
-
+      
       <div className="bluredDiv">
 
         <form onSubmit={handleClick} className='loginReg'>

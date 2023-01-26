@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 
-import { faUser, faLock, faEnvelope, faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faEnvelope, faCoins, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 const AdminUserAdd = () => {
@@ -30,19 +30,17 @@ const AdminUserAdd = () => {
 
   const handleClick = async e => {   
     e.preventDefault();
-    
-    if (user.name.length <= 0) {
-      setError(true)
-    }
-    if (user.email.length <= 0) {
-      setError(true)
-    }
-    if (user.password.length <= 0) {
-      setError(true)
-    }
 
-    if (user.name && user.email && user.password ){
-      await axios.post("http://localhost:8800/admin/user", user); 
+    try {
+      const response = await axios.post(`http://localhost:8800/admin/user`, user);
+      if (response.data) {
+        setMsg(response.data)
+        console.log(response.data)
+      }
+    } 
+    
+    catch (err) {
+      console.log(err);
     }
   }
 
@@ -112,6 +110,8 @@ const AdminUserAdd = () => {
 
 
             <button className='buttonForm'>Pridaj Používateľa</button>
+            {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
+            {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>
       </div>
     </div>

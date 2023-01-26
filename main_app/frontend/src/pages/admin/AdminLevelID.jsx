@@ -22,7 +22,6 @@ const AdminLevelID = () => {
   });
 
   const location = useLocation(); 
-  const nav = useNavigate();
   const id = location.pathname.split("/")[4];
 
   useEffect( () => {                

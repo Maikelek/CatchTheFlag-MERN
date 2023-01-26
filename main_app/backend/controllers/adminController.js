@@ -88,7 +88,7 @@ const createLevelAdmin = (req, res) => {
   
     db.query(q, [values], (error, data) => {
       if (error) return res.send(error);
-      return res.json({ message: "ok" });
+      return res.json({ messageGreen: "Pridal si level" });
     });
 };
 
@@ -107,6 +107,16 @@ const getUsersAdmin = (req, res) => {
     db.query(q,(error, data) => {   
         if(error) return res.json("error");
         return res.send(data);
+    })
+};
+
+const getUserByIDAdmin = (req, res) => {   
+    const userId = req.params.id;
+    const q = "SELECT * FROM users WHERE id = ?";
+      
+    db.query(q, [userId],(error, data) => {   
+        if(error) return res.json("error");
+        return res.json(data);
     })
 };
 
@@ -148,9 +158,10 @@ const createUserAdmin = async (req, res) => {
   
     db.query(q, [values], (error, data) => {
       if (error) return res.send(error);
-      return res.json(data);
+      return res.json({messageGreen: "Pridal si používateľa"});
     });
 };
+
 
 module.exports = {
     getLevelsAdmin,
@@ -160,6 +171,8 @@ module.exports = {
     createLevelAdmin,
 
     getUsersAdmin,
+    getUserByIDAdmin,
     deleteUserAdmin,
-    createUserAdmin
+    createUserAdmin,
+    updateUserAdmin
 };

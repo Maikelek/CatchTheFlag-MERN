@@ -31,8 +31,11 @@ const AdminLevelAdd = () => {
       const response = await axios.post(`http://localhost:8800/admin/level`, level);
       if (response.data) {
         setMsg(response.data)
+        console.log(response.data)
       }
-    } catch (err) {
+    } 
+    
+    catch (err) {
       console.log(err);
     }
   }
@@ -123,7 +126,7 @@ const AdminLevelAdd = () => {
         </div>
 
 
-        <button className='buttonForm'>Aktualizuj Level</button>
+        <button className='buttonForm'>Pridaj Level</button>
         {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
         {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>
