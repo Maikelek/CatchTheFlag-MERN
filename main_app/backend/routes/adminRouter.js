@@ -19,8 +19,8 @@ router.route("/user")
 
 router.route('/user/:id')
     .delete(adminController.deleteUserAdmin)
-    .get(adminController.getUserByIDAdmin);
-
+    .get(adminController.getUserByIDAdmin)
+    .put(adminController.updateUserAdmin);
 
 
 module.exports = router;

@@ -1,16 +1,17 @@
 import axios from 'axios'; 
 import React from 'react';
 import { useState, useEffect} from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 
-import { faUser, faLock, faEnvelope, faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faEnvelope, faCoins, faExclamationCircle, faThumbsUp, faUserAstronaut, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 
 const AdminUserID = () => {  
   const [user, setUser] = useState({  
+    id: '',
     name: '',
     email: '',
     password: '',
@@ -19,6 +20,7 @@ const AdminUserID = () => {
   })
 
   const [msg, setMsg] = useState({});
+  const [error, setError] = useState(false);
 
   const location = useLocation(); 
   const id = location.pathname.split("/")[4];
@@ -32,7 +34,6 @@ const AdminUserID = () => {
         try{
             const res = await axios.get(`http://localhost:8800/admin/user/${id}`)
             setUser(res.data[0]);
-            console.log(user)
         }catch(error) {
             console.log(error);
         }
@@ -44,6 +45,22 @@ const AdminUserID = () => {
   const handleClick = async (e) => { 
     e.preventDefault();
 
+    if (!user.name) {
+      return setError(true);
+    }
+
+    if (!user.email) {
+      return setError(true);
+    }
+
+    if (user.password.length < 8) {
+      return setError(true);
+    }
+
+    if (user.points < 0) {
+      return setError(true);
+    }
+
     try {
       const response = await axios.put(`http://localhost:8800/admin/user/${id}`, user);
       if (response.data) {
@@ -54,8 +71,6 @@ const AdminUserID = () => {
     }
   };
 
-  console.log(user)
-
   return (
     <div>
       <AdminNav />
@@ -63,13 +78,14 @@ const AdminUserID = () => {
         <form className='updateForm' onSubmit={handleClick}>
 
             <div className='textCenter'>
-              <h1>Aktualizuj Používateľa: {user.name}</h1>
+              <h2 style={{marginBottom: "1rem"}}>Aktualizuj Používateľa</h2>
             </div>
 
             <div className="inputWithLabel">
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faUser}/></i> Meno</label>
+              <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "Používateľ musí mať meno" : "Meno"}</label>
               <input 
-                type="text"  
+                type="text"
+                className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
                 autoComplete="off" 
                 onChange={(e) => {
                   setUser({...user, name: e.target.value})
@@ -80,9 +96,10 @@ const AdminUserID = () => {
             
 
             <div className="inputWithLabel">
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faEnvelope}/></i> Email</label>
+              <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "Používateľ musí mať email" : "Email"}</label>
               <input 
-                type="email"  
+                type="email" 
+                className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
                 autoComplete="off" 
                 onChange={(e) => {
                   setUser({...user, email: e.target.value})
@@ -92,9 +109,10 @@ const AdminUserID = () => {
             </div>
             
             <div className="inputWithLabel">
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faLock}/></i> Heslo</label>
+              <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Heslo musí mať 7+ znakov" : "Heslo"}</label>
               <input 
-                type="text" 
+                type="password" 
+                className={"inputField " + (error && user.password.length < 8  ? 'inputFieldDanger' : 'null')}
                 onChange={(e) => {
                   setUser({...user, password: e.target.value})
                 }} 
@@ -105,9 +123,10 @@ const AdminUserID = () => {
             
 
             <div className="inputWithLabel">
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
+              <label className={"labelForInput " + (error && user.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && user.points < 0  ? 'Body musia byť viac ako 0' : 'Body'}</label>
               <input 
                 type="number"  
+                className={"inputField " + (error && user.points < 0  ? 'inputFieldDanger' : 'null')}
                 autoComplete="off" 
                 onChange={(e) => {
                   setUser({...user, points: e.target.value})
@@ -116,8 +135,11 @@ const AdminUserID = () => {
                 value={user.points}/>
             </div>
 
-            <div className="inputWithLabelRow">
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Hráč</label>
+            <div className='radioRow'>
+              <div className='radioRow'>
+                <i><FontAwesomeIcon icon={faGamepad}/></i>
+                <label className='labelForInput'> Hráč </label>
+              </div>
               <input 
                 type='radio'  
                 onChange={handleChange} 
@@ -125,8 +147,13 @@ const AdminUserID = () => {
                 value='hrac'
                 checked={user.role === "hrac" ? true : false}
                 />
+            </div>
 
-              <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Admin</label>
+            <div className='radioRow'>
+              <div className='radioRow'>
+                <i><FontAwesomeIcon icon={faUserAstronaut}/></i>
+                <label className='labelForInput'> Admin </label>
+              </div>
               <input 
                 type="radio"  
                 onChange={handleChange} 
@@ -136,6 +163,8 @@ const AdminUserID = () => {
             </div>
 
             <button className='buttonForm'>Aktualizuj Používateľa</button>
+            {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
+            {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>
       </div>
     </div>

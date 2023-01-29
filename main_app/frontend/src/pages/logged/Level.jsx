@@ -115,7 +115,7 @@ const Level = () => {
                           <button className='signin'>Potvrď</button>
                       </div>
                   </form>
-                  {msg.message ? <h4 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h4>: null }
+                  {msg.message ? <h4 className='loginDangerLabel' style={{marginTop: "1rem"}}><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h4>: null }
               </div>  
           ))}
         </div>

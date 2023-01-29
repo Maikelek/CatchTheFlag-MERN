@@ -27,6 +27,18 @@ const AdminLevelAdd = () => {
   const handleClick = async e => {   
     e.preventDefault();
 
+    if (!level.title) {
+      return setError(true);
+    }
+
+    if (level.points < 0) {
+      return setError(true);
+    }
+
+    if (!level.hint) {
+      return setError(true);
+    }
+
     try {
       const response = await axios.post(`http://localhost:8800/admin/level`, level);
       if (response.data) {
@@ -46,14 +58,18 @@ const AdminLevelAdd = () => {
       <div className='content'>
       <form onSubmit={handleClick} className='updateForm'>
 
-        <div className='textCenter'>
-          <h1>Pridaj Level</h1>
-        </div>
+      <div className='textCenter'>
+        <h2 style={{marginBottom: "2rem"}}>Aktualizuj Level</h2>
+      </div>
+
+
+      <div className="radioRow">
 
         <div className="inputWithLabel">  
-          <label className="labelForInput"><i><FontAwesomeIcon icon={faAddressCard}/></i> Nazov Levelu</label>
+          <label className={"labelForInput " + (error && !level.title  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> {error && !level.title ? "Level musí mať názov" : "Názov"} </label>
           <input 
             type="text"  
+            className={"inputField " + (error && !level.title  ? 'inputFieldDanger' : 'null')}
             autoComplete="off" 
             name='title'
             value={level.title}
@@ -61,24 +77,12 @@ const AdminLevelAdd = () => {
               setLevel({...level, title: e.target.value})
             }}/>
         </div>
-        
-        <div className="inputWithLabel">  
-            <label className="labelForInput"><i><FontAwesomeIcon icon={faComments}/></i> Pomôcka</label>
-            <textarea               
-                type="text"  
-                autoComplete="off" 
-                name='hint'
-                value={level.hint}
-                onChange={(e) => {
-                  setLevel({...level, hint: e.target.value})
-                }}
-              />
-          </div>
 
         <div className="inputWithLabel">  
-          <label className="labelForInput"><i><FontAwesomeIcon icon={faCoins}/></i> Body</label>
+          <label className={"labelForInput " + (error && level.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && level.points < 0 ? "Body musia byť kladné" : "Body"}</label>
           <input 
             type="number"  
+            className={"inputField " + (error && level.points < 0  ? 'inputFieldDanger' : 'null')}
             autoComplete="off" 
             name='points'
             value={level.points}
@@ -86,11 +90,16 @@ const AdminLevelAdd = () => {
               setLevel({...level, points: e.target.value})
             }}/>
         </div>
+      
+      </div>
+
+      <div className="radioRow">
 
         <div className="inputWithLabel">  
           <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Fotka</label>
           <input 
             type="text"  
+            className='inputField'
             autoComplete="off" 
             placeholder="Nevyžaduje sa"
             name='picture'
@@ -101,21 +110,10 @@ const AdminLevelAdd = () => {
         </div>
 
         <div className="inputWithLabel">  
-          <label className="labelForInput"><i><FontAwesomeIcon icon={faLock} /></i> Heslo</label>
-          <input 
-            type="text"  
-            autoComplete="off" 
-            name='pass'
-            value={level.pass}
-            onChange={(e) => {
-              setLevel({...level, pass: e.target.value})
-            }}/>
-        </div>
-
-        <div className="inputWithLabel">  
           <label className="labelForInput "><i><FontAwesomeIcon icon={faGlobe} /></i> Link</label>
           <input 
             type="text"  
+            className='inputField'
             autoComplete="off" 
             placeholder="Nevyžaduje sa"
             name='link'
@@ -124,6 +122,39 @@ const AdminLevelAdd = () => {
               setLevel({...level, link: e.target.value})
             }}/>
         </div>
+
+      </div>
+
+      <div className="radioRow">
+              
+        <div className="inputWithLabel">  
+          <label className={"labelForInput " + (error && !level.hint  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> {error && !level.hint  ? 'Level musí mať pomôcku' : 'Pomôcka'}</label>
+          <textarea               
+              type="text"  
+              className={"inputField " + (error && !level.hint  ? 'inputFieldDanger' : 'null')}
+              autoComplete="off" 
+              name='hint'
+              value={level.hint}
+              onChange={(e) => {
+                setLevel({...level, hint: e.target.value})
+              }}
+            />
+        </div>
+
+            
+        <div className="inputWithLabel">  
+        <label className={"labelForInput " + (error && !level.pass  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && !level.pass  ? 'Level musí mať heslo' : 'Heslo'}</label>
+          <input 
+            type="text"  
+            className={"inputField " + (error && !level.pass  ? 'inputFieldDanger' : 'null')}
+            autoComplete="off" 
+            name='pass'
+            value={level.pass}
+            onChange={(e) => {
+              setLevel({...level, pass: e.target.value})
+            }}/>
+        </div>
+      </div>
 
 
         <button className='buttonForm'>Pridaj Level</button>

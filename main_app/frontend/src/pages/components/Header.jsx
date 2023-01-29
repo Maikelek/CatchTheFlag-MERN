@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation} from 'react-router-dom';
 
-import logo from '../../images/hacker.png'; 
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,15 +68,13 @@ const Header = () => {
 
   return (
     <div className='header'>
-        <Link to="/domov">
-            <img src={logo} alt="hacker" id='logo' />
-        </Link>
 
         <div className='openButton'>
             <span onClick={openNav}> <FontAwesomeIcon icon={faBars}/></span>
         </div>
 
         <div id="myNav" className='overlay'>
+
             <span onClick={closeNav} className='closebtn'>&times;</span>
             <div className='overlay-content'>
                 {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
@@ -91,6 +88,7 @@ const Header = () => {
             </div>
 
         </div>
+        
     </div>
   )
 }

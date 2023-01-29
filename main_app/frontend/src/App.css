@@ -28,13 +28,13 @@ body {
 
 /* Hlavička */
 .header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  z-index: 2;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 1;
   position: absolute;
   color: white;
-  padding: 2rem; 
+  padding: 0.8rem; 
 }
 
 #active {
@@ -575,7 +575,9 @@ body {
   align-items: center;
   position: absolute;
 
-  width: 60%;
+  width: 80%;
+  height: 100%;
+
 } 
 
 /* Div uloženia pozície levelov */
@@ -585,6 +587,14 @@ body {
   list-style: none;
 
   color: white;
+
+  position:absolute;
+  width: 60%;
+  max-height: 80%;
+  overflow:auto; 
+  top: 25%;
+  bottom:25%;
+  padding: 1rem;
 }
 
 /* Výzor textu linku */
@@ -915,7 +925,7 @@ height: 150px;
 }
 
 .content {
-  padding: 3rem;
+  padding: 2rem;
   position:absolute;
   width: 100%;
   height: 100%;
@@ -930,6 +940,7 @@ height: 150px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 1rem;
 }
 
 .update {
@@ -962,6 +973,7 @@ height: 150px;
 
   cursor: pointer;
   border: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .uprav{
@@ -972,6 +984,7 @@ height: 150px;
 
   cursor: pointer;
   border: none;
+  transition: all 0.2s ease-in-out;
 }
 
 
@@ -981,15 +994,19 @@ height: 150px;
 }
 
 .zmaz:hover {
-  background-color: #92222f;  
+  background-color: #9b0e1e;
+  transform: translateY(3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .uprav:hover {
-  background-color: #0756cc;  
+  transform: translateY(3px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #022c6b;  
 }
 
 .textCenter {
-  padding: 1rem;
+  margin: 10px;
 }
 
 .updateForm {
@@ -998,7 +1015,7 @@ height: 150px;
   flex-direction: column;
   justify-content: center;
 
-  gap: 13px;
+  gap: 10px;
 
   max-width: 100%;
   height: 95%;
@@ -1009,47 +1026,24 @@ height: 150px;
 }
 
 .buttonForm {
-    
-    border: solid #0DCAF0 1px;
-    border-bottom: 3px solid #0DCAF0;
-    border-right: 3px solid #0DCAF0;
-    border-radius: 30px;
-
-    background-color: #191C24;
-    box-shadow: #1c8eec 0px 5px 15px;
-
-    padding: 1rem;
-    margin-top: 0.5rem;
-
-    cursor: pointer;
-    color: white;
-    transition: all 0.2s ease-in-out;
+  margin: 10px;
+  background-color: #1c8eec;
+  border-radius: 20px;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .buttonForm:hover {
-  background-color: #101218;
-  border-radius: 0px;
+  background-color: #191C24;
+  transform: translateY(5px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-
-
-
-
-.updateForminput:focus::placeholder {
-  color: white;
-}
-
-.updateForm input:hover {
-  background-color: #20242e;
-  color: white;
-  transition: all 0.4s ease-in-out;
-}
-
-.updateForm input:hover::placeholder {
-  color: white;
-  transition: all 0.4s ease-in-out;
-}
-
-
 
 
 
@@ -1064,32 +1058,43 @@ height: 150px;
   width: auto;
 }
 
-.inputWithLabelRow {
+
+.radioRow {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-
-  width: auto;
+  gap: 1rem;
 }
 
-.inputField {
+.radioRow input {
+  width: 100%;
+}
 
+
+.inputField {
   background-color: #101218;
   color: white;
-  width: auto;
-  padding: 1rem 1.2rem;
+  width: 100%;
+  padding: 1rem;
   margin-bottom: 10px;
-
-  border: solid #0DCAF0 1px;
+  border: none;
   border-bottom: 2px solid #0DCAF0;
-  border-right: 2px solid #0DCAF0;
+  transition: border-bottom 0.2s ease-in-out;
+  font-size: 1rem;
+}
 
-  box-shadow: #080a0a 0px 30px 60px -12px inset, #0DCAF0 0px 18px 36px -18px inset, #1c8eec 0px 5px 15px;
+.inputField:focus {
+  border-bottom: 2px solid #1c8eec;
+  outline: none;
 }
 
 .labelForInput {
   align-self: flex-start;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .labelForInputDanger {
@@ -1097,10 +1102,12 @@ height: 150px;
 }
 
 .inputFieldDanger {
-  border: solid #750f0f 1px;
-  border-bottom: 3px solid #eb2121;
-  border-right: 3px solid #eb2121;
-  box-shadow: #ec1c1c 0px 5px 15px;
+  border-bottom: 2px solid #eb2121;
+}
+
+.inputFieldDanger:focus {
+  border-bottom: 2px solid #eb2121;
+  outline: none;
 }
 
 .loginDangerLabel {
@@ -1137,13 +1144,16 @@ height: 150px;
   color: rgba(60, 118, 61, 1);
 }
 
-@media screen and (max-width: 800px) {
-
-  /* Logo nie je viditelné */
-  .header > a{
-      visibility: hidden;
-      margin-top: -5%;
+@media screen and (max-height: 800px) {
+  .profil {
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+    justify-content: center;
   }
+}
+
+@media screen and (max-width: 800px) {
 
   /* Pri telefóne nebude vidno ľavú stranu pri logine */
   .woLogin {
@@ -1186,6 +1196,10 @@ height: 150px;
     visibility: hidden;  
   }
 
+  .content {
+    padding: 0rem;
+  }
+
   .update > h1{
     font-size: 1rem;
   }
@@ -1198,8 +1212,15 @@ height: 150px;
     padding: 0.4rem;
   }
 
+  .radioRow .inputField  {
+    width: 100%;
+  }
 
-  .updateForm input {
+  .updateForm input  {
+    width: 40%;
+  }
+
+  .updateForm textarea {
     width: 40%;
   }
 
@@ -1209,6 +1230,9 @@ height: 150px;
 
   .pomocka {  
     max-width: 400px;
+  }
+  .spotUpdate {
+    padding: 3rem;
   }
 
   .text {
@@ -1247,9 +1271,8 @@ height: 150px;
     top: 25%;
     bottom:25%;
     padding: 1rem;
-}
-
-
+  }
+  
   .labelForInput {
     align-self: center;
   }
@@ -1257,11 +1280,9 @@ height: 150px;
   .inputWithLabel {
     width: 200%;
   }
+
   .updateForm {
-    padding: 3rem;
-  }
-  .updateFormUser {
-    padding: 3rem;
+    padding: 0.5rem;
   }
   .nameRow {
     flex-direction: column;
@@ -1285,7 +1306,7 @@ height: 150px;
     height: auto;
   }
   .inputFieldProfil {
-    padding: 0.4rem 1.2rem;
+    padding: 0.3rem 1.2rem;
   }
   .stats {
     font-size: 10px;

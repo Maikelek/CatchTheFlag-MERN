@@ -43,7 +43,7 @@ const updateLevelAdmin = (req, res) => {
     };
 
     if (!level.title) return res.json({ message: "Level musí mať názov" });
-    if (!level.hint) return res.json({ message: "Level musí mať pomôcku" });
+    if (level.hint.length <= 0) return res.json({ message: "Level musí mať pomôcku" });
     if (level.points <= 0) return res.json({ message: "Počet bodov v musí byť viac ako 0" });
     if (!level.pass) return res.json({ message: "Level musí mať heslo" });
 
@@ -70,7 +70,7 @@ const updateLevelAdmin = (req, res) => {
 const createLevelAdmin = (req, res) => {  
 
     if (!req.body.title) return res.json({ message: "Level musí mať názov" });
-    if (!req.body.hint) return res.json({ message: "Level musí mať pomôcku" });
+    if (req.body.hint.length <= 0)  return res.json({ message: "Level musí mať pomôcku" });
     if (req.body.points <= 0) return res.json({ message: "Počet bodov v musí byť viac ako 0" });
     if (!req.body.pass) return res.json({ message: "Level musí mať heslo" });
     
@@ -139,8 +139,9 @@ const createUserAdmin = async (req, res) => {
     const q = "INSERT INTO users (`name`, `email`, `password`, `points`, `role`) VALUES (?)";
     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email má nesprávny formát !" })}
     if (!req.body.name) return res.json({ message: "Používateľ musí mať meno" });
+    if (req.body.name.length > 25) return res.json({ message: "Meno nesmie mať nad 25 znakov" });
+    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email má nesprávny formát !" })}
     if (!req.body.email) return res.json({ message: "Používateľ musí mať email" });
     if (!req.body.password) return res.json({ message: "Používateľ musí mať heslo" });
 
@@ -160,6 +161,71 @@ const createUserAdmin = async (req, res) => {
       if (error) return res.send(error);
       return res.json({messageGreen: "Pridal si používateľa"});
     });
+};
+
+const updateUserAdmin = (req, res) => {
+
+    const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const user = {
+        id: req.body.id,
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        points: req.body.points,
+        role: req.body.role
+    };
+
+    if (!user.name) return res.json({ message: "Používateľ musí mať meno" });
+    if (req.body.name.length > 25) return res.json({ message: "Meno nesmie mať nad 25 znakov" });
+    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email má nesprávny formát !" })}
+    if (user.points < 0) return res.json({ message: "Používateľ nemôže mať záporné body" });
+
+    db.query("SELECT `password` FROM users WHERE id = ?", [user.id], async (error, data) => {
+        if (error) return res.send(error);
+        const passDB = data[0].password
+
+        if (user.password === passDB) {
+            const q = "UPDATE users SET `name`= ?, `email`= ?, `points`= ?, `role`= ? WHERE `id`= ? ";
+            db.query(q, [user.name, user.email, user.points, user.role, user.id], (error, data) => {
+                if (error) return res.send(error);
+                let random = Math.floor(Math.random() * 11)
+                if ( random <= 2 ) {
+                    return res.json({ messageGreen: "Aktualizoval si používateľa"  });
+                } else if ( random <= 4 ) {
+                    return res.json({ messageGreen: "Používateľ bol aktualizovananý"  });
+                } else if ( random <= 6 ) {
+                    return res.json({ messageGreen: "Údaje používateľa boli zmenené"  });
+                } else if ( random <= 8 ) {
+                    return res.json({ messageGreen: "Používateľ bol upravený"  });
+                } else {
+                    return res.json({ messageGreen: "Používateľ má nové údaje"  });
+                }
+            });  
+        }
+
+        else {
+            const q = "UPDATE users SET `name`= ?, `email`= ?, `password`= ?, `points`= ?, `role`= ?  WHERE `id`= ? ";
+            const newPassword = await bcrypt.hash(user.password, 8);
+            db.query(q, [user.name, user.email, newPassword, user.points, user.role, user.id], (error, data) => {
+                if (error) return res.send(error);
+
+                let random = Math.floor(Math.random() * 11)
+                if ( random <= 2 ) {
+                    return res.json({ messageGreen: "Aktualizoval si používateľa"  });
+                } else if ( random <= 4 ) {
+                    return res.json({ messageGreen: "Používateľ bol aktualizovananý"  });
+                } else if ( random <= 6 ) {
+                    return res.json({ messageGreen: "Údaje používateľa boli zmenené"  });
+                } else if ( random <= 8 ) {
+                    return res.json({ messageGreen: "Používateľ bol upravený"  });
+                } else {
+                    return res.json({ messageGreen: "Používateľ má nové údaje"  });
+                }
+
+            });  
+        }
+    });
+
 };
 
 
