@@ -59,7 +59,7 @@ const AdminLevelAdd = () => {
       <form onSubmit={handleClick} className='updateForm'>
 
       <div className='textCenter'>
-        <h2 style={{marginBottom: "2rem"}}>Aktualizuj Level</h2>
+        <h2 style={{marginBottom: "2rem"}}>Pridaj Level</h2>
       </div>
 
 

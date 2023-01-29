@@ -67,7 +67,7 @@ const AdminUserAdd = () => {
         <form className='updateForm' onSubmit={handleClick}>
 
         <div className='textCenter'>
-          <h2 style={{marginBottom: "1rem"}}>Aktualizuj Používateľa</h2>
+          <h2 style={{marginBottom: "1rem"}}>Pridaj Používateľa</h2>
         </div>
 
           <div className="inputWithLabel">

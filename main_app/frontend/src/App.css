@@ -788,7 +788,9 @@ height: 150px;
 
 .nameRow {
   display: flex;
-  justify-content: space-between;
+  align-content: center;
+  justify-content: center;
+  gap: 2rem;
 
   padding: 2rem;
 }
@@ -840,7 +842,7 @@ height: 150px;
 .inputFieldProfil {
   color: white;
   width: auto;
-  padding: 1rem 0.1rem;
+  padding: 1rem;
   margin-bottom: 10px;
   font-size: 18px;
 
