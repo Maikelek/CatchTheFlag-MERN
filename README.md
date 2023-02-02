@@ -8,7 +8,7 @@ This project is CTF (catch the flag) game made as dynamic webpage using **M**(my
 | Level            | Password                   |Solution
 | -------------    |:-------------:             |:-------------:       
 | Level  1         | /l1-z4c1470k\              | HTML comment  
-| Level  2         | /l2-3nc0d1100100110ng\     | ACII | HEX | BINARY  
+| Level  2         | /l2-3nc0d1100100110ng\     | ASCII | HEX | BINARY  
 | Level  3         | /l3-m30w\                  | Photo description
 | Level  4         | /l4-$73gan0gr4f1k\         | Steganography  
 | Level  5         | /l5-1n574gr4m1k\           | Instagram account OSINT   

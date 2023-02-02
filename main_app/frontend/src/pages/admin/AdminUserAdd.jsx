@@ -70,86 +70,91 @@ const AdminUserAdd = () => {
           <h2 style={{marginBottom: "1rem"}}>Pridaj Používateľa</h2>
         </div>
 
-          <div className="inputWithLabel">
-            <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "Používateľ musí mať meno" : "Meno"}</label>
-            <input 
-              type="text"
-              className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
-              autoComplete="off" 
-              onChange={(e) => {
-                setUser({...user, name: e.target.value})
-              }}
-              name='name'
-              value={user.name}/>
-          </div>
-          
 
-          <div className="inputWithLabel">
-            <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "Používateľ musí mať email" : "Email"}</label>
-            <input 
-              type="email" 
-              className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
-              autoComplete="off" 
-              onChange={(e) => {
-                setUser({...user, email: e.target.value})
-              }}
-              name='email'
-              value={user.email}/>
-          </div>
-          
-          <div className="inputWithLabel">
-            <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Heslo musí mať 7+ znakov" : "Heslo"}</label>
-            <input 
-              type="password" 
-              className={"inputField " + (error && user.password.length < 8  ? 'inputFieldDanger' : 'null')}
-              onChange={(e) => {
-                setUser({...user, password: e.target.value})
-              }} 
-              name='password'
-              placeholder='********'
-              />
-          </div>
-          
+          <div className="radioRow">
+              <div className="inputWithLabel">
+                <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "Používateľ musí mať meno" : "Meno"}</label>
+                <input 
+                  type="text"
+                  className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
+                  autoComplete="off" 
+                  onChange={(e) => {
+                    setUser({...user, name: e.target.value})
+                  }}
+                  name='name'
+                  value={user.name}/>
+              </div>
+              
 
-          <div className="inputWithLabel">
-            <label className={"labelForInput " + (error && user.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && user.points < 0  ? 'Body musia byť viac ako 0' : 'Body'}</label>
-            <input 
-              type="number"  
-              className={"inputField " + (error && user.points < 0  ? 'inputFieldDanger' : 'null')}
-              autoComplete="off" 
-              onChange={(e) => {
-                setUser({...user, points: e.target.value})
-              }}
-              name='points'
-              value={user.points}/>
-          </div>
-
-          <div className='radioRow'>
-            <div className='radioRow'>
-              <i><FontAwesomeIcon icon={faGamepad}/></i>
-              <label className='labelForInput'> Hráč </label>
+              <div className="inputWithLabel">
+                <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "Používateľ musí mať email" : "Email"}</label>
+                <input 
+                  type="email" 
+                  className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
+                  autoComplete="off" 
+                  onChange={(e) => {
+                    setUser({...user, email: e.target.value})
+                  }}
+                  name='email'
+                  value={user.email}/>
+              </div>
             </div>
-            <input 
-              type='radio'  
-              onChange={handleChange} 
-              name='role'
-              value='hrac'
-              checked={user.role === "hrac" ? true : false}
-              />
-          </div>
+            
+            <div className="radioRow">
+              <div className="inputWithLabel">
+                <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Heslo musí mať 7+ znakov" : "Heslo"}</label>
+                <input 
+                  type="password" 
+                  className={"inputField " + (error && user.password.length < 8  ? 'inputFieldDanger' : 'null')}
+                  onChange={(e) => {
+                    setUser({...user, password: e.target.value})
+                  }} 
+                  name='password'
+                  placeholder='********'
+                  />
+              </div>
+              
 
-          <div className='radioRow'>
-            <div className='radioRow'>
-              <i><FontAwesomeIcon icon={faUserAstronaut}/></i>
-              <label className='labelForInput'> Admin </label>
+              <div className="inputWithLabel">
+                <label className={"labelForInput " + (error && user.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && user.points < 0  ? 'Body musia byť viac ako 0' : 'Body'}</label>
+                <input 
+                  type="number"  
+                  className={"inputField " + (error && user.points < 0  ? 'inputFieldDanger' : 'null')}
+                  autoComplete="off" 
+                  onChange={(e) => {
+                    setUser({...user, points: e.target.value})
+                  }}
+                  name='points'
+                  value={user.points}/>
+              </div>
             </div>
-            <input 
-              type="radio"  
-              onChange={handleChange} 
-              name='role'
-              value="admin"
-              checked={user.role === "admin" ? true : false}/>
-          </div>
+
+            <div className='radioRow'>
+              <div className='radioRow'>
+                <i><FontAwesomeIcon icon={faGamepad}/></i>
+                <label className='labelForInput'> Hráč </label>
+              </div>
+              <input 
+                type='radio'  
+                onChange={handleChange} 
+                name='role'
+                value='hrac'
+                checked={user.role === "hrac" ? true : false}
+                />
+            </div>
+
+            <div className='radioRow'>
+              <div className='radioRow'>
+                <i><FontAwesomeIcon icon={faUserAstronaut}/></i>
+                <label className='labelForInput'> Admin </label>
+              </div>
+              <input 
+                type="radio"  
+                onChange={handleChange} 
+                name='role'
+                value="admin"
+                checked={user.role === "admin" ? true : false}/>
+            </div>
 
 
             <button className='buttonForm'>Pridaj Používateľa</button>

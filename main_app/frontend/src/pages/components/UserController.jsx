@@ -48,7 +48,7 @@ const UserController = () => {
 
     <div className='content'>
       <div className="spotUpdate">
-        <h1>Moderacia levelov</h1>
+        <h1>Moderacia používateľov</h1>
         <div className="update">
           <form action="">
             <input type="text" name="" id="" />

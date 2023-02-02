@@ -123,16 +123,29 @@ const getUserByIDAdmin = (req, res) => {
 const deleteUserAdmin = (req, res) => { 
     const userId = req.params.id;
     const q = `
-                DELETE user_levels, users
-                FROM user_levels
-                JOIN users ON user_levels.userID = users.id
-                WHERE user_levels.userID = 2;
-            `;
-  
-    db.query(q,[userId], (error, data) => {
+    DELETE user_levels, users
+    FROM user_levels
+    LEFT JOIN users ON user_levels.userID = users.id
+    WHERE user_levels.userID = ?;
+`;
+
+    db.query("SELECT * FROM user_levels WHERE `userID` = ?",[userId], (error, response) => {
         if(error) return res.json("Error");
-        return res.json("Pouzivatel bol zmazaný");
+
+        if (response.length == 0) {
+            db.query("DELETE FROM users WHERE id = ?",[userId], (error, data) => {
+                if(error) return res.json("Error");
+                return res.json("Pouzivatel bol zmazaný");
+            });
+        }
+        else {
+            db.query(q,[userId], (error, data) => {
+                if(error) return res.json("Error");
+                return res.json("Pouzivatel bol zmazaný");
+            });
+        }
     });
+
 };
 
 const createUserAdmin = async (req, res) => { 

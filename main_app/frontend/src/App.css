@@ -655,16 +655,16 @@ body {
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
   gap: 5px;
-  padding: 5rem;
-  border-radius: 15%;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
   color: white;
 
   background: rgba(10, 10, 10, 0.8);
-  border: 3px solid rgb(15, 15, 15);
-  border-radius: 15%;
   box-shadow: 2px 2px 5px rgb(82, 80, 79);
 }
 
@@ -694,7 +694,7 @@ body {
 
 /* Zmena veľkosti fotky v pomôcke */
 .pomocka > img {
-width: 10rem; 
+width: 8rem; 
 height: auto
 }
 
@@ -1247,10 +1247,10 @@ height: 150px;
   }
 
   .level{
-    width: 100%;
-    height: 100%;
-    border-radius: 0%;
     justify-content: center;
+  }
+  .pomocka > img {
+    width: 5rem; 
   }
 
   .levely {
@@ -1295,6 +1295,8 @@ height: 150px;
     height: 100%;
     border-radius: 0%;
     justify-content: center;
+    align-items: center;
+    overflow: auto;
   }
   
   .centerButton{
