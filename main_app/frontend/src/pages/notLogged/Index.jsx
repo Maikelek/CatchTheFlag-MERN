@@ -109,7 +109,7 @@ const Index = () => {
                 <Link to="/register">Zaregistruj sa</Link>
             </div>
 
-            <ContactAdmin/>
+            {/* <ContactAdmin/> */}
 
         </form>
     </div>

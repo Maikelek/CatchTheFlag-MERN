@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import React from 'react';
 import { useState, useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 
@@ -10,6 +10,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 
 const AdminUserID = () => {  
+
+  const nav = useNavigate(); 
+
+  useEffect(() => {
+    fetch('http://localhost:8800/auth', {
+        method:'GET',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        credentials: 'include'
+        }).then(res => res.json()) 
+        .then(response => {
+          if (response.auth !== true && response.user.role !== "admin" ) {
+            nav("/"); 
+          }
+        })
+       
+    },[nav])
+
   const [user, setUser] = useState({  
     id: '',
     name: '',

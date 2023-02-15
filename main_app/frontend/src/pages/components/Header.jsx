@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation} from 'react-router-dom';
 
-import useAuth from '../../hooks/useAuth.jsx'
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,14 +19,30 @@ const Header = () => {
         document.getElementById("myNav").style.width = "0%";
       } 
 
+      const [id, setID] = useState(0);
+      const [role, setRole] = useState("");
       const [activeLink, setActiveLink] = useState('');
 
       useEffect(() => {
         setActiveLink(location.pathname);
       }, [location]);
       
-      const [id, role] = useAuth();
-      console.log(id, role)
+      useEffect(() => {
+        fetch('http://localhost:8800/auth', {
+            method:'GET',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            credentials: 'include'
+            }).then(res => res.json()) 
+            .then(response => {
+              if( response.auth === true ) {
+                setID(response.user.id);
+                setRole(response.user.role);
+              } 
+            })
+           
+        },[]);
 
       const handleClick = async e => {   
         e.preventDefault();
