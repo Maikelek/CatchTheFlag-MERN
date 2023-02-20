@@ -21,7 +21,7 @@ const Admin = () => {
             nav("/"); 
           }
         })
-       
+        
     },[nav])
 
 

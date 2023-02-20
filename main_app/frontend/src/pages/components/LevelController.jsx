@@ -11,8 +11,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const LevelController = () => {
   
   let [levely, setLevely] = useState ( [] )
-
   let [sorted, setSorted] = useState ( 0 )
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredLevely = levely.filter((level) => {
+    return level.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   useEffect( () => {                
       const fetchAllLevely = async () => {
@@ -28,11 +32,14 @@ const LevelController = () => {
 
 
   const handleDelete = async (id) => {         
-    try {
-      await axios.delete(`http://localhost:8800/admin/level/${id}`);
-      window.location.reload()
-    } catch (err) {
-      console.log(err);
+    const confirmed = window.confirm("Naozaj chceš zmazať tento level?");
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:8800/admin/level/${id}`);
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   
@@ -44,6 +51,14 @@ const LevelController = () => {
     setSorted(2);
   }
 
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      setSorted(3);
+    } else {
+      setSorted(0);
+    }
+  }, [searchTerm]);
+
   return (
 
     <div> 
@@ -53,7 +68,7 @@ const LevelController = () => {
         <h1>Moderacia levelov</h1>
         <div className="update">
           <form action="">
-            <input type="text" name="" id="" />
+            <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
           </form>
           <div>
             <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
@@ -92,6 +107,18 @@ const LevelController = () => {
                 </div> 
             </div>  
         )) : null}
+
+
+      {sorted === 3 ? filteredLevely.map(level => (
+          <div className='update' key={level.id}>
+            <h1>{level.title} : {level.points}b</h1>
+            <div>
+            <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+            <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+            </div> 
+        </div>  
+      )) : null}
+
 
           </div>
       </div>

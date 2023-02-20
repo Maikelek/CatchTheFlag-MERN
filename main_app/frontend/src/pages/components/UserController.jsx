@@ -12,6 +12,12 @@ const UserController = () => {
   
     let [users, setUsers] = useState ( [] );
     let [sorted, setSorted] = useState ( 0 );
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredUsers = users.filter((user) => {
+      return user.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
 
     useEffect( () => {                
         const fetchAllUsers = async () => {
@@ -24,13 +30,17 @@ const UserController = () => {
         }
         fetchAllUsers()
     },[])
-  
+
+
     const handleDelete = async (id) => {         
-      try {
-        await axios.delete(`http://localhost:8800/admin/user/${id}`);
-        window.location.reload()
-      } catch (err) {
-        console.log(err);
+      const confirmed = window.confirm("Naozaj chceš zmazať tohto používateľa?");
+      if (confirmed) {
+        try {
+          await axios.delete(`http://localhost:8800/admin/user/${id}`);
+          window.location.reload();
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
@@ -42,6 +52,15 @@ const UserController = () => {
     setSorted(2);
   }
 
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      setSorted(3);
+    } else {
+      setSorted(0);
+    }
+  }, [searchTerm]);
+
+
   return (
 
     <div> 
@@ -51,7 +70,7 @@ const UserController = () => {
         <h1>Moderacia používateľov</h1>
         <div className="update">
           <form action="">
-            <input type="text" name="" id="" />
+          <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </form>
           <div>
             <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
@@ -83,6 +102,16 @@ const UserController = () => {
 
         {sorted === 2 ? users.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(user => (
             <div className='update' key={user.id}>
+            <h1>{user.name} : {user.points}b</h1>
+            <div>
+              <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+            </div> 
+        </div>  
+      )) : null}
+
+      {sorted === 3 ? filteredUsers.map(user => (
+          <div className='update' key={user.id}>
             <h1>{user.name} : {user.points}b</h1>
             <div>
               <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
