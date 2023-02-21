@@ -962,6 +962,17 @@ height: 150px;
   padding: 1rem;
 }
 
+.spotUpdateRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  margin: 3rem;
+}
+
 .update {
   display: flex;
   flex-direction: row;
@@ -972,7 +983,16 @@ height: 150px;
   width: 100%;
   padding: 0.8rem;
   margin-bottom: 1rem;
+}
 
+.updateSmall {
+  display: flex;
+  text-align: center;
+  background: rgba(62, 65, 75, 0.2);
+  backdrop-filter: blur(25px);
+  max-width: fit-content;
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .update h1{
