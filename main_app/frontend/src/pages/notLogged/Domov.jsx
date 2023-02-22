@@ -11,7 +11,9 @@ const Domov = () => {
       <div className='domov'>
 
           <div className='text'>
-            <h1>Ročníkový projekt</h1>
+            <div>
+              <h1 className='typing'>Ročníkový projekt</h1>
+            </div>
             <p>
                 Ročníkový projekt v podobe webovej stránky so zameraním na prácu s webovými technológiami, sociálnymi sieťami, šifrovaním, forénznou a malwareovou analýzou. Jeho úlohou je zvýšiť povedomie o 
                 týchto technológiach a ich nebezpečenstvách. Súťaž je vhodná prevažne pre študentov stredných škôl a vyššie.

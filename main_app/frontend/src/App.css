@@ -121,11 +121,6 @@ body {
   width: 8rem;
 }
 
-/* Domov nebude vidno v menu */
-#domov {
-  display: none;
-}
-
 /* Ľavá časť bez loginu s registráciou */
 .woLogin {
   position: absolute;
@@ -356,7 +351,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem; 
 
   height: 100%;
   width: 100%;
@@ -367,6 +362,7 @@ body {
   background: rgba(10, 10, 10, 0.5);
   backdrop-filter: blur(10px);
 }
+
 
 .statHolder {
   padding: 3rem;
@@ -392,14 +388,15 @@ body {
 
 /* Text domovu */
 .text {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
   max-width: 1000px;
   word-wrap: break-word;
   overflow: auto;
-}
 
-/* Nadpis */
-.text > h1 {
-  font-size: 2.5rem;
   text-align: center;
 }
 
@@ -410,9 +407,25 @@ body {
   text-align: center;
 }
 
-/* logo je viditelne */
-.logo{
-  visibility: visible;
+.typing {
+  overflow: hidden;
+  max-width: fit-content;
+  text-align: center;
+  border-right: .01em solid red;
+  white-space: nowrap;
+  animation:
+    typing 3.2s steps(30, end),
+    blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: red; }
 }
 
 
@@ -606,25 +619,29 @@ body {
 
 /* Div samotného levelu */
 .levelHranica {
-  border: 3px solid black;
+  border: 3px solid #FF4136;
   border-radius: 25px;
-
-  background: linear-gradient(to right, #34b0cc, #145e77);
+  background: linear-gradient(to right, #FF4136, #9B111E);
   padding: 0.8rem 2rem;
   margin: 1rem;
   transition: 0.5s;
   text-align: center;
   font-weight: bold;
   font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  text-shadow: 0px 0px 5px black;
 }
 
+
 .doneHranica {
-  border: 3px solid black;
+  border: 3px solid #1dc726;
   border-radius: 25px;
 
   background: linear-gradient(to right, #1dc726, #2d7a0e);
   padding: 0.8rem 2rem;
   margin: 1rem;
+  letter-spacing: 2px;
   transition: 0.5s;
   text-align: center;
   font-weight: bold;
@@ -987,13 +1004,23 @@ height: 150px;
 
 .updateSmall {
   display: flex;
-  text-align: center;
-  background: rgba(62, 65, 75, 0.2);
-  backdrop-filter: blur(25px);
-  max-width: fit-content;
-  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: linear-gradient(to left, #151b24, #424e63);
+  color: #fff; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
   margin: 1rem;
 }
+
+.updateSmall:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 10px rgba(121, 118, 118, 0.2);
+  }
+
 
 .update h1{
   font-size: 1.5rem;

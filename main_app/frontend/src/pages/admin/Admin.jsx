@@ -59,7 +59,7 @@ const Admin = () => {
     <div>
       <AdminNav />
       <div className='content'>
-        <h1 style={{textAlign: "center", margin: "0.5rem"}}>Moderuj web pomocou tohto rozhrania</h1>
+        <h1 style={{textAlign: "center", margin: "0.5rem", letterSpacing: "1px", fontSize: "2.5rem"}}>Moderuj web pomocou tohto rozhrania</h1>
 
         <div className="spotUpdateRow">
 
@@ -79,7 +79,7 @@ const Admin = () => {
             <h1>Počet hráčov: {playerUsers.length}</h1>
           </div>
 
-         {userWithMostPoints ? 
+         {userWithMostPoints && userWithMostPoints.points !== 0 ? 
             <div className="updateSmall">
               <h1>Najúspešnejší hráč: {userWithMostPoints.name}:{userWithMostPoints.points}b</h1>
             </div>

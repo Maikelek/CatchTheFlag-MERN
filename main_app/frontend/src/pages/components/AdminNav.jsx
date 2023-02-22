@@ -42,9 +42,7 @@ const AdminNav = () => {
           <li className='dropdown'>
             <span className='dropbtn'>Cesty</span>
             <div className='dropdown-content'>
-              <Link to="/register">Registrácia</Link>
               <Link to="/stats">Štatistika</Link>
-              <Link to="/">Prihlásenie</Link>
               <Link to="/domov">Domov</Link>
               <Link to="/levely">Levely</Link>
               <Link>Profil</Link>

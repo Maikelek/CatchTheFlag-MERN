@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 
 import Header from '../components/Header';
 
@@ -11,6 +12,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const Regpage = () => {  
+
+  const nav = useNavigate(); 
+
+  useEffect(() => {
+    fetch('http://localhost:8800/auth', {
+        method:'GET',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        credentials: 'include'
+        }).then(res => res.json()) 
+        .then(response => {
+          if (response.auth === true) {
+            nav("/profil"); 
+          }
+        })
+        
+    },[nav])
 
   const [eye1, setEye1] = useState(faEye);
   const [eye2, setEye2] = useState(faEye);

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from '../components/Header';
-import ContactAdmin from '../components/ContactAdmin';
 
 import { faEye, faUser, faLock, faEyeSlash, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +10,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Index = () => {
 
     const nav = useNavigate(); 
+
+    useEffect(() => {
+      fetch('http://localhost:8800/auth', {
+          method:'GET',
+          headers: {
+              'Content-Type':'application/json'
+          },
+          credentials: 'include'
+          }).then(res => res.json()) 
+          .then(response => {
+            if (response.auth === true) {
+              nav("/profil"); 
+            }
+          })
+          
+      },[nav])
 
     const [eye, setEye] = useState(faEye);
     const [msg, setMsg] = useState({});
@@ -75,7 +90,7 @@ const Index = () => {
         </div>
 
         <form className='login' onSubmit={handleClick}>
-            <h3>Prihlás sa</h3>
+            <h3 className='typing'>Prihlás sa</h3>
             <p>A nájdi rôzne chyby vo webových technológiach. Vzhľadom na typ hry odporúčam používať počítač/notebook</p>
 
             <div className='input'>
@@ -108,8 +123,6 @@ const Index = () => {
                 <p>Nemáš účet?</p>
                 <Link to="/register">Zaregistruj sa</Link>
             </div>
-
-            {/* <ContactAdmin/> */}
 
         </form>
     </div>
