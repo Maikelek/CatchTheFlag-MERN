@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import axios from "axios"
 import config from '../../config/config';
@@ -13,14 +13,37 @@ const UserController = () => {
   
     let [users, setUsers] = useState ( [] );
     let [sorted, setSorted] = useState ( 0 );
+    const [logged, setLogged] = useState ( 0 );
     const [searchTerm, setSearchTerm] = useState('');
+
+    const nav = useNavigate(); 
 
     const filteredUsers = users.filter((user) => {
       return user.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
+    useEffect(() => {
+      fetch(`${config.apiUrl}/auth`, {
+          method:'GET',
+          headers: {
+              'Content-Type':'application/json'
+          },
+          credentials: 'include'
+          }).then(res => res.json()) 
+          .then(response => {
+            if (response.auth !== true && response.user.role !== "admin" ) {
+              nav("/"); 
+            }
+            else {
+              setLogged(response.user.id);
+            }
+          })
+         
+      },[nav])
 
-    useEffect( () => {                
+
+    useEffect( () => {  
+      if (logged >= 1 ) {               
         const fetchAllUsers = async () => {
             try{
                 const res = await axios.get(`${config.apiUrl}/admin/user`)
@@ -30,7 +53,8 @@ const UserController = () => {
             }
         }
         fetchAllUsers()
-    },[])
+      }
+    },[logged])
 
 
     const handleDelete = async (id) => {         

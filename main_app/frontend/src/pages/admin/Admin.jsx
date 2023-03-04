@@ -12,6 +12,8 @@ const Admin = () => {
   let [levely, setLevely] = useState ( [] )
   let [users, setUsers] = useState ( [] )
 
+  const [id, setID] = useState ( 0 )
+
 
   const adminUsers = users.filter(user => user.role === 'admin');
   const playerUsers = users.filter(user => user.role === 'hrac');
@@ -36,24 +38,28 @@ const Admin = () => {
         .then(response => {
           if (response.auth !== true && response.user.role !== "admin" ) {
             nav("/"); 
+          } else {
+            setID(response.user.id)
           }
         })
         
     },[nav])
 
     useEffect(() => {
-      const fetchAllData = async () => {
-        try {
-          const levelRes = await axios.get(`${config.apiUrl}/admin/level`)
-          const userRes = await axios.get(`${config.apiUrl}/admin/user`)
-          setLevely(levelRes.data)
-          setUsers(userRes.data)
-        } catch (error) {
-          console.log(error)
+      if (id >= 1) { 
+        const fetchAllData = async () => {
+          try {
+            const levelRes = await axios.get(`${config.apiUrl}/admin/level`)
+            const userRes = await axios.get(`${config.apiUrl}/admin/user`)
+            setLevely(levelRes.data)
+            setUsers(userRes.data)
+          } catch (error) {
+            console.log(error)
+          }
         }
+        fetchAllData()
       }
-      fetchAllData()
-    }, [])
+    }, [id])
 
   return (
     <div>

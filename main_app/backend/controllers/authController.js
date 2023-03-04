@@ -19,6 +19,7 @@ const validateUser = async (req, res) => {
                     
                     user = {id: results[0].id, name:results[0].name, email: results[0].email, role: results[0].role}
                     req.session.user = user;
+
                     return res.json({ message: "ok"});
 
                 }

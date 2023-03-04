@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import axios from "axios"
 import config from '../../config/config';
@@ -13,13 +13,36 @@ const LevelController = () => {
   
   let [levely, setLevely] = useState ( [] )
   let [sorted, setSorted] = useState ( 0 )
+  const [logged, setLogged] = useState ( 0 )
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredLevely = levely.filter((level) => {
     return level.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
+  const nav = useNavigate(); 
+
+  useEffect(() => {
+    fetch(`${config.apiUrl}/auth`, {
+        method:'GET',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        credentials: 'include'
+        }).then(res => res.json()) 
+        .then(response => {
+          if (response.auth !== true && response.user.role !== "admin" ) {
+            nav("/"); 
+          }
+          else {
+            setLogged(response.user.id);
+          }
+        })
+       
+    },[nav])
+
   useEffect( () => {                
+    if (logged >= 1) { 
       const fetchAllLevely = async () => {
           try{
               const res = await axios.get(`${config.apiUrl}/admin/level`)
@@ -29,7 +52,8 @@ const LevelController = () => {
           }
       }
       fetchAllLevely()
-  },[])
+    }
+  },[logged])
 
 
   const handleDelete = async (id) => {         

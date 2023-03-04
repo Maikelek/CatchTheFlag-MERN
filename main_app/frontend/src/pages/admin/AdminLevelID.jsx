@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AdminLevelID = () => {
 
   const nav = useNavigate(); 
+  const [logged, setLogged] = useState(0);
 
   useEffect(() => {
     fetch(`${config.apiUrl}/auth`, {
@@ -24,6 +25,9 @@ const AdminLevelID = () => {
         .then(response => {
           if (response.auth !== true && response.user.role !== "admin" ) {
             nav("/"); 
+          }
+          else {
+            setLogged(response.user.id)
           }
         })
        
@@ -44,7 +48,8 @@ const AdminLevelID = () => {
   const location = useLocation(); 
   const id = location.pathname.split("/")[4];
 
-  useEffect( () => {                
+  useEffect( () => {    
+    if (logged >= 1) {            
     const fetchAllData = async () => {
         try{
             const res = await axios.get(`${config.apiUrl}/admin/level/${id}`)
@@ -54,7 +59,8 @@ const AdminLevelID = () => {
         }
     }
     fetchAllData()
-},[id])
+  }
+  },[id, logged])
 
 
   const handleClick = async (e) => { 

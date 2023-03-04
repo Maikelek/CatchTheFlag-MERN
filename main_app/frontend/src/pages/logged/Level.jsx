@@ -43,17 +43,38 @@ const Level = () => {
        
     },[nav])
 
-    useEffect( () => {                
+    useEffect(() => {
+      fetch(`${config.apiUrl}/auth`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+        .then(res => res.json())
+        .then(response => {
+          if (response.auth === true) {
+            setLogged(response.user.id);
+          } else {
+            nav("/");
+          }
+        })
+    
+    }, [nav])
+    
+    useEffect(() => {
+      if (logged >= 1) {
         const fetchAllData = async () => {
-            try{
-                const res = await axios.get(`${config.apiUrl}/level/${id}`)
-                setLevelData(res.data)
-            }catch(error) {
-                console.log(error)
-            }
+          try {
+            const res = await axios.get(`${config.apiUrl}/level/${id}`)
+            setLevelData(res.data)
+          } catch (error) {
+            console.log(error)
+          }
         }
         fetchAllData()
-    },[id])
+      }
+    }, [id, logged])
 
     const handleChange = (e) => {
         setAnswer(prev => ({...prev, [e.target.name]: e.target.value})); 

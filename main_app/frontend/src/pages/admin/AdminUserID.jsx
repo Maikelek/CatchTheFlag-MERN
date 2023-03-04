@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AdminUserID = () => {  
 
   const nav = useNavigate(); 
+  const [logged, setLogged] = useState(0);
 
   useEffect(() => {
     fetch(`${config.apiUrl}/auth`, {
@@ -25,6 +26,9 @@ const AdminUserID = () => {
         .then(response => {
           if (response.auth !== true && response.user.role !== "admin" ) {
             nav("/"); 
+          }
+          else {
+            setLogged(response.user.id);
           }
         })
        
@@ -49,17 +53,19 @@ const AdminUserID = () => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
   };
 
-  useEffect( () => {                
-    const fetchAllData = async () => {
-        try{
-            const res = await axios.get(`${config.apiUrl}/admin/user/${id}`)
-            setUser(res.data[0]);
-        }catch(error) {
-            console.log(error);
-        }
+  useEffect( () => {       
+    if (logged >= 1) {          
+      const fetchAllData = async () => {
+          try{
+              const res = await axios.get(`${config.apiUrl}/admin/user/${id}`)
+              setUser(res.data[0]);
+          }catch(error) {
+              console.log(error);
+          }
+      }
+      fetchAllData()
     }
-    fetchAllData()
-  },[id])
+  },[id, logged])
 
 
   const handleClick = async (e) => { 
@@ -80,7 +86,7 @@ const AdminUserID = () => {
     if (user.points < 0) {
       return setError(true);
     }
-
+ 
     try {
       const response = await axios.put(`http://localhost:8800/admin/user/${id}`, user);
       if (response.data) {
