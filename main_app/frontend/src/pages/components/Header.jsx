@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation} from 'react-router-dom';
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import config from '../../config/config';
 
 const Header = () => {
 
@@ -28,7 +29,7 @@ const Header = () => {
       }, [location]);
       
       useEffect(() => {
-        fetch('http://localhost:8800/auth', {
+        fetch(`${config.apiUrl}/auth`, {
             method:'GET',
             headers: {
                 'Content-Type':'application/json'
@@ -47,7 +48,7 @@ const Header = () => {
       const handleClick = async e => {   
         e.preventDefault();
         
-        fetch('http://localhost:8800/auth', {
+        fetch(`${config.apiUrl}/auth`, {
           method:'DELETE',
           headers: {
               'Content-Type':'application/json'

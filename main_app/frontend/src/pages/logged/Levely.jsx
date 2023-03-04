@@ -4,6 +4,8 @@ import axios from "axios"
 import Header from '../components/Header'
 import { Link, useNavigate } from 'react-router-dom'
 
+import config from '../../config/config';
+
 const Levely = () => {
 
 
@@ -12,7 +14,7 @@ const Levely = () => {
     const nav = useNavigate(); 
 
     useEffect(() => {
-        fetch('http://localhost:8800/auth', {
+        fetch(`${config.apiUrl}/auth`, {
             method:'GET',
             headers: {
                 'Content-Type':'application/json'
@@ -35,7 +37,7 @@ const Levely = () => {
     useEffect( () => {                
         const fetchAllLevely = async () => {
             try{
-                const response = await axios.post(" http://localhost:8800/answer/done", {id})
+                const response = await axios.post(`${config.apiUrl}/answer/done`, {id})
                 setDone(response.data.done)
                 setLevely(response.data.levels)
             }catch(error) {

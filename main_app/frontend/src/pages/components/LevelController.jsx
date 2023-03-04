@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import axios from "axios"
+import config from '../../config/config';
 
 import { faArrowTrendDown, faArrowTrendUp, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +22,7 @@ const LevelController = () => {
   useEffect( () => {                
       const fetchAllLevely = async () => {
           try{
-              const res = await axios.get("http://localhost:8800/admin/level")
+              const res = await axios.get(`${config.apiUrl}/admin/level`)
               setLevely(res.data)
           }catch(error) {
               console.log(error)
@@ -35,7 +36,7 @@ const LevelController = () => {
     const confirmed = window.confirm("Naozaj chceš zmazať tento level?");
     if (confirmed) {
       try {
-        await axios.delete(`http://localhost:8800/admin/level/${id}`);
+        await axios.delete(`${config.apiUrl}/admin/level/${id}`);
         window.location.reload();
       } catch (err) {
         console.log(err);
@@ -67,7 +68,7 @@ const LevelController = () => {
       <div className="spotUpdate">
         <h1>Moderacia levelov</h1>
         <div className="update">
-          <form action="">
+          <form>
             <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
           </form>
           <div>
@@ -79,7 +80,7 @@ const LevelController = () => {
         
         {sorted === 0 ? levely.map(level => (
             <div className='update' key={level.id}>
-                <h1>{level.title} : {level.points}b</h1>
+                <h1>{level.title}</h1>
                 <div>
                 <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -89,7 +90,7 @@ const LevelController = () => {
 
         {sorted === 1 ? levely.sort((a, b) => (a.points < b.points) ? 1: -1).map(level => (
             <div className='update' key={level.id}>
-                <h1>{level.title} : {level.points}b</h1>
+                <h1>{level.title}</h1>
                 <div>
                 <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -100,7 +101,7 @@ const LevelController = () => {
 
         {sorted === 2 ? levely.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(level => (
             <div className='update' key={level.id}>
-                <h1>{level.title} : {level.points}b</h1>
+                <h1>{level.title}</h1>
                 <div>
                 <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -111,7 +112,7 @@ const LevelController = () => {
 
       {sorted === 3 ? filteredLevely.map(level => (
           <div className='update' key={level.id}>
-            <h1>{level.title} : {level.points}b</h1>
+            <h1>{level.title}</h1>
             <div>
             <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
             <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>

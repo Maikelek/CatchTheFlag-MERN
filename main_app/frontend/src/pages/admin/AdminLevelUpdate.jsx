@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 import LevelController from '../components/LevelController'
+import config from '../../config/config';
 
 
 const AdminLevelUpdate = () => {
@@ -10,7 +11,7 @@ const AdminLevelUpdate = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch('http://localhost:8800/auth', {
+    fetch(`${config.apiUrl}/auth`, {
         method:'GET',
         headers: {
             'Content-Type':'application/json'

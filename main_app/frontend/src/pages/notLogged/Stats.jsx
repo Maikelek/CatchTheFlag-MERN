@@ -13,7 +13,7 @@ const Stats = () => {
     useEffect( () => {                
         const fetchAllUsers = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/user/")
+                const res = await axios.get("http://192.168.1.10:8800/user/")
                 setUsers(res.data)
             }catch(error) {
                 console.log(error)

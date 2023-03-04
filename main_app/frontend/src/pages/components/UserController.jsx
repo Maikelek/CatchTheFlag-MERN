@@ -3,6 +3,7 @@ import { useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 
 import axios from "axios"
+import config from '../../config/config';
 
 import { faArrowTrendDown, faArrowTrendUp, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +23,7 @@ const UserController = () => {
     useEffect( () => {                
         const fetchAllUsers = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/admin/user")
+                const res = await axios.get(`${config.apiUrl}/admin/user`)
                 setUsers(res.data)
             }catch(error) {
                 console.log(error)
@@ -36,7 +37,7 @@ const UserController = () => {
       const confirmed = window.confirm("Naozaj chceš zmazať tohto používateľa?");
       if (confirmed) {
         try {
-          await axios.delete(`http://localhost:8800/admin/user/${id}`);
+          await axios.delete(`${config.apiUrl}/admin/user/${id}`);
           window.location.reload();
         } catch (err) {
           console.log(err);
@@ -69,7 +70,7 @@ const UserController = () => {
       <div className="spotUpdate">
         <h1>Moderacia používateľov</h1>
         <div className="update">
-          <form action="">
+          <form >
           <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </form>
           <div>
@@ -81,7 +82,7 @@ const UserController = () => {
         
         {sorted === 0 ? users.map(user => (
             <div className='update' key={user.id}>
-                <h1>{user.name} : {user.points}b</h1>
+                <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
                   <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
                   <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -91,7 +92,7 @@ const UserController = () => {
 
         {sorted === 1 ? users.sort((a, b) => (a.points < b.points) ? 1: -1).map(user => (
             <div className='update' key={user.id}>
-                <h1>{user.name} : {user.points}b</h1>
+                <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
                   <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
                   <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -102,7 +103,7 @@ const UserController = () => {
 
         {sorted === 2 ? users.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(user => (
             <div className='update' key={user.id}>
-            <h1>{user.name} : {user.points}b</h1>
+            <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
               <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
               <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
@@ -112,7 +113,7 @@ const UserController = () => {
 
       {sorted === 3 ? filteredUsers.map(user => (
           <div className='update' key={user.id}>
-            <h1>{user.name} : {user.points}b</h1>
+            <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
               <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
               <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>

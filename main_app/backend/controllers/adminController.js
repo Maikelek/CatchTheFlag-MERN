@@ -159,20 +159,28 @@ const createUserAdmin = async (req, res) => {
     if (!req.body.password) return res.json({ message: "Používateľ musí mať heslo" });
 
     let password = req.body.password;
+    let email = req.body.email;
     password = await bcrypt.hash(password, 8);
 
     const values = [
       req.body.name,
-      req.body.email,
+      email,
       password,
       req.body.points,
       req.body.role
     ];
 
-  
-    db.query(q, [values], (error, data) => {
-      if (error) return res.send(error);
-      return res.json({messageGreen: "Pridal si používateľa"});
+    db.query("SELECT email FROM `users` WHERE email = ?", [email], async (error, results) => {
+        if ( results.length >= 1 ) {
+            return res.json({ message: "Tento email je použitý" });
+        }
+
+        else {
+            db.query(q, [values], (error, data) => {
+                if (error) return res.send(error);
+                return res.json({messageGreen: "Pridal si používateľa"});
+              });
+        }
     });
 };
 

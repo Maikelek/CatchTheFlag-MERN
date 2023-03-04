@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Header from '../components/Header';
+import config from '../../config/config';
 
 import l3 from '../../images/l3.JPEG';
 import l4 from '../../images/l4.JPEG';
@@ -25,7 +26,7 @@ const Level = () => {
   const [msg, setMsg] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:8800/auth', {
+    fetch(`${config.apiUrl}/auth`, {
         method:'GET',
         headers: {
             'Content-Type':'application/json'
@@ -45,7 +46,7 @@ const Level = () => {
     useEffect( () => {                
         const fetchAllData = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/level/${id}`)
+                const res = await axios.get(`${config.apiUrl}/level/${id}`)
                 setLevelData(res.data)
             }catch(error) {
                 console.log(error)
@@ -61,7 +62,7 @@ const Level = () => {
       const handleClick = async e => {   
         e.preventDefault();
        
-        fetch('http://localhost:8800/answer', {
+        fetch(`${config.apiUrl}/answer`, {
           method:'POST',
           body: JSON.stringify({id, logged, answer}), 
           headers: {
@@ -106,11 +107,14 @@ const Level = () => {
                       {level.id === 1 ? <div dangerouslySetInnerHTML={{__html: "<!-- heslo je /l1-z4c1470k\\ -->"}}/>: null }
                   </div>
                   <form onSubmit={handleClick}>
+                    <div className='levelInput'>
                       <input type="text" 
-                          placeholder='Vlož heslo: ' 
-                          name='answer'
-                          autoComplete='off'
-                          onChange={handleChange}/>
+                        placeholder='Vlož heslo: ' 
+                        name='answer'
+                        autoComplete='off'
+                        onChange={handleChange}
+                      />
+                    </div>
                       <div className='button'>
                           <button className='signin'>Potvrď</button>
                       </div>

@@ -24,6 +24,7 @@ body {
   display: flex;
   height: 100%;
   width: 100%;
+  overflow: auto;
 }
 
 /* Hlavička */
@@ -63,6 +64,11 @@ body {
 
 /* Vyskakovacie menu */
 .overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
   height: 100%;
   width: 0;
   position: fixed;
@@ -81,7 +87,6 @@ body {
 
 /* Obsah vyskakovácieho menu */
 .overlay-content {
-  position: relative;
   top: 25%;
   width: 100%;
   text-align: center;
@@ -93,7 +98,7 @@ body {
   padding: 8px;
   text-decoration: none;
   font-size: 3rem;
-  color: #818181;
+  color: #b3aeae;
   display: block;
   transition: 0.3s;
 }
@@ -242,6 +247,8 @@ body {
   right: 0;
   color: white;
 
+  overflow: auto;
+
   background: rgba(10, 10, 10, 0.5);
   backdrop-filter: blur(10px);
 }
@@ -373,6 +380,7 @@ body {
   overflow:auto;
   top: 25%;
   text-align: center;
+  overflow: auto;
 }
 
 .stats {
@@ -410,6 +418,7 @@ body {
 .typing {
   overflow: hidden;
   max-width: fit-content;
+  max-height: 40px;
   text-align: center;
   border-right: .01em solid red;
   white-space: nowrap;
@@ -445,6 +454,7 @@ body {
 
   width: 100%;
   height: 100%;
+  overflow: auto;
 
   position: absolute;
   background: rgba(10, 10, 10, 0.6);
@@ -507,26 +517,43 @@ body {
 
 /* Tlačídko na potvrdenie registrácie */
 .regButton {
-  background: transparent;
-  
-  border: 2px solid white;
-  border-radius: 20px;
-
-  width: 30%;
-
+  background-color: rgb(150, 18, 18);
+  border: none;
   align-self: center;
-  margin-top: 1rem;
-  padding: 0.7rem;
-
-  color: white;
-
-  transition: all 0.4s ease-in-out;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 70%;
+  font-size: 16px;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Tlačídko na potvrdenie registrácie pri hoveri */
+.regButton::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+
 .regButton:hover {
-  border-radius: 0%;
-  color: white;
+  background-color: rgb(78, 9, 9); 
+  transform: scaleX(1.05);
+}
+
+.regButton:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
 }
 
 /* Ikonka oka pri hesle */
@@ -669,8 +696,7 @@ body {
 
 
 .level{
-  overflow: hidden;
-  display: flex;
+  display:flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -680,6 +706,8 @@ body {
   height: 100%;
   padding: 2rem;
   color: white;
+
+  overflow: auto;
 
   background: rgba(10, 10, 10, 0.8);
   box-shadow: 2px 2px 5px rgb(82, 80, 79);
@@ -733,6 +761,10 @@ height: 150px;
 
 
 
+.levelInput {
+  border-bottom: 2px solid white;
+}
+
 .level input {
   font-size: 1.5rem;
   margin-top: 4rem;
@@ -741,7 +773,6 @@ height: 150px;
   padding: 0.4rem 1.2rem;
   margin-bottom: 10px;
   border: none;
-  border-bottom: 2px solid white;
 }
 
 .level input::placeholder {
@@ -881,7 +912,8 @@ height: 150px;
   font-size: 18px;
 
   background-color: transparent;
-  border: hidden;
+  
+  border: none;
   border-bottom: 1px solid white;
 }
 
@@ -889,13 +921,10 @@ height: 150px;
   color: #15a8b3;
 }
 
-.inputFieldProfil:hover {
+.inputFieldProfil:hover:focus {
   border-bottom: 1px solid #00E6F6;
 }
 
-.inputFieldProfil:focus {
-  border-bottom: 1px solid #00E6F6;
-}
 
 
 
@@ -960,13 +989,20 @@ height: 150px;
   display: block;
 }
 
+#adminActive {
+  background-color: #0f1118;
+  border-top: solid 1px #0DCAF0;
+  border-bottom: solid 1px #0DCAF0;
+  color: white;
+}
+
 .content {
   padding: 2rem;
   position:absolute;
   width: 100%;
   height: 100%;
   color: white;
-  overflow: scroll;
+  overflow: auto;
 
   
   background-color: #070708;
@@ -981,7 +1017,7 @@ height: 150px;
 
 .spotUpdateRow {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -1004,26 +1040,49 @@ height: 150px;
 
 .updateSmall {
   display: flex;
-  justify-content: space-between;
+  font-weight: 100;
   align-items: center;
-  border: none;
-  background: linear-gradient(to left, #151b24, #424e63);
-  color: #fff; 
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  max-width: 400px;
-  padding: 0.75rem 1rem;
-  margin: 1rem;
+  justify-content: center;
+  background-color: #191C24; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  margin-bottom: 0.7rem; 
+  transition: 0.3s ease-in-out;
 }
 
 .updateSmall:hover {
-  transform: translateY(-2px);
-  box-shadow: 5px 5px 10px rgba(121, 118, 118, 0.2);
-  }
+  background-color: #0f1118;
+  transform: scale(1.05);
+}
+
+.updateSmall::before {
+  content: ""; 
+  position: absolute; 
+  width: 100%; 
+  height: 4px; 
+  bottom: 0; 
+  left: 0; 
+  background-color: #14cedb; 
+  visibility: hidden; 
+  transform: scaleX(0); 
+  transition: all 0.3s ease-in-out; 
+}
+
+.updateSmall:hover::before {
+  visibility: visible; 
+  transform: scaleX(1); 
+}
+
+.info {
+  color: #14cedb;
+}
 
 
 .update h1{
+  font-weight: 100;
   font-size: 1.5rem;
+  word-wrap: normal;
 }
 
 #updateName {
@@ -1082,6 +1141,7 @@ height: 150px;
   justify-content: center;
 
   gap: 10px;
+  overflow: auto;
 
   max-width: 100%;
   height: 95%;
@@ -1223,14 +1283,23 @@ height: 150px;
 
   /* Pri telefóne nebude vidno ľavú stranu pri logine */
   .woLogin {
-      display: none;
+    display: none;
   }
   
   /* Login bude roztiahnutý na celú obrazovku */
   .login {
-      width: 100%;
-      max-width: 100%;
-      font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+  } 
+
+  .input > input {
+    border: none;
+  }
+  
+
+  .input  {
+    border-bottom: 1px solid white;
   } 
 
   /* Text pre uživateľov na mobilnom telefóne bude viditelný */
@@ -1242,24 +1311,34 @@ height: 150px;
   /* Zmena velkosti registračného tlačídka pri mobile */
   .regButton {
   
-    width: 60%;
+    width: 80%;
 
   }
 
   /* Zmena veľkostí registračného menu */
   .loginReg {
-      width: 80%;  
+      width: 60%;  
   }
+
+  .loginReg > h1 {
+    font-size: 1.7rem;
+  }
+
+  .inputReg {
+    border-bottom: 1px solid white;
+  }
+
   .inputReg > input {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    border: none;
   }
 
-  .input > input {
-    font-size: 1rem;
+  .inputBlueFocus:hover {
+    border: none;
   }
 
-  .adminProblem {
-    visibility: hidden;  
+  .inputBlueFocus:focus {
+    border: none;
   }
 
   .content {
@@ -1290,13 +1369,24 @@ height: 150px;
     width: 40%;
   }
 
+  .levelInput > input {
+    font-size: 1.1rem;
+  }
+
   .level > h1 {
-    font-size: 2.5rem;
+    font-size: 1.7rem;
+  }
+
+
+  .level > h5 {
+    font-size: 1.2rem;
   }
 
   .pomocka {  
-    max-width: 400px;
+    max-width: 300px;
+    font-size: 0.8rem;
   }
+
   .spotUpdate {
     padding: 3rem;
   }
@@ -1315,6 +1405,15 @@ height: 150px;
   }
   .pomocka > img {
     width: 5rem; 
+  }
+
+  .updateSmall {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8rem;
+    width: 300px;
+    height: 80px;
   }
 
   .levely {
@@ -1353,7 +1452,9 @@ height: 150px;
   .nameRow {
     flex-direction: column;
     gap: 15px;
+    padding: 0.3rem;
   }
+
   .profil {
     width: 100%;
     height: 100%;
@@ -1362,20 +1463,47 @@ height: 150px;
     align-items: center;
     overflow: auto;
   }
+
+
+  .profilCenter {
+    font-size: 0.9rem;
+    margin: 0.6rem;
+    border: 1px solid white;
+
+    padding: 0.3rem;
+  }
+
+  .inputFieldProfil  {
+    font-size: 0.7rem;
+    margin: 0;
+    border: none;
+  }
+
+  .inputWithLabelProfil {
+    border-bottom: 1px solid white;
+  }
+
+  .labelForInput  {
+    font-size: 0.7rem;
+    margin: 0;
+  }
   
   .centerButton{
-    margin-top: 1rem;
+    margin-top: 0.2rem;
+  }
+
+  .searcher {
+    max-width: 150px;
   }
 
   .profilButton {
     margin: 20px;
-    padding: 1.2rem;
+    padding: 1rem;
+    font-size: 0.7rem;
     width: auto;
     height: auto;
   }
-  .inputFieldProfil {
-    padding: 0.3rem 1.2rem;
-  }
+
   .stats {
     font-size: 10px;
     margin: 0;

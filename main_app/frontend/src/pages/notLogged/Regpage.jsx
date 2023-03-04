@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 import Header from '../components/Header';
+import config from '../../config/config';
 
 import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +17,7 @@ const Regpage = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch('http://localhost:8800/auth', {
+    fetch(`${config.apiUrl}/auth`, {
         method:'GET',
         headers: {
             'Content-Type':'application/json'
@@ -81,7 +82,7 @@ const Regpage = () => {
   const handleClick = async e => {   
     e.preventDefault();
    
-    fetch('http://localhost:8800/register', {
+    fetch(`${config.apiUrl}/register`, {
       method:'POST',
       body: JSON.stringify(user), 
       headers: {
@@ -131,7 +132,7 @@ const Regpage = () => {
             <label><FontAwesomeIcon icon={faEnvelope}/></label>
           </div>
 
-          <div className='inputReg'>
+          <div className='inputReg '>
             <input 
               id='hesloInput1' 
               className='inputBlueFocus' 

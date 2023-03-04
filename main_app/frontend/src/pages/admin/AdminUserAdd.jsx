@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
+import config from '../../config/config';
 
 import { faUser, faLock, faEnvelope, faCoins, faExclamationCircle, faThumbsUp, faUserAstronaut, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +14,7 @@ const AdminUserAdd = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch('http://localhost:8800/auth', {
+    fetch(`${config.apiUrl}/auth`, {
         method:'GET',
         headers: {
             'Content-Type':'application/json'
@@ -65,7 +66,7 @@ const AdminUserAdd = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8800/admin/user`, user);
+      const response = await axios.post(`${config.apiUrl}/admin/user`, user);
       if (response.data) {
         setMsg(response.data)
         console.log(response.data)

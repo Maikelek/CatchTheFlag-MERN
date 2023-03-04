@@ -3,16 +3,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
 import Header from '../components/Header';
+import config from '../../config/config';
 
 import { faEye, faUser, faLock, faEyeSlash, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Index = () => {
 
-    const nav = useNavigate(); 
+  const nav = useNavigate(); 
 
     useEffect(() => {
-      fetch('http://localhost:8800/auth', {
+      fetch(`${config.apiUrl}/auth`, {
           method:'GET',
           headers: {
               'Content-Type':'application/json'
@@ -56,7 +57,7 @@ const Index = () => {
       const handleClick = async e => {   
         e.preventDefault();
        
-        fetch('http://localhost:8800/auth', {
+        fetch(`${config.apiUrl}/auth`, {
           method:'POST',
           body: JSON.stringify(user), 
           headers: {

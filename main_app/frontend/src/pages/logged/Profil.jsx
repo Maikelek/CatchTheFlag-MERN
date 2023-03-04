@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import config from '../../config/config';
+
 import { faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -26,7 +28,7 @@ const Profil = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const authResponse = await axios.get('http://localhost:8800/auth', {
+                const authResponse = await axios.get(`${config.apiUrl}/auth`, {
                     headers: {
                         'Content-Type':'application/json'
                     },
@@ -35,7 +37,7 @@ const Profil = () => {
                 if( authResponse.data.auth ) {
                     setUser(authResponse.data.user);
                     setEmail(authResponse.data.user.email);
-                    const profileResponse = await axios.post("http://localhost:8800/profil", {email});
+                    const profileResponse = await axios.post(`${config.apiUrl}/profil`, {email});
                     if(profileResponse.data[0] && profileResponse.data[0].points) {
                         setPoints(profileResponse.data[0].points);
                     }
@@ -53,7 +55,7 @@ const Profil = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.put('http://localhost:8800/profil', {user});
+            const response = await axios.put(`${config.apiUrl}/profil`, {user});
             if (response.data) {
                 setMsg(response.data)
             }
