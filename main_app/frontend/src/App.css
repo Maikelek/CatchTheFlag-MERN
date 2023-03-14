@@ -247,7 +247,7 @@ body {
   right: 0;
   color: white;
 
-  overflow: auto;
+  overflow: hidden;
 
   background: rgba(10, 10, 10, 0.5);
   backdrop-filter: blur(10px);
