@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require("../db");  
+const emailSender = require("../mailer"); 
 
 const getLevelsAdmin = (req, res) => {   
     const q = "SELECT * FROM levels";
@@ -129,6 +130,11 @@ const deleteUserAdmin = (req, res) => {
     WHERE user_levels.userID = ?;
 `;
 
+    db.query("SELECT email FROM `users` WHERE id = ?", [userId], (error, response) => {
+        const email = response[0].email;
+        emailSender(email, 'Zmazanie účtu', `Tvoj účet bol zmazaný a nemôžeš pokračovať v hre!\n\nAdmin a Developer Webu HackTheMaturita`);
+    });
+
     db.query("SELECT * FROM user_levels WHERE `userID` = ?",[userId], (error, response) => {
         if(error) return res.json("Error");
 
@@ -176,6 +182,7 @@ const createUserAdmin = async (req, res) => {
         }
 
         else {
+            emailSender(email, 'Vytvorenie účtu adminom', `Tvoj účet bol vytvorený Adminom!\nAk je táto informácia úplne nová a nesúhlasíš s účtom, kontaktuj ma na tomto Emaily \n\nAdmin a Developer Webu HackTheMaturita`);
             db.query(q, [values], (error, data) => {
                 if (error) return res.send(error);
                 return res.json({messageGreen: "Pridal si používateľa"});
@@ -209,6 +216,7 @@ const updateUserAdmin = (req, res) => {
             const q = "UPDATE users SET `name`= ?, `email`= ?, `points`= ?, `role`= ? WHERE `id`= ? ";
             db.query(q, [user.name, user.email, user.points, user.role, user.id], (error, data) => {
                 if (error) return res.send(error);
+                emailSender(user.email, 'Aktualizácia Adminom', `Tvoj účet bol aktualizovaný Adminom!\nV prípade, že tiento zmeny narúšaju váš chod hry, prosím kontaktujte ma na tomto emaily\n\nAdmin a Developer Webu HackTheMaturita`);
                 let random = Math.floor(Math.random() * 11)
                 if ( random <= 2 ) {
                     return res.json({ messageGreen: "Aktualizoval si používateľa"  });

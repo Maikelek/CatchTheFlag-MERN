@@ -34,12 +34,6 @@ const Regpage = () => {
 
   const [eye1, setEye1] = useState(faEye);
   const [eye2, setEye2] = useState(faEye);
-  const [error, setError] = useState({
-    name: { error: false, message: null },
-    email: { error: false, message: null },
-  })
-
-  console.log(error.name.message)
 
   function hesloToggle() {
     let hesloInput = document.getElementById("hesloInput1");

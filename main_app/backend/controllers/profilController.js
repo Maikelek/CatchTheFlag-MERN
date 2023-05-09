@@ -1,5 +1,6 @@
 const db = require("../db");
 const bcrypt = require("bcryptjs");
+const emailSender = require("../mailer"); 
 
 const getPoints = (req, res) => { 
   const email = req.body.email;
@@ -35,6 +36,7 @@ const editUser =  async (req, res)  => {
         if (err) return res.send(err);
 
         let random = Math.floor(Math.random() * 11)
+        emailSender(email, 'Aktualizácia profilu', `Tvoj účet bol aktualizovaný ${name}!\n\nAdmin a Developer Webu HackTheMaturita`);
         if ( random <= 2 ) {
             return res.json({ messageGreen: "Zmeny sa prejavia po prihlásení"  });
         } else if ( random <= 4 ) {

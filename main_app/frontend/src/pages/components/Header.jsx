@@ -80,11 +80,11 @@ const Header = () => {
             <div className='overlay-content'>
                 {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
                 <Link to="/domov" id={activeLink === '/domov' ? 'active' : ''}>Domov</Link>
-                <Link to="/stats" id={activeLink === '/stats' ? 'active' : ''}>Štatistika</Link>
                 {id > 0 ?  null : <Link to="/" id={activeLink === '/' ? 'active' : ''}>Prihlásenie</Link>}
                 {id > 0 ?  null : <Link to="/register" id={activeLink === '/register' ? 'active' : ''}>Registrácia</Link>}
                 {id === 0 ?  null : <Link to="/levely" id={activeLink === '/levely' ? 'active' : ''}>Levely</Link>}
-                {id === 0 ?  null : <Link to="/profil" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
+                {id === 0 ?  null : <Link to="/stats" id={activeLink === '/stats' ? 'active' : ''}>Štatistika</Link>}
+	        {id === 0 ?  null : <Link to="/profil" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
                 {id === 0 ?  null : <Link onClick={handleClick}>Odhlás sa</Link>}
             </div>
 

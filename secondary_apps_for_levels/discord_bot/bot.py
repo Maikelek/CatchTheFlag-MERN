@@ -1,4 +1,4 @@
-#Importnuté knižnice
+# Import necessary libraries
 import discord
 from random import choice, randint
 from requests import get
@@ -7,17 +7,14 @@ from os import system
 import datetime
 from discord.ext import commands
 
-
-#variabilné uchovávajúca statusy a heslá (lepšie uloženie pre hesla by bol .env súbor ak by sa jednalo o bezpečnosť)
+#variable to store statuses and passwords (it's better to store passwords in an .env file for security)
 presences = [".pomoc = Príkazy", "Moderujem chat", "Ročníková práca"]
 hesla = ['z4c1470k', 'l2-3nc0d1100100110ng', 'm30w', '$73gan0gr4f1k', '1n574gr4m1k', 'dzt22', ':d1sc0rd807:', 'l8-w1r3$h.4rk:', '22:59:50', 'enchantmcpass']
 
-#Spôsob akým bot bude volať príkazy
+#Set the way the bot calls commands
 intents = discord.Intents.all()
-discord.member = True
-bot = commands.Bot(command_prefix=".", description="ročníková práca", help_command=None, intents = intents)
+bot = commands.Bot(command_prefix=".", description="ročníková práca", help_command=None, intents=intents)
 bot.remove_command('help')
-
 #
 # PRÍKAZY BOTA #
 #
@@ -60,6 +57,7 @@ async def pomoc(ctx):
 #     data = response.json()
 #     await ctx.send(data['file'])
 
+
 #Totožný princíp ako príkaz vyššie iba iná API
 @bot.command() 
 async def korgi(ctx):
@@ -85,7 +83,7 @@ async def ping(ctx, ip=None):
     if ip == None:
         await ctx.send("Zadaj IP alebo Doménu")
     else:
-        response = system(f"ping -n 1 {ip}")
+        response = system(f"ping -c 1 {ip}")
         if response == 0:
             await ctx.send("Server je online")
         else:
@@ -214,4 +212,4 @@ async def on_message(message):
 
 
 #Bot Token
-bot.run("TOKEN")
+bot.run("Token")

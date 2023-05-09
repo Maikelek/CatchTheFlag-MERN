@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require("../db"); 
+const emailSender = require("../mailer"); 
 
 
 const userRegister = (req, res) => {
@@ -40,6 +41,7 @@ const userRegister = (req, res) => {
             if(error) {
                 console.log(error);
             } else {
+                emailSender(email, 'Ďakujem za Tvoju účasť', `Tvoj účet bol zaregistrovaný ${name}.\nDúfam, že získaš nové skúsenosti a zabavíš sa!\n\nAdmin a Developer Webu HackTheMaturita`);
                 return res.status(200).json({ messageGreen: "Si zaregistrovaný" });
             }
         });

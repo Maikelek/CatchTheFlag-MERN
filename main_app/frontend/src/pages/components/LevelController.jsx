@@ -31,7 +31,7 @@ const LevelController = () => {
         credentials: 'include'
         }).then(res => res.json()) 
         .then(response => {
-          if (response.auth !== true && response.user.role !== "admin" ) {
+          if (response.auth !== true || response.user.role !== "admin" ) {
             nav("/"); 
           }
           else {

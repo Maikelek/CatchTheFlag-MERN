@@ -24,7 +24,7 @@ const AdminUserID = () => {
         credentials: 'include'
         }).then(res => res.json()) 
         .then(response => {
-          if (response.auth !== true && response.user.role !== "admin" ) {
+          if (response.auth !== true || response.user.role !== "admin" ) {
             nav("/"); 
           }
           else {
@@ -88,7 +88,7 @@ const AdminUserID = () => {
     }
  
     try {
-      const response = await axios.put(`http://localhost:8800/admin/user/${id}`, user);
+      const response = await axios.put(`${config.apiUrl}/admin/user/${id}`, user);
       if (response.data) {
         setMsg(response.data)
       }

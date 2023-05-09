@@ -54,7 +54,7 @@ const answerChecker = async (req, res) => {
       } else if ( random <= 8 ) {
           return res.json({ message: "Zlá vlajka, učíme sa chybami, že?"  });
       } else {
-          return res.json({ message: "Zlá vlajku, skúšaj alebo sa vráť do menu"  });
+          return res.json({ message: "Zlá vlajka, skúšaj alebo sa vráť do menu"  });
       }
     }
   });
