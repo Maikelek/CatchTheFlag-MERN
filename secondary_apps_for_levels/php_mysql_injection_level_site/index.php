@@ -24,7 +24,7 @@ if(isset($_SESSION["token"])){
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container">
             <a href="https://github.com/maikelek" class="navbar-brand">Michal Priemerny</a>
-            
+
 
             <ul class="navbar-nav">
             <?php if($id >= 1): ?>
@@ -38,6 +38,9 @@ if(isset($_SESSION["token"])){
                         <a href="./backend/logout.php" class="nav-link">Odhlás sa</a>
                     </li>
             <?php else: ?>
+                <li class="nav-item">
+                    <a href="register.php" class="nav-link">Registruj sa</a>
+                </li>
                 <li class="nav-item">
                     <a href="index.php" class="nav-link active">Prihlás sa</a>
                 </li>
@@ -80,6 +83,6 @@ if(isset($_SESSION["token"])){
                 </div>
             </form>
         </div>
-    
+
 </body>
 </html>

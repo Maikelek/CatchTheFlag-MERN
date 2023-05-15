@@ -212,4 +212,8 @@ async def on_message(message):
 
 
 #Bot Token
+
 bot.run("Token")
+
+bot.run("MTAyMTg3MjIzMDM5NDc2NTM3Mg.GubBiX.cdQ7G2kSnKOH88btuxnjyc2Y7urmkV421YkQZw")
+

@@ -42,6 +42,9 @@ if(isset($_SESSION["token"])){
                     </li>
             <?php else: ?>
                 <li class="nav-item">
+                    <a href="register.php" class="nav-link">Registruj sa</a>
+                </li>
+                <li class="nav-item">
                     <a href="index.php" class="nav-link">Prihlás sa</a>
                 </li>
             <?php endif; ?>
