@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-
+const {isAuthenticated} = require('../middleware/protector');
 
 
 router.route('/')
-    .get(userController.getUsers)
+    .get(isAuthenticated, userController.getUsers)
 
 router.route('/:id')
-    .put(userController.updateUser)
+    .put(isAuthenticated, userController.updateUser)
 
 
 module.exports = router;  

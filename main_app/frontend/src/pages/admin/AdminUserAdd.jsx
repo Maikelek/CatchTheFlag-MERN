@@ -14,20 +14,23 @@ const AdminUserAdd = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          }
-        })
-       
-    },[nav])
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } 
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
+  
 
 
   const [user, setUser] = useState({ 
@@ -66,7 +69,9 @@ const AdminUserAdd = () => {
     }
 
     try {
-      const response = await axios.post(`${config.apiUrl}/admin/user`, user);
+      const response = await axios.post(`${config.apiUrl}/admin/user`, user, {
+        withCredentials: true
+      });
       if (response.data) {
         setMsg(response.data)
         console.log(response.data)
@@ -85,13 +90,13 @@ const AdminUserAdd = () => {
         <form className='updateForm' onSubmit={handleClick}>
 
         <div className='textCenter'>
-          <h2 style={{marginBottom: "1rem"}}>Pridaj Používateľa</h2>
+          <h2 style={{marginBottom: "1rem"}}>Add User</h2>
         </div>
 
 
           <div className="radioRow">
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "Používateľ musí mať meno" : "Meno"}</label>
+                <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "User must have a nick" : "Nick"}</label>
                 <input 
                   type="text"
                   className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
@@ -105,7 +110,7 @@ const AdminUserAdd = () => {
               
 
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "Používateľ musí mať email" : "Email"}</label>
+                <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "User must have an email" : "Email"}</label>
                 <input 
                   type="email" 
                   className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
@@ -120,7 +125,7 @@ const AdminUserAdd = () => {
             
             <div className="radioRow">
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Heslo musí mať 7+ znakov" : "Heslo"}</label>
+                <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Password must have 7+ chars" : "Password"}</label>
                 <input 
                   type="password" 
                   className={"inputField " + (error && user.password.length < 8  ? 'inputFieldDanger' : 'null')}
@@ -150,7 +155,7 @@ const AdminUserAdd = () => {
             <div className='radioRow'>
               <div className='radioRow'>
                 <i><FontAwesomeIcon icon={faGamepad}/></i>
-                <label className='labelForInput'> Hráč </label>
+                <label className='labelForInput'> Player </label>
               </div>
               <input 
                 type='radio'  
@@ -175,7 +180,7 @@ const AdminUserAdd = () => {
             </div>
 
 
-            <button className='buttonForm'>Pridaj Používateľa</button>
+            <button className='buttonForm'>Add User</button>
             {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
             {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>

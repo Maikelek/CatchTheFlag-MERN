@@ -23,29 +23,32 @@ const LevelController = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          }
-          else {
-            setLogged(response.user.id);
-          }
-        })
-       
-    },[nav])
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } else {
+          setLogged(response.user.id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
 
   useEffect( () => {                
     if (logged >= 1) { 
       const fetchAllLevely = async () => {
           try{
-              const res = await axios.get(`${config.apiUrl}/admin/level`)
+              const res = await axios.get(`${config.apiUrl}/admin/level`, {
+                withCredentials: true
+              })
               setLevely(res.data)
           }catch(error) {
               console.log(error)
@@ -60,7 +63,9 @@ const LevelController = () => {
     const confirmed = window.confirm("Naozaj chceš zmazať tento level?");
     if (confirmed) {
       try {
-        await axios.delete(`${config.apiUrl}/admin/level/${id}`);
+        await axios.delete(`${config.apiUrl}/admin/level/${id}`, {
+          withCredentials: true
+        });
         window.location.reload();
       } catch (err) {
         console.log(err);
@@ -90,10 +95,10 @@ const LevelController = () => {
 
     <div className='content'>
       <div className="spotUpdate">
-        <h1>Moderacia levelov</h1>
+        <h1>Managing levels</h1>
         <div className="update">
           <form>
-            <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
+            <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
           </form>
           <div>
             <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>

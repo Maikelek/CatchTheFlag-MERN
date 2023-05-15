@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import config from '../../config/config';
-
+import axios from "axios"
 
 const AdminNav = () => {
 
@@ -17,51 +17,43 @@ const AdminNav = () => {
 
   const handleClick = async e => {   
     e.preventDefault();
-    
-    fetch(`${config.apiUrl}/auth`, {
-      method:'DELETE',
-      headers: {
-          'Content-Type':'application/json'
-      },
-      credentials: 'include'
-      }).then(res => res.json()) 
-      .then(response => {
-        if (response.logout === true) {
-          nav("/"); 
-        } 
-      })
-      .catch(err => {
-          console.log(err);
-          alert(err);
-      });
+    try {
+      const response = await axios.delete(`${config.apiUrl}/auth`, { withCredentials: true });
+      if (response.data.logout === true) {
+        nav("/");
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   }
 
   return (
     <div className="nav">
         <ul>
           <li className='dropdown'>
-            <span className='dropbtn'>Moderácia</span>
+            <span className='dropbtn'>Managing</span>
             <div className='dropdown-content'>
-              <Link to="/admin" id={activeLink === '/admin' ? 'adminActive' : ''}>Hlavne menu</Link>
-              <Link to="/admin/level/update" id={activeLink === '/admin/level/update' ? 'adminActive' : ''}>Levely</Link>
-              <Link to="/admin/user/update" id={activeLink === '/admin/user/update' ? 'adminActive' : ''}>Používatelia</Link>
+              <Link to="/admin" id={activeLink === '/admin' ? 'adminActive' : ''}>Main menu</Link>
+              <Link to="/admin/level/update" id={activeLink === '/admin/level/update' ? 'adminActive' : ''}>Levels</Link>
+              <Link to="/admin/user/update" id={activeLink === '/admin/user/update' ? 'adminActive' : ''}>Users</Link>
             </div>
           </li>
           <li className='dropdown'>
-            <span className='dropbtn'>Cesty</span>
+            <span className='dropbtn'>Routes</span>
             <div className='dropdown-content'>
-              <Link to="/stats">Štatistika</Link>
-              <Link to="/domov">Domov</Link>
-              <Link to="/levely">Levely</Link>
+              <Link to="/stats">Stats</Link>
+              <Link to="/domov">Home</Link>
+              <Link to="/levely">Levels</Link>
               <Link to="/profil">Profil</Link>
             </div>
           </li>
           <li className='dropdown'>
-            <span className='dropbtn'>Pridávanie</span>
+            <span className='dropbtn'>Adding</span>
             <div className='dropdown-content'>
               <Link to="/admin/level/add" id={activeLink === '/admin/level/add' ? 'adminActive' : ''}>Level</Link>
-              <Link to="/admin/user/add" id={activeLink === '/admin/user/add' ? 'adminActive' : ''}>Používateľ</Link>
-              <Link onClick={handleClick}>Odhlás sa</Link>
+              <Link to="/admin/user/add" id={activeLink === '/admin/user/add' ? 'adminActive' : ''}>User</Link>
+              <Link onClick={handleClick}>LogOut</Link>
             </div>
           </li>
         </ul>

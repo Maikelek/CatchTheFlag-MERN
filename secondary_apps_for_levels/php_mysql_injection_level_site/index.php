@@ -63,6 +63,8 @@ if(isset($_SESSION["token"])){
 
         <div class="card">
             <form action="./backend/loginUser.php" method="POST">
+                <!-- meno: Einstein -->
+                <!-- heslo: heslojeflasa123 -->
                 <div class="p-3">
                     <label for="fname" class="form-label">Meno</label>
                     <input type="text" class="form-control" name="fname">

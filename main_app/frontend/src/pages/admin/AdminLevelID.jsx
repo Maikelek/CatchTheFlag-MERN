@@ -15,23 +15,24 @@ const AdminLevelID = () => {
   const [logged, setLogged] = useState(0);
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          }
-          else {
-            setLogged(response.user.id)
-          }
-        })
-       
-    },[nav])
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } else {
+          setLogged(response.user.id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
 
   const [msg, setMsg] = useState({});
   const [error, setError] = useState(false);
@@ -52,7 +53,9 @@ const AdminLevelID = () => {
     if (logged >= 1) {            
     const fetchAllData = async () => {
         try{
-            const res = await axios.get(`${config.apiUrl}/admin/level/${id}`)
+            const res = await axios.get(`${config.apiUrl}/admin/level/${id}`, {
+              withCredentials: true
+            })
             setLevel(res.data[0])
         }catch(error) {
             console.log(error)
@@ -79,7 +82,9 @@ const AdminLevelID = () => {
     }
 
     try {
-      const response = await axios.put(`${config.apiUrl}/admin/level/${id}`, level);
+      const response = await axios.put(`${config.apiUrl}/admin/level/${id}`, level, {
+        withCredentials: true
+      });
       if (response.data) {
         setMsg(response.data)
       }
@@ -95,14 +100,14 @@ const AdminLevelID = () => {
         <form onSubmit={handleClick} className='updateForm'>
 
           <div className='textCenter'>
-            <h2 style={{marginBottom: "2rem"}}>Aktualizuj Level</h2>
+            <h2 style={{marginBottom: "2rem"}}>Update Level</h2>
           </div>
 
 
           <div className="radioRow">
 
             <div className="inputWithLabel">  
-              <label className={"labelForInput " + (error && !level.title  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> {error && !level.title ? "Level musí mať názov" : "Názov"} </label>
+              <label className={"labelForInput " + (error && !level.title  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> {error && !level.title ? "Level must have a title" : "Title"} </label>
               <input 
                 type="text"  
                 className={"inputField " + (error && !level.title  ? 'inputFieldDanger' : 'null')}
@@ -115,7 +120,7 @@ const AdminLevelID = () => {
             </div>
 
             <div className="inputWithLabel">  
-              <label className={"labelForInput " + (error && level.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && level.points < 0 ? "Body musia byť kladné" : "Body"}</label>
+              <label className={"labelForInput " + (error && level.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && level.points < 0 ? "Points have to be above 0" : "Points"}</label>
               <input 
                 type="number"  
                 className={"inputField " + (error && level.points < 0  ? 'inputFieldDanger' : 'null')}
@@ -132,12 +137,12 @@ const AdminLevelID = () => {
           <div className="radioRow">
 
             <div className="inputWithLabel">  
-              <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Fotka</label>
+              <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Photo</label>
               <input 
                 type="text"  
                 className='inputField'
                 autoComplete="off" 
-                placeholder="Nevyžaduje sa"
+                placeholder="Not needed"
                 name='picture'
                 value={level.picture ? level.picture : ""}
                 onChange={(e) => {
@@ -151,7 +156,7 @@ const AdminLevelID = () => {
                 type="text"  
                 className='inputField'
                 autoComplete="off" 
-                placeholder="Nevyžaduje sa"
+                placeholder="Not needed"
                 name='link'
                 value={level.link ? level.link : ""}
                 onChange={(e) => {
@@ -164,7 +169,7 @@ const AdminLevelID = () => {
           <div className="radioRow">
                   
             <div className="inputWithLabel">  
-              <label className={"labelForInput " + (error && !level.hint  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> {error && !level.hint  ? 'Level musí mať pomôcku' : 'Pomôcka'}</label>
+              <label className={"labelForInput " + (error && !level.hint  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> {error && !level.hint  ? 'Level must have a hint' : 'Hint'}</label>
               <textarea               
                   type="text"  
                   className={"inputField " + (error && !level.hint  ? 'inputFieldDanger' : 'null')}
@@ -179,7 +184,7 @@ const AdminLevelID = () => {
 
                 
             <div className="inputWithLabel">  
-            <label className={"labelForInput " + (error && !level.pass  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && !level.pass  ? 'Level musí mať heslo' : 'Heslo'}</label>
+            <label className={"labelForInput " + (error && !level.pass  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && !level.pass  ? 'Level must have a password' : 'Password'}</label>
               <input 
                 type="text"  
                 className={"inputField " + (error && !level.pass  ? 'inputFieldDanger' : 'null')}
@@ -193,7 +198,7 @@ const AdminLevelID = () => {
           </div>
 
 
-          <button style={{marginTop: "2rem"}} className='buttonForm'>Aktualizuj Level</button>
+          <button style={{marginTop: "2rem"}} className='buttonForm'>Update the level</button>
           {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
           {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>

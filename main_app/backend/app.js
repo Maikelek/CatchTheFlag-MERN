@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+
 require("dotenv").config();
 
 const app = express()
@@ -25,12 +26,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 86400000 // 1 deň
+      expires: 86400000 // 1 day
     }
 })
 );
 
-/* Hlavna stránka backendu */
+/* Backend main page */
 app.get("/", (req, res) => { 
   return res.json("Backend server Hack The Maturita");
 

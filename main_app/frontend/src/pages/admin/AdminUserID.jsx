@@ -16,23 +16,25 @@ const AdminUserID = () => {
   const [logged, setLogged] = useState(0);
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          }
-          else {
-            setLogged(response.user.id);
-          }
-        })
-       
-    },[nav])
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } else {
+          setLogged(response.user.id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
+  
 
   const [user, setUser] = useState({  
     id: '',
@@ -57,7 +59,9 @@ const AdminUserID = () => {
     if (logged >= 1) {          
       const fetchAllData = async () => {
           try{
-              const res = await axios.get(`${config.apiUrl}/admin/user/${id}`)
+              const res = await axios.get(`${config.apiUrl}/admin/user/${id}`, {
+                withCredentials: true
+              })
               setUser(res.data[0]);
           }catch(error) {
               console.log(error);
@@ -88,7 +92,9 @@ const AdminUserID = () => {
     }
  
     try {
-      const response = await axios.put(`${config.apiUrl}/admin/user/${id}`, user);
+      const response = await axios.put(`${config.apiUrl}/admin/user/${id}`, user, {
+        withCredentials: true
+      });
       if (response.data) {
         setMsg(response.data)
       }
@@ -104,13 +110,13 @@ const AdminUserID = () => {
         <form className='updateForm' onSubmit={handleClick}>
 
             <div className='textCenter'>
-              <h2 style={{marginBottom: "1rem"}}>Aktualizuj Používateľa</h2>
+              <h2 style={{marginBottom: "1rem"}}>Update User</h2>
             </div>
 
 
           <div className="radioRow">
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "Používateľ musí mať meno" : "Meno"}</label>
+                <label className={"labelForInput " + (error && user.name.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faUser}/></i> {error && !user.name ? "User must have a nick" : "Nick"}</label>
                 <input 
                   type="text"
                   className={"inputField " + (error && user.name.length <=0  ? 'inputFieldDanger' : 'null')}
@@ -124,7 +130,7 @@ const AdminUserID = () => {
               
 
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "Používateľ musí mať email" : "Email"}</label>
+                <label className={"labelForInput " + (error && user.email.length <=0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faEnvelope}/></i> {error && !user.email ? "User must have an email" : "Email"}</label>
                 <input 
                   type="email" 
                   className={"inputField " + (error && user.email.length <=0  ? 'inputFieldDanger' : 'null')}
@@ -139,7 +145,7 @@ const AdminUserID = () => {
             
             <div className="radioRow">
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Heslo musí mať 7+ znakov" : "Heslo"}</label>
+                <label className={"labelForInput " + (error && user.password.length < 8  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && user.password.length < 8 ? "Password must have 7+ chars" : "Password"}</label>
                 <input 
                   type="password" 
                   className={"inputField " + (error && user.password.length < 8  ? 'inputFieldDanger' : 'null')}
@@ -153,7 +159,7 @@ const AdminUserID = () => {
               
 
               <div className="inputWithLabel">
-                <label className={"labelForInput " + (error && user.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && user.points < 0  ? 'Body musia byť viac ako 0' : 'Body'}</label>
+                <label className={"labelForInput " + (error && user.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && user.points < 0  ? 'Points must be above 0' : 'Points'}</label>
                 <input 
                   type="number"  
                   className={"inputField " + (error && user.points < 0  ? 'inputFieldDanger' : 'null')}
@@ -169,7 +175,7 @@ const AdminUserID = () => {
             <div className='radioRow'>
               <div className='radioRow'>
                 <i><FontAwesomeIcon icon={faGamepad}/></i>
-                <label className='labelForInput'> Hráč </label>
+                <label className='labelForInput'> Player </label>
               </div>
               <input 
                 type='radio'  
@@ -193,7 +199,7 @@ const AdminUserID = () => {
                 checked={user.role === "admin" ? true : false}/>
             </div>
 
-            <button className='buttonForm'>Aktualizuj Používateľa</button>
+            <button className='buttonForm'>Update user</button>
             {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
             {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>

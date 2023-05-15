@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React from 'react'; 
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -42,31 +42,14 @@ const Level = () => {
         })
        
     },[nav])
-
-    useEffect(() => {
-      fetch(`${config.apiUrl}/auth`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      })
-        .then(res => res.json())
-        .then(response => {
-          if (response.auth === true) {
-            setLogged(response.user.id);
-          } else {
-            nav("/");
-          }
-        })
-    
-    }, [nav])
     
     useEffect(() => {
       if (logged >= 1) {
         const fetchAllData = async () => {
           try {
-            const res = await axios.get(`${config.apiUrl}/level/${id}`)
+            const res = await axios.get(`${config.apiUrl}/level/${id}`, {
+              withCredentials: true
+            });
             setLevelData(res.data)
           } catch (error) {
             console.log(error)
@@ -82,26 +65,26 @@ const Level = () => {
 
       const handleClick = async e => {   
         e.preventDefault();
-       
-        fetch(`${config.apiUrl}/answer`, {
-          method:'POST',
-          body: JSON.stringify({id, logged, answer}), 
-          headers: {
-              'Content-Type':'application/json'
-          }
-          }).then(res => res.json()) 
-          .then(response => {
-            if (response.message === "ok") {
-              nav("/levely"); 
-            } else {
-              setMsg(response)
+      
+        try {
+          const response = await axios.post(
+            `${config.apiUrl}/answer`,
+            { id, logged, answer },
+            {
+              withCredentials: true,
             }
-          })
-          .catch(err => {
-              console.log(err);
-              alert(err);
-          });
+          );
+          if (response.data.message === "ok") {
+            nav("/levely");
+          } else {
+            setMsg(response.data);
+          }
+        } catch (error) {
+          console.log(error);
+          alert(error);
+        }
       }
+      
 
 
   return (
@@ -113,7 +96,7 @@ const Level = () => {
           {levelData.map(level => (
               <div className='level' key={level.id}>
                   <h1>{level.title}</h1>
-                  <h5>Za {level.points} bodov</h5>
+                  <h5>Worth {level.points} points</h5>
                   {level.id === 5 ? <img src={petrabottova2001} id='fotka' alt='petrabottova2001' />: null }
                   {level.picture ? <img src={level.picture} id='fotka' alt='levelFoto'/> : null }
 
@@ -124,20 +107,20 @@ const Level = () => {
                     </div> : null}
 
                   <div className='pomocka'>
-                      <p>{level.hint ? <label>Pomôcka je: {level.hint} {level.link ? <a href={level.link} target="_blank" rel="noopener noreferrer" id='odkaz'>LINK</a> : null}</label> : null}</p>
+                      <p>{level.hint ? <label>Hint: {level.hint} {level.link ? <a href={level.link} target="_blank" rel="noopener noreferrer" id='odkaz'>LINK</a> : null}</label> : null}</p>
                       {level.id === 1 ? <div dangerouslySetInnerHTML={{__html: "<!-- heslo je /l1-z4c1470k\\ -->"}}/>: null }
                   </div>
                   <form onSubmit={handleClick}>
                     <div className='levelInput'>
                       <input type="text" 
-                        placeholder='Vlož heslo: ' 
+                        placeholder='Insert password: ' 
                         name='answer'
                         autoComplete='off'
                         onChange={handleChange}
                       />
                     </div>
                       <div className='button'>
-                          <button className='signin'>Potvrď</button>
+                          <button className='signin'>Send</button>
                       </div>
                   </form>
                   {msg.message ? <h4 className='loginDangerLabel' style={{marginTop: "1rem"}}><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h4>: null }

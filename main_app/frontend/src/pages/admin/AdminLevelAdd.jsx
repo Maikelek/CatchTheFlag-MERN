@@ -15,21 +15,23 @@ const AdminLevelAdd = () => {
   const nav = useNavigate(); 
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          }
-        })
-       
-    },[nav])
-
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } 
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
+  
   const [error, setError] = useState(false)
   const [msg, setMsg] = useState({});
   const [level, setLevel] = useState({ 
@@ -57,7 +59,8 @@ const AdminLevelAdd = () => {
     }
 
     try {
-      const response = await axios.post(`${config.apiUrl}/admin/level`, level);
+      const response = await axios.post(`${config.apiUrl}/admin/level`, level, {
+        withCredentials: true});
       if (response.data) {
         setMsg(response.data)
         console.log(response.data)
@@ -76,14 +79,14 @@ const AdminLevelAdd = () => {
       <form onSubmit={handleClick} className='updateForm'>
 
       <div className='textCenter'>
-        <h2 style={{marginBottom: "2rem"}}>Pridaj Level</h2>
+        <h2 style={{marginBottom: "2rem"}}>Add Level</h2>
       </div>
 
 
       <div className="radioRow">
 
         <div className="inputWithLabel">  
-          <label className={"labelForInput " + (error && !level.title  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> {error && !level.title ? "Level musí mať názov" : "Názov"} </label>
+          <label className={"labelForInput " + (error && !level.title  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faAddressCard}/></i> {error && !level.title ? "Level must have a title" : "Title"} </label>
           <input 
             type="text"  
             className={"inputField " + (error && !level.title  ? 'inputFieldDanger' : 'null')}
@@ -96,7 +99,7 @@ const AdminLevelAdd = () => {
         </div>
 
         <div className="inputWithLabel">  
-          <label className={"labelForInput " + (error && level.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && level.points < 0 ? "Body musia byť kladné" : "Body"}</label>
+          <label className={"labelForInput " + (error && level.points < 0  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faCoins}/></i> {error && level.points < 0 ? "Points must be above 0" : "Points"}</label>
           <input 
             type="number"  
             className={"inputField " + (error && level.points < 0  ? 'inputFieldDanger' : 'null')}
@@ -113,12 +116,12 @@ const AdminLevelAdd = () => {
       <div className="radioRow">
 
         <div className="inputWithLabel">  
-          <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Fotka</label>
+          <label className="labelForInput "><i><FontAwesomeIcon icon={faCamera} /></i> Photo</label>
           <input 
             type="text"  
             className='inputField'
             autoComplete="off" 
-            placeholder="Nevyžaduje sa"
+            placeholder="Not needed"
             name='picture'
             value={level.picture ? level.picture : ""}
             onChange={(e) => {
@@ -132,7 +135,7 @@ const AdminLevelAdd = () => {
             type="text"  
             className='inputField'
             autoComplete="off" 
-            placeholder="Nevyžaduje sa"
+            placeholder="Not needed"
             name='link'
             value={level.link ? level.link : ""}
             onChange={(e) => {
@@ -145,7 +148,7 @@ const AdminLevelAdd = () => {
       <div className="radioRow">
               
         <div className="inputWithLabel">  
-          <label className={"labelForInput " + (error && !level.hint  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> {error && !level.hint  ? 'Level musí mať pomôcku' : 'Pomôcka'}</label>
+          <label className={"labelForInput " + (error && !level.hint  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faComments}/></i> {error && !level.hint  ? 'Level must have a hint' : 'Hint'}</label>
           <textarea               
               type="text"  
               className={"inputField " + (error && !level.hint  ? 'inputFieldDanger' : 'null')}
@@ -160,7 +163,7 @@ const AdminLevelAdd = () => {
 
             
         <div className="inputWithLabel">  
-        <label className={"labelForInput " + (error && !level.pass  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && !level.pass  ? 'Level musí mať heslo' : 'Heslo'}</label>
+        <label className={"labelForInput " + (error && !level.pass  ? 'labelForInputDanger' : 'null')}><i><FontAwesomeIcon icon={faLock}/></i> {error && !level.pass  ? 'Level must have a password' : 'Password'}</label>
           <input 
             type="text"  
             className={"inputField " + (error && !level.pass  ? 'inputFieldDanger' : 'null')}
@@ -174,7 +177,7 @@ const AdminLevelAdd = () => {
       </div>
 
 
-        <button className='buttonForm'>Pridaj Level</button>
+        <button className='buttonForm'>Add level</button>
         {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
         {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
         </form>

@@ -23,30 +23,33 @@ const UserController = () => {
     });
 
     useEffect(() => {
-      fetch(`${config.apiUrl}/auth`, {
-          method:'GET',
-          headers: {
-              'Content-Type':'application/json'
-          },
-          credentials: 'include'
-          }).then(res => res.json()) 
-          .then(response => {
-            if (response.auth !== true || response.user.role !== "admin" ) {
-              nav("/"); 
-            }
-            else {
-              setLogged(response.user.id);
-            }
-          })
-         
-      },[nav])
+      axios.get(`${config.apiUrl}/auth`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      })
+        .then(res => res.data)
+        .then(response => {
+          if (response.auth !== true || response.user.role !== "admin" ) {
+            nav("/");
+          } else {
+            setLogged(response.user.id);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, [nav]);
 
 
     useEffect( () => {  
       if (logged >= 1 ) {               
         const fetchAllUsers = async () => {
             try{
-                const res = await axios.get(`${config.apiUrl}/admin/user`)
+                const res = await axios.get(`${config.apiUrl}/admin/user`, {
+                  withCredentials: true
+                })
                 setUsers(res.data)
             }catch(error) {
                 console.log(error)
@@ -61,7 +64,9 @@ const UserController = () => {
       const confirmed = window.confirm("Naozaj chceš zmazať tohto používateľa?");
       if (confirmed) {
         try {
-          await axios.delete(`${config.apiUrl}/admin/user/${id}`);
+          await axios.delete(`${config.apiUrl}/admin/user/${id}`, {
+            withCredentials: true
+          });
           window.location.reload();
         } catch (err) {
           console.log(err);
@@ -92,10 +97,10 @@ const UserController = () => {
 
     <div className='content'>
       <div className="spotUpdate">
-        <h1>Moderacia používateľov</h1>
+        <h1>Managing users</h1>
         <div className="update">
           <form >
-          <input type="text" placeholder='Hľadaj' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </form>
           <div>
             <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>

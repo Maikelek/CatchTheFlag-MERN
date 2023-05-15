@@ -12,19 +12,19 @@ const userRegister = (req, res) => {
 
     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    if ( !name ) {return res.status(401).json({ message: "Musíš zadať meno !" });}
+    if ( !name ) {return res.status(401).json({ message: "Insert nick !" });}
 
-    if ( name.length > 25 ) {return res.status(401).json({ message: "Meno nesmie byť dlhšie ako 25 znakov !" });}
+    if ( name.length > 25 ) {return res.status(401).json({ message: "Nick cannot be longer than 25 characters !" });}
 
-    if( !email ) {return res.status(401).json({ message: "Musíš zadať email!" });}
+    if( !email ) {return res.status(401).json({ message: "Insert email !" });}
 
-    if(!emailRegex.test(email)) {return res.status(401).json({ message: "Email má nesprávny formát !" });}
+    if(!emailRegex.test(email)) {return res.status(401).json({ message: "Wrong email format !" });}
     
-    if ( !password || !passwordRep) {return res.status(401).json({ message: "Musíš zadať heslo !" });} 
+    if ( !password || !passwordRep) {return res.status(401).json({ message: "Insert password !" });} 
     
-    if ( password.length < 7) {return res.status(401).json({ message: "Heslo musi mať minimálne 7 znakov" });} 
+    if ( password.length < 7) {return res.status(401).json({ message: "Password must have 7+ chars" });} 
     
-    if ( password !== passwordRep) {return res.status(401).json({ message: "Hesla sa nezhodujú !" });}
+    if ( password !== passwordRep) {return res.status(401).json({ message: "Passwords are not matching !" });}
 
     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) =>{
         if(error) {
@@ -41,8 +41,8 @@ const userRegister = (req, res) => {
             if(error) {
                 console.log(error);
             } else {
-                emailSender(email, 'Ďakujem za Tvoju účasť', `Tvoj účet bol zaregistrovaný ${name}.\nDúfam, že získaš nové skúsenosti a zabavíš sa!\n\nAdmin a Developer Webu HackTheMaturita`);
-                return res.status(200).json({ messageGreen: "Si zaregistrovaný" });
+                emailSender(email, 'Welcome in HackTheMaturita CTF', `Your account was registered ${name}.\nI hope you will gain new experiences and have fun! \n\nAdmin and Developer of HackTheMaturita website`);
+                return res.status(200).json({ messageGreen: "You are registered." });
             }
         });
     });

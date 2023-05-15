@@ -16,7 +16,7 @@ const answerChecker = async (req, res) => {
   });
 
   if (!answer) {
-    return res.json({ message: "Nezadal si heslo !"});
+    return res.json({ message: "Enter password !"});
   }
 
   
@@ -27,7 +27,7 @@ const answerChecker = async (req, res) => {
     if ( answer == pass ) {
 
       if ( done === 1 ){
-       return res.json({ message: "Level si už vyplnil !"});
+       return res.json({ message: "You already completed this level !"});
       } else {
 
         db.query("SELECT points FROM `users` WHERE id = ?", [userID], (error, response) => {
@@ -45,16 +45,16 @@ const answerChecker = async (req, res) => {
        
     } else {
       let random = Math.floor(Math.random() * 11)
-      if ( random <= 2 ) {
-          return res.json({ message: "Zlá vlajka, môžeš skúsiť znova!"  });
-      } else if ( random <= 4 ) {
-          return res.json({ message: "Neplatná vlajka, skúšaj ďalej!"  });
-      } else if ( random <= 6 ) {
-          return res.json({ message: "Nesprávná vlajka, chyby nerátame =)"  });
-      } else if ( random <= 8 ) {
-          return res.json({ message: "Zlá vlajka, učíme sa chybami, že?"  });
+      if (random <= 2) {
+        return res.json({ message: "Wrong flag, try again!" });
+      } else if (random <= 4) {
+          return res.json({ message: "Invalid flag, keep trying!" });
+      } else if (random <= 6) {
+          return res.json({ message: "Wrong flag, don't worry about mistakes =)" });
+      } else if (random <= 8) {
+          return res.json({ message: "Wrong flag, we learn from mistakes, right?" });
       } else {
-          return res.json({ message: "Zlá vlajka, skúšaj alebo sa vráť do menu"  });
+          return res.json({ message: "Wrong flag, keep trying!" });
       }
     }
   });

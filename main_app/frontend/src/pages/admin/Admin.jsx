@@ -28,72 +28,79 @@ const Admin = () => {
   
 
   useEffect(() => {
-    fetch(`${config.apiUrl}/auth`, {
-        method:'GET',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        credentials: 'include'
-        }).then(res => res.json()) 
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/"); 
-          } else {
-            setID(response.user.id)
-          }
-        })
-        
-    },[nav])
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } else {
+          setID(response.user.id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
 
     useEffect(() => {
-      if (id >= 1) { 
+      if (id >= 1) {
         const fetchAllData = async () => {
           try {
-            const levelRes = await axios.get(`${config.apiUrl}/admin/level`)
-            const userRes = await axios.get(`${config.apiUrl}/admin/user`)
-            setLevely(levelRes.data)
-            setUsers(userRes.data)
+            const levelRes = await axios.get(`${config.apiUrl}/admin/level`, {
+              withCredentials: true,
+            });
+            const userRes = await axios.get(`${config.apiUrl}/admin/user`, {
+              withCredentials: true,
+            });
+            setLevely(levelRes.data);
+            setUsers(userRes.data);
           } catch (error) {
-            console.log(error)
+            console.log(error);
           }
-        }
-        fetchAllData()
+        };
+        fetchAllData();
       }
-    }, [id])
+    }, [id]);
+    
 
   return (
     <div>
       <AdminNav />
       <div className='content'>
-        <h1 style={{textAlign: "center", margin: "0.5rem", letterSpacing: "1px", fontSize: "2.5rem", fontWeight: "50"}}>Moderuj web pomocou tohto rozhrania</h1>
+        <h1 style={{textAlign: "center", margin: "0.5rem", letterSpacing: "1px", fontSize: "2.5rem", fontWeight: "50"}}>Administrate from this framework</h1>
 
         <div className="spotUpdateRow">
 
           <div className="updateSmall">
-            <h1>Počet uživateľov: <i className='info'>{users.length}</i></h1>
+            <h1>Count of users: <i className='info'>{users.length}</i></h1>
           </div>
 
           <div className="updateSmall">
-            <h1>Počet levelov: <i className='info'>{levely.length}</i></h1>
+            <h1>Count of levels: <i className='info'>{levely.length}</i></h1>
           </div>
 
           <div className="updateSmall">
-            <h1>Počet adminov: <i className='info'>{adminUsers.length}</i></h1>
+            <h1>Count of admins: <i className='info'>{adminUsers.length}</i></h1>
           </div>
 
           <div className="updateSmall">
-            <h1>Počet hráčov: <i className='info'>{playerUsers.length}</i></h1>
+            <h1>Count of players: <i className='info'>{playerUsers.length}</i></h1>
           </div>
 
          {userWithMostPoints && userWithMostPoints.points !== 0 ? 
             <div className="updateSmall">
-              <h1>Najúspešnejší hráč: <i className='info'>{userWithMostPoints.name}:{userWithMostPoints.points}b</i></h1>
+              <h1>Best player: <i className='info'>{userWithMostPoints.name}/{userWithMostPoints.points}p</i></h1>
             </div>
                  
           :null}
 
           <div className="updateSmall">
-            <h1>Max počet bodov: <i className='info'>{totalPoints}</i></h1>
+            <h1>Maximum points: <i className='info'>{totalPoints}</i></h1>
           </div>
 
         </div>

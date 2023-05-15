@@ -24,7 +24,7 @@ function sendEmail(to, subject, text) {
     if (error) {
       console.log(error);
     } else {
-      console.log('Email sa poslal: ' + info.response);
+      console.log('Email has been sent: ' + info.response);
     }
   });
 }

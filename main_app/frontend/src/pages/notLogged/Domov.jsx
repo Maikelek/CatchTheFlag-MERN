@@ -12,17 +12,14 @@ const Domov = () => {
 
           <div className='text'>
             <div>
-              <h1 className='typing'>Ročníkový projekt</h1>
+              <h1 className='typing'>CTF GAME</h1>
             </div>
             <p>
-                Ročníkový projekt v podobe webovej stránky so zameraním na prácu s webovými technológiami, sociálnymi sieťami, šifrovaním, forénznou a malwareovou analýzou. Jeho úlohou je zvýšiť povedomie o 
-                týchto technológiach a ich nebezpečenstvách. Súťaž je vhodná prevažne pre študentov stredných škôl a vyššie.
-                <br></br><br></br>
-                
-                Jedná sa o /catch the flag\ hru. Pre prechod do ďalšieho levlu je potrebné na stránke za pomoci využitia technológii spomenutých vyššie nájsť heslo 
-                v tvare <strong>/lx-heslo\</strong>. Prípadne inak špecifikované v konkrétnom leveli.
-                <br></br><br></br>
-                Projekt je inšpirovaný CTF súťažiami ako TryhackMe, HackTheBox, CyberGame, HackQuest.
+            This is a website project focused on working with web technologies, social networks, encryption, forensic and malware analysis. Its task is to increase awareness of these technologies and their dangers. The competition is suitable mainly for high school and higher education students.
+            <br></br><br></br>
+            It is a /catch the flag\ game. To move on to the next level, it is necessary to find a password in the form <strong>/lx-password</strong> on the website using the technologies mentioned above. Alternatively, it may be specified differently in a specific level.
+            <br></br><br></br>
+            The project is inspired by CTF competitions such as TryhackMe, HackTheBox, CyberGame, HackQuest.
 
             </p>
          </div>

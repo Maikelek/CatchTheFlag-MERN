@@ -108,7 +108,7 @@ const Regpage = () => {
       <div className="bluredDiv">
 
         <form onSubmit={handleClick} className='loginReg'>
-          <h1>Registrácia</h1>
+          <h1>Registration</h1>
 
           <div className='inputReg'>
             <input 
@@ -117,7 +117,7 @@ const Regpage = () => {
               type="text" 
               autoComplete="off" 
               onChange={handleChange} 
-              placeholder='Zadaj svoj meno: '/>
+              placeholder='Insert your nick: '/>
             <label><FontAwesomeIcon icon={faUser}/></label>
           </div>
                 
@@ -128,7 +128,7 @@ const Regpage = () => {
               type="text" 
               autoComplete="off" 
               onChange={handleChange} 
-              placeholder="Zadaj svoj email: "/>
+              placeholder="Insert your email: "/>
             <label><FontAwesomeIcon icon={faEnvelope}/></label>
           </div>
 
@@ -139,7 +139,7 @@ const Regpage = () => {
               name="password" 
               type="password" 
               onChange={handleChange} 
-              placeholder="Zadaj svoje heslo: "/>
+              placeholder="Insert your password: "/>
             <label><FontAwesomeIcon icon={faLock}/></label>
             <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye1}/></label>
           </div>
@@ -151,18 +151,18 @@ const Regpage = () => {
               name="passwordRep" 
               type="password" 
               onChange={handleChange} 
-              placeholder="Zopakuj svoje heslo: "/>
+              placeholder="Repeat your password: "/>
             <label><FontAwesomeIcon icon={faLockOpen}/></label> 
             <label id='eye2' onClick={hesloToggle2}><FontAwesomeIcon icon={eye2}/></label>
           </div>
 
           {msg.message ? <label className="loginDangerLabel"><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label> : null }
           {msg.messageGreen ? <label className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</label> : null }
-          <button className='regButton' type="submit">Registruj sa</button>
+          <button className='regButton' type="submit">Sign up</button>
 
           <div className='mobilReg'>
-              <p>Ak máš účet</p>
-              <Link to='/'>Prihlás sa tu</Link>
+              <p>Do you have an accout?</p>
+              <Link to='/'>Log in here!</Link>
           </div>
         </form>
 

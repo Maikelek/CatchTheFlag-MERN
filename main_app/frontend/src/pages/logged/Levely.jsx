@@ -20,10 +20,12 @@ const Levely = () => {
     })
       .then(res => res.json())
       .then(response => {
-        if (response.auth === false) {
-          nav('/');
-        } else {
+        console.log(response);
+        if (response.auth === true) {
           setID(response.user.id);
+          console.log(response.user);
+        } else {
+          nav('/');
         }
       });
   }, [nav]);
@@ -32,7 +34,9 @@ const Levely = () => {
     if (id >= 1) {
       const fetchAllLevely = async () => {
         try {
-          const response = await axios.post(`${config.apiUrl}/answer/done`, { id });
+          const response = await axios.post(`${config.apiUrl}/answer/done`, { id }, {
+            withCredentials: true
+          });
           setDone(response.data.done);
           setLevely(response.data.levels);
         } catch (error) {

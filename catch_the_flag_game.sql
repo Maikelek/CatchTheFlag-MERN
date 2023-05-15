@@ -13,17 +13,17 @@ CREATE TABLE `levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `levels` (`id`, `title`, `hint`, `picture`, `points`, `pass`, `link`) VALUES
-(1, 'Úvod', 'Nájdi niečo medzi div', NULL, 5, '/l1-z4c1470k\\', NULL),
-(2, 'Enkódovanie', 'Vieš dekódovať tieto súbory?', NULL, 15, '/l2-3nc0d1100100110ng\\', 'https://drive.google.com/file/d/1BJUzT9yk-NDdwzLUwj6sbMO3D2rpaYVB/view?usp=sharing'),
-(3, 'Mačka ?', 'Čo je na tejto fotke zaujímavé?', NULL, 10, '/l3-m30w\\', NULL),
-(4, 'Mačka ¿?', 'Ako sa da schovať text do fotky?', NULL, 10, '/l4-$73gan0gr4f1k\\', NULL),
-(5, 'Kto to je?', 'Toto je Petra Bottová preskúmaj jej fotku a zisti na akú sociálnu sieť ukladá svoje fotky', NULL, 15, '/l5-1n574gr4m1k\\', NULL),
-(6, 'Znova Petra', 'Petra je známa, že ľuďom dáva úlohy, vyrieš ich. Heslo zadaj v malých pismenách.', NULL, 15, '/l6-dzt22\\', NULL),
-(7, 'Discord', 'Na Discord serveri si používateľ \"MichalPriemerny\" uložil priečinok nájdi ho', NULL, 25, '/l7-:d1sc0rd807:\\', 'https://discord.gg/Tvcq7a7RAW'),
-(8, 'Komunikácia', 'Odchytili sme komunikáciu, nájdeš heslo? ', NULL, 20, '/l8-w1r3$h.4rk\\', 'https://drive.google.com/file/d/1dP1j30Gew_LFKymRvFd1DZ2Z86i3XJ-C/view?usp=sharing'),
-(9, 'Linux', 'Vo verejnej lokálnej sieti sa niekto pokúsil nabúrať do SSH Linux serveru, vieš zistiť kedy sa mu podarilo preniknúť? Heslo vo forme HH:MM:SS', NULL, 5, '22:59:50', 'https://drive.google.com/file/d/1aXZC3RLHV935pEZXefIu-QFuM1t_VMj5/view?usp=sharing'),
-(10, 'Známe znaky', 'Skús dekódovať túto správu', NULL, 5, 'enchantmcpass', 'https://drive.google.com/file/d/1q9M-No7RAVioeqB0ClJBMisaQbB4GXN0/view?usp=sharing'),
-(11, 'Php weby sú fajn', 'Michal Priemerny si urobil stránku. Nájdi na nej niekoho zaujimavého.', NULL, 30, '/l11-=)$qlinject10n=)\\', 'http://hackthematurita.sk/sqlinjection/index.php');
+(1, 'Beginning', 'No comment', NULL, 5, '/l1-z4c1470k\\', NULL),
+(2, 'Encoding', 'Can you decode it?', NULL, 15, '/l2-3nc0d1100100110ng\\', 'https://drive.google.com/file/d/1BJUzT9yk-NDdwzLUwj6sbMO3D2rpaYVB/view?usp=sharing'),
+(3, 'Cat ?', 'Is there anything interesting?', NULL, 10, '/l3-m30w\\', NULL),
+(4, 'Again ¿?', 'Is there any other way to hide text in photo?', NULL, 10, '/l4-$73gan0gr4f1k\\', NULL),
+(5, 'Who is it?', 'This is Petra Bottova, explore her photo and find out on which social network she stores her photos.', NULL, 15, '/l5-1n574gr4m1k\\', NULL),
+(6, 'Again her', 'Petra is known for giving people tasks, solve them. Enter the password in lowercase letters.', NULL, 15, '/l6-dzt22\\', NULL),
+(7, 'Discord', 'On the Discord server, the user \"MichalPriemerny\" saved a folder, find it.', NULL, 25, '/l7-:d1sc0rd807:\\', 'https://discord.gg/Tvcq7a7RAW'),
+(8, 'Communication', 'We intercepted the communication, can you find the password?', NULL, 20, '/l8-w1r3$h.4rk\\', 'https://drive.google.com/file/d/1dP1j30Gew_LFKymRvFd1DZ2Z86i3XJ-C/view?usp=sharing'),
+(9, 'Linux', 'Someone attempted to hack into an SSH Linux server in a public local network, can you find out when they managed to penetrate it? Password in the form of HH:MM:SS.', NULL, 5, '22:59:50', 'https://drive.google.com/file/d/1aXZC3RLHV935pEZXefIu-QFuM1t_VMj5/view?usp=sharing'),
+(10, 'Have I seen it?', '30xp', NULL, 5, 'enchantmcpass', 'https://drive.google.com/file/d/1q9M-No7RAVioeqB0ClJBMisaQbB4GXN0/view?usp=sharing'),
+(11, 'PHP Apps are great', "Find someone interesting on Michal Priemerny's website.", NULL, 30, '/l11-=)$qlinject10n=)\\', 'http://hackthematurita.sk/sqlinjection/index.php');
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -35,7 +35,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `points`, `role`) VALUES
-(1, 'Admin', 'admin@admin.com', '$2a$08$ipujrpkyUoyNmVjsRN6tzO51kKFXScYhorvf/bnKR8cHsGsM4RWE2', 0, 'admin');
+(1, 'Admin', 'admin@admin.com', '$2a$08$ipujrpkyUoyNmVjsRN6tzO51kKFXScYhorvf/bnKR8cHsGsM4RWE2', 0, 'admin'); 
+-- password is same as the name admin@admin.com - admin@admin.com
 
 CREATE TABLE `user_levels` (
   `userID` int(11) DEFAULT NULL,

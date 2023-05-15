@@ -37,7 +37,9 @@ const Stats = () => {
         if (id >= 1) {
             const fetchAllUsers = async () => {
                 try{
-                    const res = await axios.get(`${config.apiUrl}/user/`)
+                    const res = await axios.get(`${config.apiUrl}/user/`, {
+                      withCredentials: true
+                    });
                     setUsers(res.data)
                 }catch(error) {
                     console.log(error)
@@ -59,12 +61,12 @@ const Stats = () => {
         <div className='domov'>
 
             <div className="statHolder">
-                <h1 style={{textAlign:"center"}}>Štatistika</h1>
-                <h1 style={{textAlign:"center", marginTop:"1rem"}}>Body hráčov</h1>
+                <h1 style={{textAlign:"center"}}>Stats</h1>
+                <h1 style={{textAlign:"center", marginTop:"1rem"}}>Player's points</h1>
                 {users.filter((a => a.points > 0 && a.role !== "admin")).length > 0 ?  users.map(user => (
                         <div className='stats' key={user.id}>
                         <h1>{user.name}</h1>
-                        <h1 className='points'>{user.points}b</h1>
+                        <h1 className='points'>{user.points}p</h1>
                     </div>  
                 )) : null}
                 

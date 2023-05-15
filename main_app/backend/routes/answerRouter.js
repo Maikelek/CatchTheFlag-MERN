@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router(); 
 const answerController = require('../controllers/answerController');
+const {isAuthenticated} = require('../middleware/protector');
 
 
 router.route("/")  
-    .post(answerController.answerChecker) 
+    .post(isAuthenticated, answerController.answerChecker) 
 
 router.route("/done")  
-    .post(answerController.getLevelsAndDone)
+    .post(isAuthenticated, answerController.getLevelsAndDone)
 
 
 module.exports = router;

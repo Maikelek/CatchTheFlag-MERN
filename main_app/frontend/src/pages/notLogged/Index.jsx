@@ -84,16 +84,16 @@ const Index = () => {
         <Header />
         
         <div className='woLogin'>
-            <h1>Nemáš ešte účet?</h1>
-            <p>Zaregistruj sa tu a začni hrať</p>
+            <h1>You still dont have an accout?</h1>
+            <p>Sign up and have fun!</p>
             <Link to="/register">
-                <button className='button-49'>Registrácia</button>
+                <button className='button-49'>Sign up!</button>
             </Link>        
         </div>
 
         <form className='login' onSubmit={handleClick}>
-            <h3 className='typing'>Prihlás sa</h3>
-            <p>A nájdi rôzne chyby vo webových technológiach. Vzhľadom na typ hry odporúčam používať počítač/notebook</p>
+            <h3 className='typing'>Log in</h3>
+            <p>Find various errors in web technologies. Due to the game's type, it is recommended to use a computer/notebook.</p>
 
             <div className='input'>
                 <input 
@@ -102,7 +102,7 @@ const Index = () => {
                     name="email"
                     autoComplete='off'
                     type="text" 
-                    placeholder='Zadaj svoj email: '/>
+                    placeholder='Insert your email: '/>
                 <label><FontAwesomeIcon icon={faUser}/></label>
             </div>
             
@@ -114,16 +114,16 @@ const Index = () => {
                     autoComplete='off'
                     onChange={handleChange} 
                     type="password" 
-                    placeholder="Zadaj svoje heslo: "/>
+                    placeholder="Insert your password: "/>
                 <label><FontAwesomeIcon icon={faLock}/></label>
                 <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye}/></label>
             </div>
             {msg.message ? <label className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label>: null }
-            <button className='signin' type="submit">Prihlas sa</button>
+            <button className='signin' type="submit">Log in</button>
 
             <div className='mobil'>
-                <p>Nemáš účet?</p>
-                <Link to="/register">Zaregistruj sa</Link>
+                <p>No account?</p>
+                <Link to="/register">Sign up here!</Link>
             </div>
 
         </form>

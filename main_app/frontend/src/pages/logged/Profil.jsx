@@ -37,7 +37,9 @@ const Profil = () => {
                 if( authResponse.data.auth ) {
                     setUser(authResponse.data.user);
                     setEmail(authResponse.data.user.email);
-                    const profileResponse = await axios.post(`${config.apiUrl}/profil`, {email});
+                    const profileResponse = await axios.post(`${config.apiUrl}/profil`, {email}, {
+                        withCredentials: true
+                      });
                     if(profileResponse.data[0] && profileResponse.data[0].points) {
                         setPoints(profileResponse.data[0].points);
                     }
@@ -55,7 +57,9 @@ const Profil = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.put(`${config.apiUrl}/profil`, {user});
+            const response = await axios.put(`${config.apiUrl}/profil`, {user}, {
+                withCredentials: true
+              });
             if (response.data) {
                 setMsg(response.data)
             }
@@ -73,13 +77,13 @@ const Profil = () => {
 
         <div className="holder">
             <div className="profil">
-                <h1 className='profilCenter'>PROFIL</h1>   
+                <h1 className='profilCenter'>PROFILE</h1>   
                 
                 <form onSubmit={handleClick}>    
                     <div className="nameRow">
 
                         <div className="inputWithLabelProfil">
-                            <label className="labelForInput" >Meno</label>
+                            <label className="labelForInput" >Nick</label>
                             <input 
                                 className="inputFieldProfil"
                                 type="text"
@@ -110,7 +114,7 @@ const Profil = () => {
                         <div className="nameRow">
 
                         <div className="inputWithLabelProfil">
-                            <label className="labelForInput">Heslo</label>
+                            <label className="labelForInput">Password</label>
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
@@ -122,7 +126,7 @@ const Profil = () => {
                         </div>
 
                         <div className="inputWithLabelProfil">
-                            <label className="labelForInput"> Zopakuj Heslo</label>
+                            <label className="labelForInput"> Repeat password</label>
                             <input 
                                 className="inputFieldProfil"
                                 type="password"
@@ -133,10 +137,10 @@ const Profil = () => {
                                 }}/>
                         </div>
                     </div>
-                    <h2 className='profilCenter'>Počet bodov: <i className='points'>{points}</i></h2>
+                    <h2 className='profilCenter'>Your points: <i className='points'>{points}</i></h2>
                     
                     <div className="centerButton">
-                        <button className='profilButton'>Aktualizuj</button>
+                        <button className='profilButton'>Update yourself</button>
                         {msg.message ? <h5 className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</h5>: null }
                         {msg.messageGreen ? <h5 className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</h5> : null }
                     </div>

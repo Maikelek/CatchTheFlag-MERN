@@ -27,7 +27,7 @@ const deleteLevelAdmin = (req, res) => {
   
     db.query(q,[levelId], (error, data) => {
         if(error) return res.json("Error");
-        return res.json("Level bol zmazaný");
+        return res.json("Level was deleted");
     })
 }; 
 
@@ -43,10 +43,10 @@ const updateLevelAdmin = (req, res) => {
         id: req.body.id
     };
 
-    if (!level.title) return res.json({ message: "Level musí mať názov" });
-    if (level.hint.length <= 0) return res.json({ message: "Level musí mať pomôcku" });
-    if (level.points <= 0) return res.json({ message: "Počet bodov v musí byť viac ako 0" });
-    if (!level.pass) return res.json({ message: "Level musí mať heslo" });
+    if (!level.title) return res.json({ message: "Level must have title" });
+    if (level.hint.length <= 0) return res.json({ message: "Level must have hint" });
+    if (level.points <= 0) return res.json({ message: "Point count must be above 0" });
+    if (!level.pass) return res.json({ message: "Level must have password" });
 
     const q = "UPDATE levels SET `title`= ?, `hint`= ?, `picture`= ?, `points`= ?, `pass`= ?, `link`= ? WHERE `id`= ? ";
 
@@ -55,26 +55,27 @@ const updateLevelAdmin = (req, res) => {
 
         let random = Math.floor(Math.random() * 11)
         if ( random <= 2 ) {
-            return res.json({ messageGreen: "Aktualizoval si level"  });
+            return res.json({ messageGreen: "Level was updated"  });
         } else if ( random <= 4 ) {
-            return res.json({ messageGreen: "Level bol aktualizovananý"  });
+            return res.json({ messageGreen: "You have updated the level"  });
         } else if ( random <= 6 ) {
-            return res.json({ messageGreen: "Údaje levelu boli zmenené"  });
+            return res.json({ messageGreen: "Level data were changed"  });
         } else if ( random <= 8 ) {
-            return res.json({ messageGreen: "Level bol upravený"  });
+            return res.json({ messageGreen: "Successfully updated"  });
         } else {
-            return res.json({ messageGreen: "Level má nové údaje"  });
+            return res.json({ messageGreen: "Level is now up to date"  });
         }
       });
 };
 
 const createLevelAdmin = (req, res) => {  
 
-    if (!req.body.title) return res.json({ message: "Level musí mať názov" });
-    if (req.body.hint.length <= 0)  return res.json({ message: "Level musí mať pomôcku" });
-    if (req.body.points <= 0) return res.json({ message: "Počet bodov v musí byť viac ako 0" });
-    if (!req.body.pass) return res.json({ message: "Level musí mať heslo" });
+    if (!req.body.title) return res.json({ message: "Level must have a title" });
+    if (req.body.hint.length <= 0)  return res.json({ message: "Level must have a hint" });
+    if (req.body.points <= 0) return res.json({ message: "Points must be above 0" });
+    if (!req.body.pass) return res.json({ message: "Level must have a password" });
     
+    const qCheck = "SELECT * FROM levels WHERE title = ?";
     const q = "INSERT INTO levels (`title`, `hint`, `picture`, `points`, `pass`, `link`) VALUES (?)";
   
     const values = [
@@ -86,11 +87,18 @@ const createLevelAdmin = (req, res) => {
       req.body.link
     ];
 
-  
-    db.query(q, [values], (error, data) => {
-      if (error) return res.send(error);
-      return res.json({ messageGreen: "Pridal si level" });
-    });
+    db.query(qCheck, req.body.title, (error, data) => {
+        if (error) return res.send(error);
+
+        if (data.length === 0) {
+            db.query(q, [values], (error, data) => {
+                if (error) return res.send(error);
+                return res.json({ messageGreen: "Level was added" });
+            });
+        }else{
+            return res.json({ message: "Level already exists" });
+        }
+      });
 };
 
 
@@ -132,7 +140,7 @@ const deleteUserAdmin = (req, res) => {
 
     db.query("SELECT email FROM `users` WHERE id = ?", [userId], (error, response) => {
         const email = response[0].email;
-        emailSender(email, 'Zmazanie účtu', `Tvoj účet bol zmazaný a nemôžeš pokračovať v hre!\n\nAdmin a Developer Webu HackTheMaturita`);
+        emailSender(email, 'Removed Account', `Your accout was removed by the admin and you cannot play no more. \n\nAdmin and Developer HackTheMaturita`);
     });
 
     db.query("SELECT * FROM user_levels WHERE `userID` = ?",[userId], (error, response) => {
@@ -141,13 +149,13 @@ const deleteUserAdmin = (req, res) => {
         if (response.length == 0) {
             db.query("DELETE FROM users WHERE id = ?",[userId], (error, data) => {
                 if(error) return res.json("Error");
-                return res.json("Pouzivatel bol zmazaný");
+                return res.json("User was removed");
             });
         }
         else {
             db.query(q,[userId], (error, data) => {
                 if(error) return res.json("Error");
-                return res.json("Pouzivatel bol zmazaný");
+                return res.json("User was removed");
             });
         }
     });
@@ -158,11 +166,11 @@ const createUserAdmin = async (req, res) => {
     const q = "INSERT INTO users (`name`, `email`, `password`, `points`, `role`) VALUES (?)";
     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    if (!req.body.name) return res.json({ message: "Používateľ musí mať meno" });
-    if (req.body.name.length > 25) return res.json({ message: "Meno nesmie mať nad 25 znakov" });
-    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email má nesprávny formát !" })}
-    if (!req.body.email) return res.json({ message: "Používateľ musí mať email" });
-    if (!req.body.password) return res.json({ message: "Používateľ musí mať heslo" });
+    if (!req.body.name) return res.json({ message: "User must have a nick" });
+    if (req.body.name.length > 25) return res.json({ message: "Nick must not exceed 25 characters" });
+    if (!emailRegex.test(req.body.email)) {return res.json({ message:  "Email has an invalid format!" })}
+    if (!req.body.email) return res.json({ message:  "User must have an email" });
+    if (!req.body.password) return res.json({ message: "User must have a password" });
 
     let password = req.body.password;
     let email = req.body.email;
@@ -178,11 +186,11 @@ const createUserAdmin = async (req, res) => {
 
     db.query("SELECT email FROM `users` WHERE email = ?", [email], async (error, results) => {
         if ( results.length >= 1 ) {
-            return res.json({ message: "Tento email je použitý" });
+            return res.json({ message: "This email is used" });
         }
 
         else {
-            emailSender(email, 'Vytvorenie účtu adminom', `Tvoj účet bol vytvorený Adminom!\nAk je táto informácia úplne nová a nesúhlasíš s účtom, kontaktuj ma na tomto Emaily \n\nAdmin a Developer Webu HackTheMaturita`);
+            emailSender(email, 'Admin creation', `Your account was created by admin!\nIf this information is completely new and you do not agree with the account, contact me at this email. \n\nAdmin and Developer Webu HackTheMaturita`);
             db.query(q, [values], (error, data) => {
                 if (error) return res.send(error);
                 return res.json({messageGreen: "Pridal si používateľa"});
@@ -203,10 +211,11 @@ const updateUserAdmin = (req, res) => {
         role: req.body.role
     };
 
-    if (!user.name) return res.json({ message: "Používateľ musí mať meno" });
-    if (req.body.name.length > 25) return res.json({ message: "Meno nesmie mať nad 25 znakov" });
-    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email má nesprávny formát !" })}
-    if (user.points < 0) return res.json({ message: "Používateľ nemôže mať záporné body" });
+    if (!user.name) return res.json({ message: "User must have a name" });
+    if (req.body.name.length > 25) return res.json({ message: "Name cannot be more than 25 characters" });
+    if (!emailRegex.test(req.body.email)) {return res.json({ message: "Email has an invalid format !" })}
+    if (user.points < 0) return res.json({ message: "User cannot have negative points" });    
+
 
     db.query("SELECT `password` FROM users WHERE id = ?", [user.id], async (error, data) => {
         if (error) return res.send(error);
@@ -216,18 +225,19 @@ const updateUserAdmin = (req, res) => {
             const q = "UPDATE users SET `name`= ?, `email`= ?, `points`= ?, `role`= ? WHERE `id`= ? ";
             db.query(q, [user.name, user.email, user.points, user.role, user.id], (error, data) => {
                 if (error) return res.send(error);
-                emailSender(user.email, 'Aktualizácia Adminom', `Tvoj účet bol aktualizovaný Adminom!\nV prípade, že tiento zmeny narúšaju váš chod hry, prosím kontaktujte ma na tomto emaily\n\nAdmin a Developer Webu HackTheMaturita`);
+                emailSender(user.email, 'Updated by Admin', `Your account has been updated by an admin! If these changes affect your gameplay, please contact me at this email.\n\nAdmin and Developer HackTheMaturita`);
                 let random = Math.floor(Math.random() * 11)
+
                 if ( random <= 2 ) {
-                    return res.json({ messageGreen: "Aktualizoval si používateľa"  });
+                    return res.json({ messageGreen: "You have updated the user" });
                 } else if ( random <= 4 ) {
-                    return res.json({ messageGreen: "Používateľ bol aktualizovananý"  });
+                    return res.json({ messageGreen: "User has been updated" });
                 } else if ( random <= 6 ) {
-                    return res.json({ messageGreen: "Údaje používateľa boli zmenené"  });
+                    return res.json({ messageGreen: "User data has been changed" });
                 } else if ( random <= 8 ) {
-                    return res.json({ messageGreen: "Používateľ bol upravený"  });
+                    return res.json({ messageGreen: "User has been modified" });
                 } else {
-                    return res.json({ messageGreen: "Používateľ má nové údaje"  });
+                    return res.json({ messageGreen: "User has new data" });
                 }
             });  
         }
@@ -240,15 +250,15 @@ const updateUserAdmin = (req, res) => {
 
                 let random = Math.floor(Math.random() * 11)
                 if ( random <= 2 ) {
-                    return res.json({ messageGreen: "Aktualizoval si používateľa"  });
+                    return res.json({ messageGreen: "You have updated the user" });
                 } else if ( random <= 4 ) {
-                    return res.json({ messageGreen: "Používateľ bol aktualizovananý"  });
+                    return res.json({ messageGreen: "User has been updated" });
                 } else if ( random <= 6 ) {
-                    return res.json({ messageGreen: "Údaje používateľa boli zmenené"  });
+                    return res.json({ messageGreen: "User data has been changed" });
                 } else if ( random <= 8 ) {
-                    return res.json({ messageGreen: "Používateľ bol upravený"  });
+                    return res.json({ messageGreen: "User has been modified" });
                 } else {
-                    return res.json({ messageGreen: "Používateľ má nové údaje"  });
+                    return res.json({ messageGreen: "User has new data" });
                 }
 
             });  

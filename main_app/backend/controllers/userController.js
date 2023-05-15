@@ -23,7 +23,7 @@ const updateUser = (req, res) => {
   
     db.query(q, [...values,userId], (err, data) => {
       if (err) return res.send(err);
-      return res.json("Používateľ bol aktualizovany");
+      return res.json("User was updated");
     });
 };
 
