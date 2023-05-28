@@ -20,7 +20,27 @@ This project is CTF (catch the flag) game made as dynamic webpage using **M**(my
 | Level  11        | /11-=)$qlinject10n=)\      | SQL injection 1 or 1
 
 
+# Preview
 
+## Index Page
+<img src="visuals_for_github/index.png">
+
+#
+
+## Level Template Page
+<img src="visuals_for_github/level.png">
+
+#
+
+## AdminMenu Level Moderation Page
+<img src="visuals_for_github/adminLevel.png">
+
+#
+
+## Responsive design
+<img src="visuals_for_github/responsive.png">
+
+#
 
 # How to start the application ( DEVELOPMENT VERSION )
 * Open 2 terminals
