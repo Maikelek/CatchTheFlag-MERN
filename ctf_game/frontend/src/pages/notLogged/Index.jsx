@@ -68,7 +68,7 @@ const Index = () => {
           }).then(res => res.json()) 
           .then(response => {
             if (response.message === "ok") {
-              nav("/levely"); 
+              nav("/Levels"); 
             } else {
               setMsg(response)
             }

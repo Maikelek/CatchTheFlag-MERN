@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 
-const Domov = () => {
+const Home = () => {
   return (
 
     <div className='container'>
@@ -30,4 +30,4 @@ const Domov = () => {
   )
 }
 
-export default Domov;
+export default Home;

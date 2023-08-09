@@ -1,13 +1,13 @@
 import {BrowserRouter,Routes,Route,} from "react-router-dom";
 
 import Index from "./pages/notLogged/Index"
-import Domov from "./pages/notLogged/Domov";
+import Home from "./pages/notLogged/Home";
 import Register from "./pages/notLogged/Regpage";
 
 
 
 import Stats from "./pages/logged/Stats";
-import Levely from "./pages/logged/Levely";
+import Levels from "./pages/logged/Levels";
 import Level from "./pages/logged/Level";
 import Profil from "./pages/logged/Profil";
 
@@ -27,21 +27,20 @@ import AdminUserAdd from "./pages/admin/AdminUserAdd";
 import "./App.css";
 
 
-
 function App() {
   return ( 
     <div className="App">
       <BrowserRouter>  
         <Routes>
-          <Route path="*" element={<Domov/>}/>
+          <Route path="*" element={<Home/>}/>
 
           <Route path="/" element={<Index/>}/>
-          <Route path="/domov" element={<Domov/>}/>
+          <Route path="/domov" element={<Home/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/stats" element={<Stats/>}/>
 
         
-          <Route path="/levely" element={<Levely/>}/>
+          <Route path="/Levels" element={<Levels/>}/>
           <Route path="/level/:id" element={<Level/>}/>
           <Route path="/profil" element={<Profil/>}/>
 

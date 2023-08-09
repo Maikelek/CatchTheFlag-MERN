@@ -77,10 +77,10 @@ const Header = () => {
             <span onClick={closeNav} className='closebtn'>&times;</span>
             <div className='overlay-content'>
                 {role === "admin" ? <Link to="/admin">Admin menu</Link> : null }
-                <Link to="/domov" id={activeLink === '/domov' ? 'active' : ''}>Home</Link>
+                <Link to="/Home" id={activeLink === '/Home' ? 'active' : ''}>Home</Link>
                 {id > 0 ?  null : <Link to="/" id={activeLink === '/' ? 'active' : ''}>Log in</Link>}
                 {id > 0 ?  null : <Link to="/register" id={activeLink === '/register' ? 'active' : ''}>Registration</Link>}
-                {id === 0 ?  null : <Link to="/levely" id={activeLink === '/levely' ? 'active' : ''}>Levels</Link>}
+                {id === 0 ?  null : <Link to="/Levels" id={activeLink === '/Levels' ? 'active' : ''}>Levels</Link>}
                 {id === 0 ?  null : <Link to="/stats" id={activeLink === '/stats' ? 'active' : ''}>Stats</Link>}
 	        {id === 0 ?  null : <Link to="/profil" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
                 {id === 0 ?  null : <Link onClick={handleClick}>Log out</Link>}

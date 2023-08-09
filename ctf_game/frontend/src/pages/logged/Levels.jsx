@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import config from '../../config/config';
 
-const Levely = () => {
+const Levels = () => {
   const [id, setID] = useState(0);
   const [levely, setLevely] = useState([]);
   const [done, setDone] = useState([]);
@@ -70,4 +70,4 @@ const Levely = () => {
   );
 };
 
-export default Levely;
+export default Levels;

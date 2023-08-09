@@ -43,8 +43,8 @@ const AdminNav = () => {
             <span className='dropbtn'>Routes</span>
             <div className='dropdown-content'>
               <Link to="/stats">Stats</Link>
-              <Link to="/domov">Home</Link>
-              <Link to="/levely">Levels</Link>
+              <Link to="/Home">Home</Link>
+              <Link to="/Levels">Levels</Link>
               <Link to="/profil">Profil</Link>
             </div>
           </li>
