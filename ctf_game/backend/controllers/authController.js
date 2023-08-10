@@ -13,7 +13,7 @@ const validateUser = async (req, res) => {
     } else {
         db.query("SELECT * FROM `users` WHERE email = ?", [email], async (error, results) => {
             if ( results.length == 0 ) {
-                return res.json({ message: "User does not exist používateľ" });
+                return res.json({ message: "User does not exist" });
             } else {
                 if (await bcrypt.compare(password, results[0].password)) {
                     
