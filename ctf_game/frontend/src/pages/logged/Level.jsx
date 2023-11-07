@@ -6,10 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import config from '../../config/config';
 
-import l3 from '../../images/l3.JPEG';
-import l4 from '../../images/l4.JPEG';
-import petrabottova2001 from '../../images/petrabottova2001.png';
-
 
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -100,7 +96,6 @@ const Level = () => {
                   
                   <div className='pomocka'>
                       <p>{level.hint ? <label>Hint: {level.hint} {level.link ? <a href={level.link} target="_blank" rel="noopener noreferrer" id='odkaz'>LINK</a> : null}</label> : null}</p>
-                      {level.id === 1 ? <div dangerouslySetInnerHTML={{__html: "<!-- heslo je /l1-z4c1470k\\ -->"}}/>: null }
                   </div>
                   <form onSubmit={handleClick}>
                     <div className='levelInput'>

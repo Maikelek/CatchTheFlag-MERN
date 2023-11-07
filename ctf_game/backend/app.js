@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use(cors({
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000"], //has to be changed in production
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -33,7 +33,7 @@ app.use(
 
 /* Backend main page */
 app.get("/", (req, res) => { 
-  return res.json("Backend server Hack The Maturita");
+  return res.json("Backend server");
 
 })
 
@@ -61,7 +61,7 @@ app.use('/admin', adminRouter);
 
 
 
-/*Port aplikácie*/ 
+/* Application port*/ 
 app.listen(process.env.PORT, () =>{      
     console.log("Backend is on port " + process.env.PORT);
 })

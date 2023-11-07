@@ -32,7 +32,7 @@ const validateUser = async (req, res) => {
                     } else if (random <= 6) {
                         return res.json({ message: "Invalid password!" });
                     } else if (random <= 8) {
-                        return res.json({ message: "If you forgot your password, contact the admin!" });
+                        return res.json({ message: "Wrong password, try again!" });
                     } else {
                         return res.json({ message: "Invalid password" });
                     }

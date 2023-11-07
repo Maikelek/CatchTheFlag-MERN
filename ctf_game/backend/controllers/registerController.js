@@ -31,7 +31,7 @@ const userRegister = (req, res) => {
            return console.log(error);
         } 
         if ( results.length > 0 ) {
-            return res.status(401).json({ message: "Tento email je už použitý !" });
+            return res.status(401).json({ message: "Email is already used !" });
         }
 
 
