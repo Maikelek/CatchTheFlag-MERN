@@ -111,8 +111,8 @@ const LevelController = () => {
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
-                <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
@@ -121,8 +121,8 @@ const LevelController = () => {
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
-                <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
@@ -132,8 +132,8 @@ const LevelController = () => {
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
-                <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
@@ -143,8 +143,8 @@ const LevelController = () => {
           <div className='update' key={level.id}>
             <h1>{level.title}</h1>
             <div>
-            <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
-            <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+              <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
+              <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
             </div> 
         </div>  
       )) : null}
