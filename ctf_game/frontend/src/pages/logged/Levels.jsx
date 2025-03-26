@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../context/UserContext';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import config from '../../config/config';
 
 const Levels = () => {
-  const { user } = useUser();
+  const [id, setID] = useState(0);
   const [levely, setLevely] = useState([]);
   const [done, setDone] = useState([]);
+  const nav = useNavigate();
 
   useEffect(() => {
-    if (user?.id) {
+    fetch(`${config.apiUrl}/auth`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log(response);
+        if (response.auth === true) {
+          setID(response.user.id);
+          console.log(response.user);
+        } else {
+          nav('/');
+        }
+      });
+  }, [nav]);
+
+  useEffect(() => {
+    if (id >= 1) {
       const fetchAllLevely = async () => {
         try {
-          const response = await axios.post(
-            `${config.apiUrl}/answer/done`,
-            { id: user.id },
-            { withCredentials: true }
-          );
+          const response = await axios.post(`${config.apiUrl}/answer/done`, { id }, {
+            withCredentials: true
+          });
           setDone(response.data.done);
           setLevely(response.data.levels);
         } catch (error) {
@@ -28,7 +46,7 @@ const Levels = () => {
 
       fetchAllLevely();
     }
-  }, [user?.id]);
+  }, [id]);
 
   return (
     <div className='container'>
@@ -37,14 +55,7 @@ const Levels = () => {
         <div className='levely'>
           <ul>
             {levely.map(level => (
-              <div
-                className={
-                  done.findIndex(doneLevel => doneLevel.levelID === level.id) >= 0
-                    ? 'doneHranica'
-                    : 'levelHranica'
-                }
-                key={level.id}
-              >
+              <div className={done.findIndex(doneLevel => doneLevel.levelID === level.id) >= 0 ? 'doneHranica' : 'levelHranica'} key={level.id}>
                 <li>
                   <Link to={`/level/${level.id}`} className='link' title={level.title}>
                     {level.title}

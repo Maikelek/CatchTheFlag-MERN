@@ -1,7 +1,7 @@
 import axios from 'axios'; 
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import React from 'react';
+import { useState, useEffect} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import AdminNav from '../components/AdminNav';
 import config from '../../config/config';
@@ -9,11 +9,32 @@ import config from '../../config/config';
 import { faUser, faLock, faEnvelope, faCoins, faExclamationCircle, faThumbsUp, faUserAstronaut, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
+
 const AdminUserID = () => {  
+
   const nav = useNavigate(); 
-  const { user: loggedUser } = useUser();
-  const location = useLocation(); 
-  const id = location.pathname.split("/")[4];
+  const [logged, setLogged] = useState(0);
+
+  useEffect(() => {
+    axios.get(`${config.apiUrl}/auth`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => res.data)
+      .then(response => {
+        if (response.auth !== true || response.user.role !== "admin" ) {
+          nav("/");
+        } else {
+          setLogged(response.user.id);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [nav]);
+  
 
   const [user, setUser] = useState({  
     id: '',
@@ -22,32 +43,33 @@ const AdminUserID = () => {
     password: '',
     points: '',
     role: ''
-  });
+  })
 
   const [msg, setMsg] = useState({});
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    if (!loggedUser || loggedUser.role !== "admin") {
-      nav("/");
-    } else {
-      const fetchUserData = async () => {
-        try {
-          const res = await axios.get(`${config.apiUrl}/admin/user/${id}`, {
-            withCredentials: true
-          });
-          setUser(res.data[0]);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchUserData();
-    }
-  }, [loggedUser, id, nav]);
+  const location = useLocation(); 
+  const id = location.pathname.split("/")[4];
 
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
   };
+
+  useEffect( () => {       
+    if (logged >= 1) {          
+      const fetchAllData = async () => {
+          try{
+              const res = await axios.get(`${config.apiUrl}/admin/user/${id}`, {
+                withCredentials: true
+              })
+              setUser(res.data[0]);
+          }catch(error) {
+              console.log(error);
+          }
+      }
+      fetchAllData()
+    }
+  },[id, logged])
 
 
   const handleClick = async (e) => { 

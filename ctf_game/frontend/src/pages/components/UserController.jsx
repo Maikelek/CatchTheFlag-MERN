@@ -113,8 +113,8 @@ const UserController = () => {
             <div className='update' key={user.id}>
                 <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
-                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                   <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                 </div> 
             </div>  
           )) : null}
@@ -123,8 +123,8 @@ const UserController = () => {
             <div className='update' key={user.id}>
                 <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
-                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                   <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
                 </div> 
             </div>  
           )) : null}
@@ -134,8 +134,8 @@ const UserController = () => {
             <div className='update' key={user.id}>
             <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
-              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
               <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
             </div> 
         </div>  
       )) : null}
@@ -144,8 +144,8 @@ const UserController = () => {
           <div className='update' key={user.id}>
             <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
-              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
               <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
             </div> 
         </div>  
       )) : null}

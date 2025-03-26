@@ -1092,8 +1092,8 @@ height: 150px;
 
 .zmaz {
   padding: 0.7rem;
-  margin-right: 0.7rem;
-  
+  margin-right: 1rem;
+
   background-color: #AB2E3C;
   color: white;
 
@@ -1104,8 +1104,7 @@ height: 150px;
 
 .uprav{
   padding: 0.7rem;
-  margin-right: 1rem;
-  
+
   background-color: #0D6EFD;
   color: white;
 
