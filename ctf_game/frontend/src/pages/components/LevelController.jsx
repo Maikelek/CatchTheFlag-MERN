@@ -11,12 +11,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LevelController = () => {
   
-  let [levely, setLevely] = useState ( [] )
+  let [levels, setLevels] = useState ( [] )
   let [sorted, setSorted] = useState ( 0 )
   const [logged, setLogged] = useState ( 0 )
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredLevely = levely.filter((level) => {
+  const filteredLevels = levels.filter((level) => {
     return level.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
@@ -44,23 +44,23 @@ const LevelController = () => {
 
   useEffect( () => {                
     if (logged >= 1) { 
-      const fetchAllLevely = async () => {
+      const fetchAllLevels = async () => {
           try{
               const res = await axios.get(`${config.apiUrl}/admin/level`, {
                 withCredentials: true
               })
-              setLevely(res.data)
+              setLevels(res.data)
           }catch(error) {
               console.log(error)
           }
       }
-      fetchAllLevely()
+      fetchAllLevels()
     }
   },[logged])
 
 
   const handleDelete = async (id) => {         
-    const confirmed = window.confirm("Naozaj chceš zmazať tento level?");
+    const confirmed = window.confirm("Are you sure?");
     if (confirmed) {
       try {
         await axios.delete(`${config.apiUrl}/admin/level/${id}`, {
@@ -101,54 +101,50 @@ const LevelController = () => {
             <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
           </form>
           <div>
-            <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
-            <button className='uprav' onClick={sortDown}><FontAwesomeIcon icon={faArrowTrendUp} /></button>
+            <button className='remove' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
+            <button className='edit' onClick={sortDown}><FontAwesomeIcon icon={faArrowTrendUp} /></button>
           </div>
         </div>
-
-        
-        {sorted === 0 ? levely.map(level => (
+     
+        {sorted === 0 ? levels.map(level => (
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${level.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='remove' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
 
-        {sorted === 1 ? levely.sort((a, b) => (a.points < b.points) ? 1: -1).map(level => (
+        {sorted === 1 ? levels.sort((a, b) => (a.points < b.points) ? 1: -1).map(level => (
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${level.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='remove' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
 
-
-        {sorted === 2 ? levely.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(level => (
+        {sorted === 2 ? levels.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(level => (
             <div className='update' key={level.id}>
                 <h1>{level.title}</h1>
                 <div>
-                  <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                  <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${level.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='remove' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
         )) : null}
 
-
-      {sorted === 3 ? filteredLevely.map(level => (
+      {sorted === 3 ? filteredLevels.map(level => (
           <div className='update' key={level.id}>
             <h1>{level.title}</h1>
             <div>
-              <Link to={`${level.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-              <button className='zmaz' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${level.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+              <button className='remove' onClick={() => handleDelete(level.id)}><FontAwesomeIcon icon={faTrash}/></button>
             </div> 
         </div>  
       )) : null}
-
 
           </div>
       </div>

@@ -2,14 +2,11 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
 import Header from '../components/Header';
 import config from '../../config/config';
 
 import { faEye, faUser, faLock, faEyeSlash, faEnvelope, faLockOpen, faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-
 
 
 const Regpage = () => {  
@@ -26,7 +23,7 @@ const Regpage = () => {
         }).then(res => res.json()) 
         .then(response => {
           if (response.auth === true) {
-            nav("/profil"); 
+            nav("/profile"); 
           }
         })
         
@@ -35,31 +32,31 @@ const Regpage = () => {
   const [eye1, setEye1] = useState(faEye);
   const [eye2, setEye2] = useState(faEye);
 
-  function hesloToggle() {
-    let hesloInput = document.getElementById("hesloInput1");
+  function passToggle() {
+    let passInput1 = document.getElementById("passInput1");
   
-    if (hesloInput.type === "password") {
-      hesloInput.type = "type"
+    if (passInput1.type === "password") {
+      passInput1.type = "type"
       setEye1(faEyeSlash);
     }
   
     else {
-      hesloInput.type = "password";
+      passInput1.type = "password";
       setEye1(faEye);
     }
   
   }
   
-  function hesloToggle2() {
-    let hesloInput2 = document.getElementById("hesloInput2");
+  function passToggle2() {
+    let passInput2 = document.getElementById("passInput2");
   
-    if (hesloInput2.type === "password") {
-      hesloInput2.type = "type";
+    if (passInput2.type === "password") {
+      passInput2.type = "type";
       setEye2(faEyeSlash);
     }
   
     else {
-      hesloInput2.type = "password";
+      passInput2.type = "password";
       setEye2(faEye);
     }
   }
@@ -69,7 +66,7 @@ const Regpage = () => {
     name: "",
     email: "",
     password: "",
-    passowrdRep: ""
+    passwordRep: ""
   });
 
   const [msg, setMsg] = useState({});
@@ -90,7 +87,7 @@ const Regpage = () => {
       }
       }).then(res => res.json()) 
       .then(response => {
-        if (response.message === "Si zaregistrovaný") {
+        if (response.message === "You are registered.") {
           setMsg(response);
         } else {
           setMsg(response);
@@ -134,33 +131,33 @@ const Regpage = () => {
 
           <div className='inputReg '>
             <input 
-              id='hesloInput1' 
+              id='passInput1' 
               className='inputBlueFocus' 
               name="password" 
               type="password" 
               onChange={handleChange} 
               placeholder="Insert your password: "/>
             <label><FontAwesomeIcon icon={faLock}/></label>
-            <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye1}/></label>
+            <label id='eye' onClick={passToggle}><FontAwesomeIcon icon={eye1}/></label>
           </div>
 
           <div className='inputReg'>
             <input 
-              id='hesloInput2' 
+              id='passInput2' 
               className='inputBlueFocus' 
               name="passwordRep" 
               type="password" 
               onChange={handleChange} 
               placeholder="Repeat your password: "/>
             <label><FontAwesomeIcon icon={faLockOpen}/></label> 
-            <label id='eye2' onClick={hesloToggle2}><FontAwesomeIcon icon={eye2}/></label>
+            <label id='eye2' onClick={passToggle2}><FontAwesomeIcon icon={eye2}/></label>
           </div>
 
           {msg.message ? <label className="loginDangerLabel"><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label> : null }
           {msg.messageGreen ? <label className="loginSucessLabel"><FontAwesomeIcon icon={faThumbsUp}/> {msg.messageGreen}</label> : null }
           <button className='regButton' type="submit">Sign up</button>
 
-          <div className='mobilReg'>
+          <div className='mobileReg'>
               <p>Do you have an accout?</p>
               <Link to='/'>Log in here!</Link>
           </div>

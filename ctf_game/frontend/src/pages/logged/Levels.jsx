@@ -7,12 +7,12 @@ import config from '../../config/config';
 
 const Levels = () => {
   const { user } = useUser();
-  const [levely, setLevely] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [done, setDone] = useState([]);
 
   useEffect(() => {
     if (user?.id) {
-      const fetchAllLevely = async () => {
+      const fetchAllLevels = async () => {
         try {
           const response = await axios.post(
             `${config.apiUrl}/answer/done`,
@@ -20,13 +20,12 @@ const Levels = () => {
             { withCredentials: true }
           );
           setDone(response.data.done);
-          setLevely(response.data.levels);
+          setLevels(response.data.levels);
         } catch (error) {
           console.log(error);
         }
       };
-
-      fetchAllLevely();
+      fetchAllLevels();
     }
   }, [user?.id]);
 
@@ -34,14 +33,14 @@ const Levels = () => {
     <div className='container'>
       <Header />
       <div className='holder'>
-        <div className='levely'>
+        <div className='levels'>
           <ul>
-            {levely.map(level => (
+            {levels.map(level => (
               <div
                 className={
                   done.findIndex(doneLevel => doneLevel.levelID === level.id) >= 0
-                    ? 'doneHranica'
-                    : 'levelHranica'
+                    ? 'doneBorder'
+                    : 'levelBorder'
                 }
                 key={level.id}
               >

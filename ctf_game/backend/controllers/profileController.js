@@ -35,18 +35,14 @@ const editUser =  async (req, res)  => {
       db.query(q, [name,email,id], (err, data) => {
         if (err) return res.send(err);
 
-        let random = Math.floor(Math.random() * 11)
         emailSender(email, 'You have updated your profile', `Your profile was updated ${name}!\n\nAdmin and Developer of HackTheMaturita`);
-        if ( random <= 2 ) {
-            return res.json({ messageGreen: "These changes will take effect after you log in."  });
-        } else if ( random <= 4 ) {
-            return res.json({ messageGreen: "Your profile will be updated after you log out."  });
-        } else if ( random <= 6 ) {
-            return res.json({ messageGreen: "The profile updates after logging out."  });
-        } else if ( random <= 8 ) {
-            return res.json({ messageGreen: "Log out to see the current changes."  });
-        } else {
-            return res.json({ messageGreen: "You will see the changes after logging out."  });
+        let random = Math.floor(Math.random() * 15)
+        if ( random <= 5 ) {
+            return res.json({ messageGreen: "Changes will take effect after logging in"  });
+        }  else if ( random <= 10 ) {
+            return res.json({ messageGreen: "You will see changes after logging out"  });
+        } else if ( random <= 15 ) {
+            return res.json({ messageGreen: "Log out to see the current changes"  });
         }
       });
     } 
@@ -64,17 +60,13 @@ const editUser =  async (req, res)  => {
       db.query(q, [name,email,hashedPassword,id], (err, data) => {
         if (err) return res.send(err);
 
-        let random = Math.floor(Math.random() * 11)
-        if ( random <= 2 ) {
+        let random = Math.floor(Math.random() * 15)
+        if ( random <= 5 ) {
             return res.json({ messageGreen: "Changes will take effect after logging in"  });
-        } else if ( random <= 4 ) {
-            return res.json({ messageGreen: "Your profile will be updated after logging out"  });
-        } else if ( random <= 6 ) {
+        }  else if ( random <= 10 ) {
             return res.json({ messageGreen: "You will see changes after logging out"  });
-        } else if ( random <= 8 ) {
+        } else if ( random <= 15 ) {
             return res.json({ messageGreen: "Log out to see the current changes"  });
-        } else {
-            return res.json({ messageGreen: "Profile will be updated after logging out"  });
         }
       });
     }

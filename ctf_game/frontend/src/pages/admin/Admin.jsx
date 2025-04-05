@@ -10,13 +10,13 @@ const Admin = () => {
   const nav = useNavigate(); 
   const { user } = useUser();
 
-  const [levely, setLevely] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [users, setUsers] = useState([]);
 
   const adminUsers = users.filter(user => user.role === 'admin');
-  const playerUsers = users.filter(user => user.role === 'hrac');
+  const playerUsers = users.filter(user => user.role === 'player');
 
-  const totalPoints = levely.reduce((sum, currentValue) => {
+  const totalPoints = levels.reduce((sum, currentValue) => {
     return sum + currentValue.points;
   }, 0);
 
@@ -36,7 +36,7 @@ const Admin = () => {
           const userRes = await axios.get(`${config.apiUrl}/admin/user`, {
             withCredentials: true,
           });
-          setLevely(levelRes.data);
+          setLevels(levelRes.data);
           setUsers(userRes.data);
         } catch (error) {
           console.log(error);
@@ -59,7 +59,7 @@ const Admin = () => {
           </div>
 
           <div className="updateSmall">
-            <h1>Count of levels: <i className='info'>{levely.length}</i></h1>
+            <h1>Count of levels: <i className='info'>{levels.length}</i></h1>
           </div>
 
           <div className="updateSmall">

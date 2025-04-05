@@ -14,7 +14,7 @@ const Index = () => {
 
   useEffect(() => {
     if (user) {
-      nav("/profil");
+      nav("/profile");
     }
   }, [user, nav]);
 
@@ -25,13 +25,13 @@ const Index = () => {
     password: "",
   });
 
-  const hesloToggle = () => {
-    let hesloInput = document.getElementById("hesloInput");
-    if (hesloInput.type === "password") {
-      hesloInput.type = "text";
+  const passToggle = () => {
+    let passInput = document.getElementById("passInput");
+    if (passInput.type === "password") {
+      passInput.type = "text";
       setEye(faEyeSlash);
     } else {
-      hesloInput.type = "password";
+      passInput.type = "password";
       setEye(faEye);
     }
   };
@@ -86,18 +86,18 @@ const Index = () => {
         <div className='input'>
           <input 
             className='inputBlueFocus' 
-            id="hesloInput" 
+            id="passInput" 
             name="password" 
             autoComplete='off'
             onChange={handleChange} 
             type="password" 
             placeholder="Insert your password: "/>
           <label><FontAwesomeIcon icon={faLock}/></label>
-          <label id='eye' onClick={hesloToggle}><FontAwesomeIcon icon={eye}/></label>
+          <label id='eye' onClick={passToggle}><FontAwesomeIcon icon={eye}/></label>
         </div>
         {msg.message ? <label className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label>: null }
         <button className='signin' type="submit">Log in</button>
-        <div className='mobil'>
+        <div className='mobile'>
           <p>No account?</p>
           <Link to="/register">Sign up here!</Link>
         </div>

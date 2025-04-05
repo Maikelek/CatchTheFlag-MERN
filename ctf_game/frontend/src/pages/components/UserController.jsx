@@ -8,7 +8,6 @@ import config from '../../config/config';
 import { faArrowTrendDown, faArrowTrendUp, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const UserController = () => {
   
     let [users, setUsers] = useState ( [] );
@@ -42,7 +41,6 @@ const UserController = () => {
         });
     }, [nav]);
 
-
     useEffect( () => {  
       if (logged >= 1 ) {               
         const fetchAllUsers = async () => {
@@ -59,9 +57,8 @@ const UserController = () => {
       }
     },[logged])
 
-
     const handleDelete = async (id) => {         
-      const confirmed = window.confirm("Naozaj chceš zmazať tohto používateľa?");
+      const confirmed = window.confirm("Are you sure?");
       if (confirmed) {
         try {
           await axios.delete(`${config.apiUrl}/admin/user/${id}`, {
@@ -90,7 +87,6 @@ const UserController = () => {
     }
   }, [searchTerm]);
 
-
   return (
 
     <div> 
@@ -103,18 +99,17 @@ const UserController = () => {
           <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
           </form>
           <div>
-            <button className='zmaz' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
-            <button className='uprav' onClick={sortDown}><FontAwesomeIcon icon={faArrowTrendUp} /></button>
+            <button className='remove' onClick={sortUp}><FontAwesomeIcon icon={faArrowTrendDown} /></button>
+            <button className='edit' onClick={sortDown}><FontAwesomeIcon icon={faArrowTrendUp} /></button>
           </div>
         </div>
-
         
         {sorted === 0 ? users.map(user => (
             <div className='update' key={user.id}>
                 <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
-                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                  <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${user.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='remove' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
           )) : null}
@@ -123,19 +118,18 @@ const UserController = () => {
             <div className='update' key={user.id}>
                 <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
                 <div>
-                  <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-                  <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+                  <Link to={`${user.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+                  <button className='remove' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
                 </div> 
             </div>  
           )) : null}
-
 
         {sorted === 2 ? users.sort((a, b) => (a.points < b.points) ? 1: -1).reverse().map(user => (
             <div className='update' key={user.id}>
             <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
-              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-              <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${user.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+              <button className='remove' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
             </div> 
         </div>  
       )) : null}
@@ -144,8 +138,8 @@ const UserController = () => {
           <div className='update' key={user.id}>
             <h1>{user.name} {user.role === "admin" ? <i className='info'>admin</i> : null}</h1>
             <div>
-              <Link to={`${user.id}`}><button className='uprav'><FontAwesomeIcon icon={faEdit}/></button></Link>
-              <button className='zmaz' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
+              <Link to={`${user.id}`}><button className='edit'><FontAwesomeIcon icon={faEdit}/></button></Link>
+              <button className='remove' onClick={() => handleDelete(user.id)}><FontAwesomeIcon icon={faTrash}/></button>
             </div> 
         </div>  
       )) : null}

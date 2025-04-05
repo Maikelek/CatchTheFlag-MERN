@@ -68,7 +68,7 @@ const Level = () => {
             <h1>{level.title}</h1>
             <h5>Worth {level.points} points</h5>
 
-            <div className='pomocka'>
+            <div className='hint'>
               <p>
                 {level.hint ? (
                   <label>
@@ -78,7 +78,7 @@ const Level = () => {
                         href={level.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        id='odkaz'
+                        id='link'
                       >
                         LINK
                       </a>

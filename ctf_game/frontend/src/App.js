@@ -10,7 +10,7 @@ import Register from "./pages/notLogged/Regpage";
 import Stats from "./pages/logged/Stats";
 import Levels from "./pages/logged/Levels";
 import Level from "./pages/logged/Level";
-import Profil from "./pages/logged/Profil";
+import Profile from "./pages/logged/Profile";
 
 import Admin from "./pages/admin/Admin";
 import AdminLevelUpdate from "./pages/admin/AdminLevelUpdate";
@@ -42,7 +42,7 @@ function App() {
                 <Route path="/stats" element={<ProtectedRoute><Stats /></ProtectedRoute>} />
                 <Route path="/levels" element={<ProtectedRoute><Levels /></ProtectedRoute>} />
                 <Route path="/level/:id" element={<ProtectedRoute><Level /></ProtectedRoute>} />
-                <Route path="/profil" element={<ProtectedRoute><Profil /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
                 <Route path="/admin" element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
                 <Route path="/admin/level/update" element={<ProtectedRoute adminOnly><AdminLevelUpdate /></ProtectedRoute>} />

@@ -6,7 +6,7 @@ import config from '../../config/config';
 import { faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Profil = () => {
+const Profile = () => {
     const { user, setUser } = useUser();
     const [msg, setMsg] = useState({});
     const [points, setPoints] = useState(user?.points || 0);
@@ -16,7 +16,7 @@ const Profil = () => {
 
         try {
             const response = await axios.put(
-                `${config.apiUrl}/profil`,
+                `${config.apiUrl}/profile`,
                 { user },
                 { withCredentials: true }
             );
@@ -37,15 +37,15 @@ const Profil = () => {
             <Header />
 
             <div className="holder">
-                <div className="profil">
-                    <h1 className='profilCenter'>PROFILE</h1>
+                <div className="profile">
+                    <h1 className='profileCenter'>PROFILE</h1>
 
                     <form onSubmit={handleClick}>
                         <div className="nameRow">
-                            <div className="inputWithLabelProfil">
+                            <div className="inputWithLabelProfile">
                                 <label className="labelForInput">Nick</label>
                                 <input
-                                    className="inputFieldProfil"
+                                    className="inputFieldProfile"
                                     type="text"
                                     value={user?.name || ""}
                                     autoComplete="off"
@@ -54,10 +54,10 @@ const Profil = () => {
                                 />
                             </div>
 
-                            <div className="inputWithLabelProfil">
+                            <div className="inputWithLabelProfile">
                                 <label className="labelForInput">Email</label>
                                 <input
-                                    className="inputFieldProfil"
+                                    className="inputFieldProfile"
                                     type="text"
                                     value={user?.email || ""}
                                     autoComplete="off"
@@ -68,10 +68,10 @@ const Profil = () => {
                         </div>
 
                         <div className="nameRow">
-                            <div className="inputWithLabelProfil">
+                            <div className="inputWithLabelProfile">
                                 <label className="labelForInput">Password</label>
                                 <input
-                                    className="inputFieldProfil"
+                                    className="inputFieldProfile"
                                     type="password"
                                     autoComplete="off"
                                     name='pass'
@@ -79,10 +79,10 @@ const Profil = () => {
                                 />
                             </div>
 
-                            <div className="inputWithLabelProfil">
+                            <div className="inputWithLabelProfile">
                                 <label className="labelForInput">Repeat Password</label>
                                 <input
-                                    className="inputFieldProfil"
+                                    className="inputFieldProfile"
                                     type="password"
                                     autoComplete="off"
                                     name='passRep'
@@ -91,10 +91,10 @@ const Profil = () => {
                             </div>
                         </div>
 
-                        <h2 className='profilCenter'>Your points: <i className='points'>{points}</i></h2>
+                        <h2 className='profileCenter'>Your points: <i className='points'>{points}</i></h2>
 
                         <div className="centerButton">
-                            <button className='profilButton'>Update yourself</button>
+                            <button className='profileButton'>Update yourself</button>
                             {msg.message ? (
                                 <h5 className='loginDangerLabel'>
                                     <FontAwesomeIcon icon={faExclamationCircle} /> {msg.message}
@@ -113,4 +113,4 @@ const Profil = () => {
     );
 };
 
-export default Profil;
+export default Profile;

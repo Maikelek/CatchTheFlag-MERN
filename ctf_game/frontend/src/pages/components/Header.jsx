@@ -61,7 +61,7 @@ const Header = () => {
                     {!user && <Link to="/register" id={activeLink === '/register' ? 'active' : ''}>Registration</Link>}
                     {user && <Link to="/Levels" id={activeLink === '/Levels' ? 'active' : ''}>Levels</Link>}
                     {user && <Link to="/stats" id={activeLink === '/stats' ? 'active' : ''}>Stats</Link>}
-                    {user && <Link to="/profil" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
+                    {user && <Link to="/profile" id={activeLink === '/profil' ? 'active' : ''}>Profil</Link>}
                     {user && <Link onClick={handleLogout}>Log out</Link>}
                 </div>
             </div>

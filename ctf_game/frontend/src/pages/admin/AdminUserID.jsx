@@ -49,7 +49,6 @@ const AdminUserID = () => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
   };
 
-
   const handleClick = async (e) => { 
     e.preventDefault();
 
@@ -159,8 +158,8 @@ const AdminUserID = () => {
                 type='radio'  
                 onChange={handleChange} 
                 name='role'
-                value='hrac'
-                checked={user.role === "hrac" ? true : false}
+                value='player'
+                checked={user.role === "player" ? true : false}
                 />
             </div>
 

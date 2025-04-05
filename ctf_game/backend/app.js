@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-
 require("dotenv").config();
 
 const app = express()
@@ -28,7 +27,7 @@ app.use(
     cookie: {
       expires: 86400000 // 1 day
     }
-})
+  })
 );
 
 /* Backend main page */
@@ -53,15 +52,13 @@ app.use('/auth', authRouter);
 const answerRouter = require('./routes/answerRouter');
 app.use('/answer', answerRouter);
 
-const profilRouter = require('./routes/profilRouter');
-app.use('/profil', profilRouter);
+const profileRouter = require('./routes/profileRouter');
+app.use('/profile', profileRouter);
 
 const adminRouter = require('./routes/adminRouter');
 app.use('/admin', adminRouter);
 
-
-
 /* Application port*/ 
-app.listen(process.env.PORT, () =>{      
+app.listen(process.env.PORT, () => {      
     console.log("Backend is on port " + process.env.PORT);
 })

@@ -25,7 +25,7 @@ const AdminUserAdd = () => {
     email: "",
     password: "",
     points: 0,
-    role: "hrac"
+    role: "player"
   });
 
   const [error, setError] = useState(false);
@@ -141,8 +141,8 @@ const AdminUserAdd = () => {
               type='radio'  
               onChange={handleChange} 
               name='role'
-              value='hrac'
-              checked={user.role === "hrac"}
+              value='player'
+              checked={user.role === "player"}
             />
           </div>
 

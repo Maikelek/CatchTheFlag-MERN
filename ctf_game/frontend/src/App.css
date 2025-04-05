@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-/* Odstránenie marginu a paddingu */
+/* Basic settings for web */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +9,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Pozadie a font */
+/* Background and font */
 body {
   background-image: url(./images/hacking.png);
   background-repeat: no-repeat;
@@ -19,7 +19,7 @@ body {
   overflow: hidden;
 }
 
-/* Kontainer blok */
+/* Container block */
 .container {
   display: flex;
   height: 100%;
@@ -27,7 +27,7 @@ body {
   overflow: auto;
 }
 
-/* Hlavička */
+/* Header */
 .header {
   position: absolute;
   top: 8px;
@@ -49,20 +49,19 @@ body {
   width: 8rem;
 }
 
-/* Veľkosť tlačídka otváracieho menu */
+/* Hamburger menu size*/
 .openButton > span {
   font-size: 3rem;
   cursor: pointer;
   transition: 1s;
 }
 
-/* Tlačídko otváracieho menu  */
+/* Hamburger menu on hover  */
 .openButton > span:hover {
   color: rgb(104, 207, 233)
 }
 
-
-/* Vyskakovacie menu */
+/* Slide menu */
 .overlay {
   display: flex;
   flex-direction: column;
@@ -85,7 +84,7 @@ body {
   transition: 0.5s;
 }
 
-/* Obsah vyskakovácieho menu */
+/* Content of slide menu */
 .overlay-content {
   top: 25%;
   width: 100%;
@@ -93,7 +92,7 @@ body {
   margin-top: 30px;
 }
 
-/* Linky vyskakovacieho menu */
+/* Links of slide menu */
 .overlay a {
   padding: 8px;
   text-decoration: none;
@@ -103,13 +102,13 @@ body {
   transition: 0.3s;
 }
 
-/* Linky vyskakovacieho menu pri hoveri a fokuse */
+/* Links of slide menu at hover and focus*/
 .overlay a:hover, .overlay a:focus {
   color: #f1f1f1;
   transform: scale(1.1);
 }
 
-/* Zatváracie tlačídko v otváracom menu */
+/* Close button of slide menu */
 .overlay .closebtn {
   position: absolute;
   cursor: pointer;
@@ -119,14 +118,14 @@ body {
 }
 
 
-/* Logo z: https://www.flaticon.com/free-icon/hacker_7570776?term=hacker&page=1&position=73&page=1&position=73&related_id=7570776&origin=search */
+/* Logo from: https://www.flaticon.com/free-icon/hacker_7570776?term=hacker&page=1&position=73&page=1&position=73&related_id=7570776&origin=search */
 .header > img {
   margin-top: -10px;
   margin-left: 10px;
   width: 8rem;
 }
 
-/* Ľavá časť bez loginu s registráciou */
+/* Left side of index page without login */
 .woLogin {
   position: absolute;
   bottom: 1rem;
@@ -142,7 +141,7 @@ body {
   color: white;
 }
 
-/* Button číslo 49 z https://getcssscan.com/css-buttons-examples */
+/* Button 49 from https://getcssscan.com/css-buttons-examples */
 .button-49,
 .button-49:after {
   width: 150px;
@@ -235,7 +234,7 @@ body {
   }
 }
 
-/* Pravá časť obrazovky - login */
+/* Right side of index - login */
 .login {
   display: flex;
   max-width: 400px;
@@ -253,7 +252,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Input div pre input */
+/* Div for input */
 .input {
   display: flex;
   flex-direction: column;
@@ -261,14 +260,12 @@ body {
   width: 100%;
 }
 
-/* Odsadenie tagu p v div login */
 .login > p {
   padding-top: 2rem;
   padding-bottom: 1rem;
   margin-bottom: 0.5rem;
 }
 
-/* Výzor inputového poľa v div input */
 .input > input {
   background: transparent;
   color: white;
@@ -279,14 +276,15 @@ body {
   font-size: 0.9rem;
 }
 
-/* Ikonky vedľa inputu */
+/* Icons next to input */
 .input > label {
   position: absolute;
-  top: 7;
+  top: 1;
+  margin-top: 4px;
   font-size: 1rem;
 }
 
-/* Ikonka oka pri hesle */
+/* Icon of an eye next to password */
 .input > #eye {
   position: absolute;
   right: 5rem;
@@ -294,15 +292,11 @@ body {
   cursor: pointer;
 }
 
-/* Input pole pri fokuse */
 .inputBlueFocus:focus {
   border-bottom: 3.5px solid rgb(104, 207, 233);
 }
 
-
-
-
-/* Tlačídko na potvrdenie loginu */
+/* Login button */
 .signin {
   background: transparent;
   
@@ -321,38 +315,25 @@ body {
   transition: all 0.4s ease-in-out;
 }
 
-/* Tlačídko na potvrdenie loginu pri hoveri */
 .signin:hover {
   text-decoration: underline;
   border-radius: 0%;
 }
 
-/* Text pre telefóny, ktorý nás posiela sa zaregistrovať ak nemáme ešte účet */
-.mobil {
+.mobile {
   display: none;
   align-self: center;
   margin-top: 30px;
 }
 
-/* Odsadenie a farba textu v texte pre mobil */
-.mobil > a {
+.mobile > a {
   margin-top: 0.5rem;
   color: white;
 }
 
-
-
-
-
-/* Zmeny pre Domov*/
-
-
-
-
-
-
-/* Domov div */
-.domov {
+/* Changes for home and stats*/
+/* home div */
+.home {
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -365,11 +346,9 @@ body {
 
   color: white;
   
-
   background: rgba(10, 10, 10, 0.5);
   backdrop-filter: blur(10px);
 }
-
 
 .statHolder {
   padding: 3rem;
@@ -393,8 +372,7 @@ body {
   padding-bottom: 1rem;
 }
 
-
-/* Text domovu */
+/* Text in home */
 .text {
   display: flex;
   flex-direction: column;
@@ -408,7 +386,7 @@ body {
   text-align: center;
 }
 
-/* p tag v domove */
+/* p tag in home */
 .text > p {
   padding: 3.2rem;
   font-size: 1.5rem;
@@ -437,15 +415,7 @@ body {
   50% { border-color: red; }
 }
 
-
-
-
-
-
-/* Zmeny pre Regpage*/
-
-
-
+/* Changes for registration page*/
 .bluredDiv {
   display: flex;
   flex-direction: column;
@@ -461,7 +431,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-
 .loginReg {
   display: flex;
   flex-direction: column;
@@ -470,13 +439,11 @@ body {
   color: white;
 }
 
-/* Velkosť nadpisu v registračnom menu */
 .loginReg > h1 {
   margin: 2rem;
   font-size: 2rem;
   align-self: center;
 }
-
 
 .inputReg {
   display: flex;
@@ -487,13 +454,11 @@ body {
   width: 100%;
 }
 
-/* Odsadenie v p tagu inputu */
 .loginReg > p {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-/* Výzor menu inputu */
 .inputReg > input {
   background: transparent;
   color: white;
@@ -507,15 +472,12 @@ body {
   border-bottom: 2px solid white;
 }
 
-
-/* Ikonky pri inpute */
 .inputReg > label {
   position: absolute;
   margin-bottom: 1rem;
   font-size: 1rem;
 }
 
-/* Tlačídko na potvrdenie registrácie */
 .regButton {
   background-color: rgb(150, 18, 18);
   border: none;
@@ -556,7 +518,6 @@ body {
   transform: scaleX(1);
 }
 
-/* Ikonka oka pri hesle */
 .inputReg > #eye {
   position: absolute;
   top: 7;
@@ -565,7 +526,6 @@ body {
   cursor: pointer;
 }
 
-/* Ikonka oka2 pri hesle */
 .inputReg > #eye2 {
   position: absolute;
   top: 7;
@@ -575,15 +535,14 @@ body {
 }
 
 
-.mobilReg {
+.mobileReg {
   display: block;
   text-align: center;
   margin-top: 30px;
   font-size: 1.2rem;
 }
 
-/* Nastavenie linku v -//- */
-.mobilReg > a {
+.mobileReg > a {
   color: white;
   font-size: 1.0rem;
 }
@@ -601,15 +560,8 @@ body {
   font-size: 1.0rem;
 }
 
-
-
-
-/* Zmeny pre Levely*/
-
-
-
-
-.levely {
+/* Changes for levels */
+.levels {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -620,8 +572,7 @@ body {
 
 } 
 
-/* Div uloženia pozície levelov */
-.levely > ul {
+.levels > ul {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -637,15 +588,15 @@ body {
   padding: 1rem;
 }
 
-/* Výzor textu linku */
+/* Link to level */
 .link {
   color: white;
   text-decoration: none;    
   font-size: 1.7rem;
 }
 
-/* Div samotného levelu */
-.levelHranica {
+/* Div of level */
+.levelBorder {
   border: 3px solid #FF4136;
   border-radius: 25px;
   background: linear-gradient(to right, #FF4136, #9B111E);
@@ -660,8 +611,7 @@ body {
   text-shadow: 0px 0px 5px black;
 }
 
-
-.doneHranica {
+.doneBorder {
   border: 3px solid #1dc726;
   border-radius: 25px;
 
@@ -674,28 +624,18 @@ body {
   font-weight: bold;
 }
 
-/* Div levelu pri hoveri */
-.levelHranica:hover {
+.levelBorder:hover {
   cursor: pointer; 
   transform: scale(1.1);
 }
 
-.doneHranica:hover {
+.doneBorder:hover {
   cursor: pointer; 
   transform: scale(1.1);
 }
 
-
-
-
-
-
-
-/*Upravy pre level*/
-
-
-
-.level{
+/* Changes for level */
+.level {
   display:flex;
   align-items: center;
   justify-content: center;
@@ -713,20 +653,18 @@ body {
   box-shadow: 2px 2px 5px rgb(82, 80, 79);
 }
 
-/* Veľkosť textu nadpisu v leveli */
 .level > h1 {
   margin: 15px;
   font-size: 3rem;
   color: white
 }
-/* Veľkosť textu počtu bodov v leveli */
+
 .level > h5 {
   font-size: 1.7rem;
   color: white
 }
 
-/* Nastavenia pomôcky v leveli */
-.pomocka {  
+.hint {  
   border-bottom: 1px white solid;
   border-top: 1px white solid;
   padding: 0.5rem;
@@ -737,29 +675,18 @@ body {
   color: white
 }
 
-/* Zmena veľkosti fotky v pomôcke */
-.pomocka > img {
+.hint > img {
 width: 8rem; 
 height: auto
 }
 
-.pomocka a, .pomocka a:link, .pomocka a:visited {
+.hint a, .hint a:link, .hint a:visited {
   color: white;
 }
 
-.pomocka a:hover {
+.hint a:hover {
   color: red;
 }
-
-/* Špeciálna zmena pre fotku v 5 úlohe */
-#fotka {
-margin-left: 17px;
-width: 150px;
-height: 150px;
-}
-
-
-
 
 .levelInput {
   border-bottom: 2px solid white;
@@ -779,14 +706,12 @@ height: 150px;
   color: white;
 }
 
-
 .button {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
 }
 
-/* Nastavenie tlačídka v Dive tlačídka*/
 .button > button {
   width: 150px;
   height: 50px;
@@ -794,17 +719,6 @@ height: 150px;
   color: white;
   transition: 0.5s;
 }
-
-
-
-
-
-
-
-/*Zmeny pre adminske menu*/
-
-
-
 
 .holder {
   display: flex;
@@ -818,13 +732,12 @@ height: 150px;
   position: absolute;
 }
 
-
-.profil {
+.profile {
   display: flex;
   flex-direction: column;
 
-  width: 65vh;
-  height: 65vh;
+  width: 80vh;
+  height: 75vh;
 
   border-radius: 7%;
   padding: 5rem;
@@ -842,14 +755,14 @@ height: 150px;
   gap: 2rem;
 
   padding: 2rem;
+  margin-top: 10px;
 }
 
-.profilCenter {
+.profileCenter {
   text-align: center;
-  margin-top: 15px;
 }
 
-.inputWithLabelProfil {
+.inputWithLabelProfile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -865,17 +778,17 @@ height: 150px;
   flex-direction: column;
 }
 
-.profilButton {
+.profileButton {
   background: transparent;
   font-size: 16px;
 
   border: 2px solid white;
   border-radius: 20px;
 
-  width: 30%;
+  width: 40%;
   cursor: pointer;
 
-  margin: 2rem;
+  margin: 1rem;
   padding: 1rem;
 
   color: white;
@@ -883,7 +796,7 @@ height: 150px;
   transition: all 0.4s ease-in-out;
 }
 
-.profilButton:hover {
+.profileButton:hover {
   text-decoration: underline;
   border-radius: 0%;
 }
@@ -904,8 +817,7 @@ height: 150px;
   box-shadow: 0px 0px 0px 2px #00E6F6, 0px 0px 0px 2px rgba(0, 230, 246, 0.4);
 }
 
-
-.inputFieldProfil {
+.inputFieldProfile {
   color: white;
   width: auto;
   padding: 1rem;
@@ -922,17 +834,11 @@ height: 150px;
   color: #15a8b3;
 }
 
-.inputFieldProfil:hover:focus {
+.inputFieldProfile:hover:focus {
   border-bottom: 1px solid #00E6F6;
 }
 
-
-
-
-
-/*Zmeny pre adminske menu*/
-
-
+/* Changes for admin navigation bar*/
 .nav ul {
   display: flex;
   justify-content: space-between;
@@ -1004,7 +910,6 @@ height: 150px;
   height: 100%;
   color: white;
   overflow: auto;
-
   
   background-color: #070708;
 }
@@ -1079,7 +984,6 @@ height: 150px;
   color: #14cedb;
 }
 
-
 .update h1{
   font-weight: 100;
   font-size: 1.5rem;
@@ -1090,7 +994,7 @@ height: 150px;
   text-align: center;
 }
 
-.zmaz {
+.remove {
   padding: 0.7rem;
   margin-right: 0.7rem;
   
@@ -1102,7 +1006,7 @@ height: 150px;
   transition: all 0.2s ease-in-out;
 }
 
-.uprav{
+.edit {
   padding: 0.7rem;
   margin-right: 1rem;
   
@@ -1114,19 +1018,18 @@ height: 150px;
   transition: all 0.2s ease-in-out;
 }
 
-
-.uprav a {
+.edit a {
   color: white;
   text-decoration: none;
 }
 
-.zmaz:hover {
+.remove:hover {
   background-color: #9b0e1e;
   transform: translateY(3px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.uprav:hover {
+.edit:hover {
   transform: translateY(3px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   background-color: #022c6b;  
@@ -1173,10 +1076,7 @@ height: 150px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-
-
-/*                 Alerty     a          Inputy         */
-
+/* Alerts and inputs*/
 .inputWithLabel {
   display: flex;
   flex-direction: column;
@@ -1185,7 +1085,6 @@ height: 150px;
 
   width: auto;
 }
-
 
 .radioRow {
   display: flex;
@@ -1197,7 +1096,6 @@ height: 150px;
 .radioRow input {
   width: 100%;
 }
-
 
 .inputField {
   background-color: #101218;
@@ -1272,23 +1170,12 @@ height: 150px;
   color: rgba(60, 118, 61, 1);
 }
 
-@media screen and (max-height: 800px) {
-  .profil {
-    width: 100%;
-    height: 100%;
-    border-radius: 0%;
-    justify-content: center;
-  }
-}
-
 @media screen and (max-width: 800px) {
 
-  /* Pri telefóne nebude vidno ľavú stranu pri logine */
   .woLogin {
     display: none;
   }
   
-  /* Login bude roztiahnutý na celú obrazovku */
   .login {
     width: 100%;
     max-width: 100%;
@@ -1304,20 +1191,14 @@ height: 150px;
     border-bottom: 1px solid white;
   } 
 
-  /* Text pre uživateľov na mobilnom telefóne bude viditelný */
-  .mobil {
+  .mobile {
       display: block;
   }
 
-
-  /* Zmena velkosti registračného tlačídka pri mobile */
   .regButton {
-  
     width: 80%;
-
   }
 
-  /* Zmena veľkostí registračného menu */
   .loginReg {
       width: 60%;  
   }
@@ -1351,11 +1232,11 @@ height: 150px;
     font-size: 1rem;
   }
 
-  .zmaz {
+  .remove {
     padding: 0.4rem;
   }
 
-  .uprav {
+  .edit {
     padding: 0.4rem;
   }
 
@@ -1384,7 +1265,7 @@ height: 150px;
     font-size: 1.2rem;
   }
 
-  .pomocka {  
+  .hint {  
     max-width: 300px;
     font-size: 0.8rem;
   }
@@ -1405,7 +1286,7 @@ height: 150px;
   .level{
     justify-content: center;
   }
-  .pomocka > img {
+  .hint > img {
     width: 5rem; 
   }
 
@@ -1418,7 +1299,7 @@ height: 150px;
     height: 80px;
   }
 
-  .levely {
+  .levels {
     width: 100%;
     max-height: 50%;
     top: 25%;
@@ -1430,7 +1311,7 @@ height: 150px;
     padding: 10px;
   }
 
-  .levely > ul {
+  .levels > ul {
     position:absolute;
     width: 100%;
     max-height: 50%;
@@ -1451,13 +1332,14 @@ height: 150px;
   .updateForm {
     padding: 0.5rem;
   }
+
   .nameRow {
     flex-direction: column;
     gap: 15px;
     padding: 0.3rem;
   }
 
-  .profil {
+  .profile {
     width: 100%;
     height: 100%;
     border-radius: 0%;
@@ -1466,31 +1348,38 @@ height: 150px;
     overflow: auto;
   }
 
-
-  .profilCenter {
-    font-size: 0.9rem;
-    margin: 0.6rem;
-
-    padding: 0.3rem;
+  .profileCenter {
+    font-size: 1.3rem;
+    margin: 1rem;
   }
 
-  .inputFieldProfil  {
+  .profileButton {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .inputFieldProfile {
     font-size: 0.7rem;
     margin: 0;
     border: none;
+    width: 100%;
   }
 
-  .inputWithLabelProfil {
+  .inputFieldProfile[type="text"] {
+    font-size:16px;
+}
+
+  .inputWithLabelProfile {
     border-bottom: 1px solid white;
   }
 
   .labelForInput  {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin: 0;
   }
   
   .centerButton{
-    margin-top: 0.2rem;
+    margin-top: 0.20rem;
   }
 
   .searcher {

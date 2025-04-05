@@ -8,7 +8,7 @@ const Home = () => {
 
       <Header />
       
-      <div className='domov'>
+      <div className='home'>
 
           <div className='text'>
             <div>

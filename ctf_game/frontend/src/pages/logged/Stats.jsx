@@ -58,7 +58,7 @@ const Stats = () => {
 
         <div className='container'>
     
-        <div className='domov'>
+        <div className='home'>
 
             <div className="statHolder">
                 <h1 style={{textAlign:"center"}}>Stats</h1>
@@ -69,8 +69,6 @@ const Stats = () => {
                         <h1 className='points'>{user.points}p</h1>
                     </div>  
                 )) : null}
-                
-        
 
             </div>
 
