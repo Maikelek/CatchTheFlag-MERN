@@ -16,7 +16,7 @@ This project is CTF (catch the flag) game made as dynamic webpage using **M**(my
 #
 
 ## AdminMenu Level Moderation Page
-<img src="visuals_for_github/adminLevel.png">
+<img src="visuals_for_github/admin_level_management.png">
 
 #
 
@@ -67,7 +67,7 @@ SESSION_SECRET=long_string_of_random_characters
 npm i
 ```
 
-# How to host the application ( HOSTING )
+# How to host the application ( PRODUCTION )
 * Open 2 terminals
 
 
@@ -113,9 +113,8 @@ npm i
 ```
 node app.js
 ```
+---
 
-#
-#
-#
-
-## Happy hacking
+ **Happy** **Hacking** 💻
+ 
+ ---
