@@ -1,6 +1,5 @@
-// App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useUser } from './context/UserContext'; // teraz bude fungovať
+import { useUser } from './context/UserContext';
 import ProtectedRoute from "./pages/components/ProtectedRoute"
 
 import Index from "./pages/notLogged/Index";

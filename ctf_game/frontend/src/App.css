@@ -1002,6 +1002,7 @@ height: auto
   padding: 10px 20px; 
   margin-bottom: 0.7rem; 
   transition: 0.3s ease-in-out;
+  border-radius: 10px;
 }
 
 .updateSmall:hover {

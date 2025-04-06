@@ -45,7 +45,7 @@ const AdminNav = () => {
             <Link to="/stats">Stats</Link>
             <Link to="/Home">Home</Link>
             <Link to="/Levels">Levels</Link>
-            <Link to="/profil">Profil</Link>
+            <Link to="/profile">Profile</Link>
           </div>
         </li>
         <li className='dropdown'>
