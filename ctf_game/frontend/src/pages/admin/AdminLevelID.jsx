@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
 import AdminNav from '../components/AdminNav';
@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AdminLevelID = () => {
 
-  const nav = useNavigate(); 
   const { user } = useUser();
   const location = useLocation(); 
   const id = location.pathname.split("/")[4];
@@ -29,22 +28,18 @@ const AdminLevelID = () => {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      nav("/");
-    } else {
-      const fetchAllData = async () => {
-        try {
-          const res = await axios.get(`${config.apiUrl}/admin/level/${id}`, {
-            withCredentials: true,
-          });
-          setLevel(res.data[0]);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchAllData();
-    }
-  }, [user, id, nav]);
+    const fetchAllData = async () => {
+      try {
+        const res = await axios.get(`${config.apiUrl}/admin/level/${id}`, {
+          withCredentials: true,
+        });
+        setLevel(res.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllData();
+    }, [user, id]);
 
   const handleClick = async (e) => { 
     e.preventDefault();

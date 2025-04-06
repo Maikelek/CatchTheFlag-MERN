@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import Header from '../components/Header';
 import axios from 'axios';
@@ -7,9 +7,28 @@ import { faExclamationCircle, faThumbsUp } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Profile = () => {
+
     const { user, setUser } = useUser();
     const [msg, setMsg] = useState({});
-    const [points, setPoints] = useState(user?.points || 0);
+    const [points, setPoints] = useState(0);
+    const email = user.email ? user.email : "";
+
+    useEffect(() => {
+        const fetchPoints = async () => {
+            try {
+                const profileResponse = await axios.post(`${config.apiUrl}/profile`, { email }, {
+                    withCredentials: true
+                  });
+                if(profileResponse.data[0] && profileResponse.data[0].points) {
+                    setPoints(profileResponse.data[0].points);
+                }
+
+            } catch(error) {
+                console.log(error);
+            }
+        }
+        fetchPoints();
+    }, [email], [])
 
     const handleClick = async (e) => {
         e.preventDefault();

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import axios from "axios"
 import config from '../../config/config';
@@ -12,50 +12,25 @@ const UserController = () => {
   
     let [users, setUsers] = useState ( [] );
     let [sorted, setSorted] = useState ( 0 );
-    const [logged, setLogged] = useState ( 0 );
     const [searchTerm, setSearchTerm] = useState('');
-
-    const nav = useNavigate(); 
 
     const filteredUsers = users.filter((user) => {
       return user.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    useEffect(() => {
-      axios.get(`${config.apiUrl}/auth`, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      })
-        .then(res => res.data)
-        .then(response => {
-          if (response.auth !== true || response.user.role !== "admin" ) {
-            nav("/");
-          } else {
-            setLogged(response.user.id);
+    useEffect( () => {               
+      const fetchAllUsers = async () => {
+          try{
+              const res = await axios.get(`${config.apiUrl}/admin/user`, {
+                withCredentials: true
+              })
+              setUsers(res.data)
+          }catch(error) {
+              console.log(error)
           }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }, [nav]);
-
-    useEffect( () => {  
-      if (logged >= 1 ) {               
-        const fetchAllUsers = async () => {
-            try{
-                const res = await axios.get(`${config.apiUrl}/admin/user`, {
-                  withCredentials: true
-                })
-                setUsers(res.data)
-            }catch(error) {
-                console.log(error)
-            }
-        }
-        fetchAllUsers()
       }
-    },[logged])
+      fetchAllUsers()
+      },[])
 
     const handleDelete = async (id) => {         
       const confirmed = window.confirm("Are you sure?");
@@ -93,7 +68,7 @@ const UserController = () => {
 
     <div className='content'>
       <div className="spotUpdate">
-        <h1>Managing users</h1>
+        <h1>User Management</h1>
         <div className="update">
           <form >
           <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />

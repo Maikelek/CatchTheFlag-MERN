@@ -1,7 +1,5 @@
 import axios from 'axios'; 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import React, { useState } from 'react';
 
 import AdminNav from '../components/AdminNav';
 import config from '../../config/config';
@@ -10,15 +8,6 @@ import { faAddressCard, faLock, faCoins, faComments, faCamera, faGlobe, faExclam
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 const AdminLevelAdd = () => {
-
-  const nav = useNavigate(); 
-  const { user } = useUser();
-
-  useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      nav("/");
-    }
-  }, [user, nav]);
 
   const [error, setError] = useState(false);
   const [msg, setMsg] = useState({});

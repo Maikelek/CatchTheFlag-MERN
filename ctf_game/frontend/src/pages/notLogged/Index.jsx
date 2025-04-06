@@ -10,13 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Index = () => {
   const nav = useNavigate(); 
+  const [loadingIndex, setLoadingIndex] = useState(false);
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    if (user) {
+    if (user && !loadingIndex) {
       nav("/profile");
     }
-  }, [user, nav]);
+  }, [user, nav, loadingIndex]);
 
   const [eye, setEye] = useState(faEye);
   const [msg, setMsg] = useState({});
@@ -49,8 +50,13 @@ const Index = () => {
       });
       if (response.data.message === "ok") {
         setUser(response.data.user);
-        console.log(user);
-        nav("/Levels");
+        setLoadingIndex(true);
+        setMsg({});
+
+        setTimeout(() => {
+          nav("/Levels");
+        }, 2100);
+
       } else {
         setMsg(response.data);
       }
@@ -96,7 +102,11 @@ const Index = () => {
           <label id='eye' onClick={passToggle}><FontAwesomeIcon icon={eye}/></label>
         </div>
         {msg.message ? <label className='loginDangerLabel'><FontAwesomeIcon icon={faExclamationCircle}/> {msg.message}</label>: null }
-        <button className='signin' type="submit">Log in</button>
+        
+        {!loadingIndex ? 
+          <button className='signin' type="submit"> Login </button> :
+          <p className='loader'></p>
+        }
         <div className='mobile'>
           <p>No account?</p>
           <Link to="/register">Sign up here!</Link>

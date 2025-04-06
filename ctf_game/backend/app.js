@@ -25,6 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
+      httpOnly: true,
       expires: 86400000 // 1 day
     }
   })

@@ -28,21 +28,17 @@ const AdminUserID = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!loggedUser || loggedUser.role !== "admin") {
-      nav("/");
-    } else {
-      const fetchUserData = async () => {
-        try {
-          const res = await axios.get(`${config.apiUrl}/admin/user/${id}`, {
-            withCredentials: true
-          });
-          setUser(res.data[0]);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchUserData();
-    }
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`${config.apiUrl}/admin/user/${id}`, {
+          withCredentials: true
+        });
+        setUser(res.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUserData();
   }, [loggedUser, id, nav]);
 
   const handleChange = (e) => {

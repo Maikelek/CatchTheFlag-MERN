@@ -22,21 +22,24 @@ import AdminUserID from "./pages/admin/AdminUserID";
 import AdminLevelAdd from "./pages/admin/AdminLevelAdd";
 import AdminUserAdd from "./pages/admin/AdminUserAdd";
 
+import Loading from "./pages/components/Loading";
+import NotFound from "./pages/components/NotFound";
+
 import "./App.css";
 
 function App() {
     const { loading } = useUser();
 
     if (loading) {
-        return <div className="loading">Loading...</div>;
+        return <Loading />;
     }
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="*" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
                 <Route path="/" element={<Index />} />
-                <Route path="/domov" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/register" element={<Register />} />
 
                 <Route path="/stats" element={<ProtectedRoute><Stats /></ProtectedRoute>} />

@@ -9,7 +9,6 @@ const AdminUserUpdate = () => {
 
   return (
     <div>
-
       <AdminNav />
       <UserController/>
     </div>

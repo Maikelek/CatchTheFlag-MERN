@@ -13,7 +13,6 @@ export const UserProvider = ({ children }) => {
             try {
                 const response = await axios.get(`${config.apiUrl}/auth`, { withCredentials: true });
                 if (response.data.auth) {
-                    console.log("User loaded:", response.data.user);
                     setUser(response.data.user);
                 } else {
                     setUser(null);
@@ -21,12 +20,15 @@ export const UserProvider = ({ children }) => {
             } catch (error) {
                 console.log("Error loading user:", error);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 700);
             }
         };
-
+    
         fetchUser();
     }, []);
+    
 
     return (
         <UserContext.Provider value={{ user, setUser, loading }}>

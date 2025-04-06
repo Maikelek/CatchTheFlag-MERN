@@ -11,23 +11,21 @@ const Levels = () => {
   const [done, setDone] = useState([]);
 
   useEffect(() => {
-    if (user?.id) {
-      const fetchAllLevels = async () => {
-        try {
-          const response = await axios.post(
-            `${config.apiUrl}/answer/done`,
-            { id: user.id },
-            { withCredentials: true }
-          );
-          setDone(response.data.done);
-          setLevels(response.data.levels);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchAllLevels();
-    }
-  }, [user?.id]);
+    const fetchAllLevels = async () => {
+      try {
+        const response = await axios.post(
+          `${config.apiUrl}/answer/done`,
+          { id: user.id },
+          { withCredentials: true }
+        );
+        setDone(response.data.done);
+        setLevels(response.data.levels);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllLevels();
+    }, [user?.id]);
 
   return (
     <div className='container'>

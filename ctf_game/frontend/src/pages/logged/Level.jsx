@@ -18,22 +18,18 @@ const Level = () => {
   const [msg, setMsg] = useState({});
 
   useEffect(() => {
-    if (!user?.id) {
-      nav("/");
-    } else {
-      const fetchAllData = async () => {
-        try {
-          const res = await axios.get(`${config.apiUrl}/level/${id}`, {
-            withCredentials: true,
-          });
-          setLevelData(res.data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchAllData();
-    }
-  }, [id, user?.id, nav]);
+    const fetchAllData = async () => {
+      try {
+        const res = await axios.get(`${config.apiUrl}/level/${id}`, {
+          withCredentials: true,
+        });
+        setLevelData(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllData();
+    }, [id, user?.id, nav]);
 
   const handleChange = (e) => {
     setAnswer((prev) => ({ ...prev, [e.target.name]: e.target.value }));

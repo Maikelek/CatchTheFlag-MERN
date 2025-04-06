@@ -25,26 +25,22 @@ const Admin = () => {
   }, playerUsers[0]);
 
   useEffect(() => {
-    if (!user || user.role !== 'admin') {
-      nav("/");
-    } else {
-      const fetchAllData = async () => {
-        try {
-          const levelRes = await axios.get(`${config.apiUrl}/admin/level`, {
-            withCredentials: true,
-          });
-          const userRes = await axios.get(`${config.apiUrl}/admin/user`, {
-            withCredentials: true,
-          });
-          setLevels(levelRes.data);
-          setUsers(userRes.data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchAllData();
-    }
-  }, [user, nav]);
+    const fetchAllData = async () => {
+      try {
+        const levelRes = await axios.get(`${config.apiUrl}/admin/level`, {
+          withCredentials: true,
+        });
+        const userRes = await axios.get(`${config.apiUrl}/admin/user`, {
+          withCredentials: true,
+        });
+        setLevels(levelRes.data);
+        setUsers(userRes.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllData();
+    }, [user, nav]);
 
   return (
     <div>

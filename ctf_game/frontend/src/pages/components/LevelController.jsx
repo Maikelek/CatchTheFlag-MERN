@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import axios from "axios"
 import config from '../../config/config';
@@ -8,55 +8,30 @@ import config from '../../config/config';
 import { faArrowTrendDown, faArrowTrendUp, faEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const LevelController = () => {
   
   let [levels, setLevels] = useState ( [] )
   let [sorted, setSorted] = useState ( 0 )
-  const [logged, setLogged] = useState ( 0 )
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredLevels = levels.filter((level) => {
     return level.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  const nav = useNavigate(); 
-
-  useEffect(() => {
-    axios.get(`${config.apiUrl}/auth`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      withCredentials: true
-    })
-      .then(res => res.data)
-      .then(response => {
-        if (response.auth !== true || response.user.role !== "admin" ) {
-          nav("/");
-        } else {
-          setLogged(response.user.id);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [nav]);
 
   useEffect( () => {                
-    if (logged >= 1) { 
-      const fetchAllLevels = async () => {
-          try{
-              const res = await axios.get(`${config.apiUrl}/admin/level`, {
-                withCredentials: true
-              })
-              setLevels(res.data)
-          }catch(error) {
-              console.log(error)
-          }
-      }
-      fetchAllLevels()
+    const fetchAllLevels = async () => {
+        try{
+            const res = await axios.get(`${config.apiUrl}/admin/level`, {
+              withCredentials: true
+            })
+            setLevels(res.data)
+        }catch(error) {
+            console.log(error)
+        }
     }
-  },[logged])
+    fetchAllLevels()
+  },[])
 
 
   const handleDelete = async (id) => {         
@@ -95,7 +70,7 @@ const LevelController = () => {
 
     <div className='content'>
       <div className="spotUpdate">
-        <h1>Managing levels</h1>
+        <h1>Level Management</h1>
         <div className="update">
           <form>
             <input type="text" placeholder='Search' className='searcher' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>

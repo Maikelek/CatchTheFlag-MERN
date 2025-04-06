@@ -101,14 +101,7 @@ const createLevelAdmin = (req, res) => {
       });
 };
 
-
-
-
-
-
-
 /// USERS
-
 
 const getUsersAdmin = (req, res) => {   
     const q = "SELECT id,name,email,points,role FROM users";
@@ -193,7 +186,7 @@ const createUserAdmin = async (req, res) => {
             emailSender(email, 'Admin creation', `Your account was created by admin!\nIf this information is completely new and you do not agree with the account, contact me at this email. \n\nAdmin and Developer Webu HackTheMaturita`);
             db.query(q, [values], (error, data) => {
                 if (error) return res.send(error);
-                return res.json({messageGreen: "Pridal si používateľa"});
+                return res.json({messageGreen: "User was added!"});
               });
         }
     });

@@ -5,49 +5,24 @@ import axios from "axios"
 
 import Header from '../components/Header';
 import config from '../../config/config';
-import { useNavigate } from 'react-router-dom';
 
 const Stats = () => {
 
     let [users, setUsers] = useState ( [] );
-    const [id, setID] = useState ( 0 );
-    const nav = useNavigate();
-
-    useEffect(() => {
-        fetch(`${config.apiUrl}/auth`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          credentials: 'include'
-        })
-          .then(res => res.json())
-          .then(response => {
-            if (response.auth === true) {
-              setID(response.user.id);
-            } else {
-              nav("/");
-            }
-          })
-      
-      }, [nav])
-    
 
     useEffect( () => {                
-        if (id >= 1) {
-            const fetchAllUsers = async () => {
-                try{
-                    const res = await axios.get(`${config.apiUrl}/user/`, {
-                      withCredentials: true
-                    });
-                    setUsers(res.data)
-                }catch(error) {
-                    console.log(error)
-                }
-            }
-            fetchAllUsers()
-        }
-    },[id])
+      const fetchAllUsers = async () => {
+          try{
+              const res = await axios.get(`${config.apiUrl}/user/`, {
+                withCredentials: true
+              });
+              setUsers(res.data)
+          }catch(error) {
+              console.log(error)
+          }
+      }
+      fetchAllUsers()
+    }, [])
 
     users = users.sort((a, b) => (a.points < b.points) ? 1: -1)
     users = users.filter((a => a.points > 0 && a.role !== "admin"));

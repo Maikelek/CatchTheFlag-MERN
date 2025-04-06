@@ -1,7 +1,5 @@
 import axios from 'axios'; 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import React, { useState } from 'react';
 
 import AdminNav from '../components/AdminNav';
 import config from '../../config/config';
@@ -10,15 +8,6 @@ import { faUser, faLock, faEnvelope, faCoins, faExclamationCircle, faThumbsUp, f
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  
 const AdminUserAdd = () => {
-
-  const nav = useNavigate(); 
-  const { user: loggedUser } = useUser();
-
-  useEffect(() => {
-    if (!loggedUser || loggedUser.role !== "admin") {
-      nav("/");
-    }
-  }, [loggedUser, nav]);
 
   const [user, setUser] = useState({ 
     name: "",
