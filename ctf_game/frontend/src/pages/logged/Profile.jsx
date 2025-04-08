@@ -11,6 +11,7 @@ const Profile = () => {
     const { user, setUser } = useUser();
     const [msg, setMsg] = useState({});
     const [points, setPoints] = useState(0);
+    const [profileLoading, setProfileLoadingPoints] = useState(false);
     const email = user.email ? user.email : "";
 
     useEffect(() => {
@@ -32,6 +33,7 @@ const Profile = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
+        setMsg({});
 
         try {
             const response = await axios.put(
@@ -40,7 +42,15 @@ const Profile = () => {
                 { withCredentials: true }
             );
             if (response.data) {
-                setMsg(response.data);
+                if (response.data.messageGreen) {
+                    setProfileLoadingPoints(true);
+                    setTimeout(() => {
+                        setProfileLoadingPoints(false);
+                        setMsg(response.data);
+                    }, 2100);
+                } else {
+                    setMsg(response.data);
+                }
                 if (response.data.points) {
                     setPoints(response.data.points);
                 }
@@ -113,17 +123,24 @@ const Profile = () => {
                         <h2 className='profileCenter'>Your points: <i className='points'>{points}</i></h2>
 
                         <div className="centerButton">
-                            <button className='profileButton'>Update yourself</button>
+
+                            {!profileLoading ? 
+                                <button className='profileButton'>Update yourself</button> :
+                                <p className='loader' style={{fontSize: "1.5rem", marginTop: "10px", marginBottom: "10px"}}></p>
+                            }
+
                             {msg.message ? (
                                 <h5 className='loginDangerLabel'>
                                     <FontAwesomeIcon icon={faExclamationCircle} /> {msg.message}
                                 </h5>
                             ) : null}
+
                             {msg.messageGreen ? (
                                 <h5 className="loginSucessLabel">
                                     <FontAwesomeIcon icon={faThumbsUp} /> {msg.messageGreen}
                                 </h5>
                             ) : null}
+
                         </div>
                     </form>
                 </div>
